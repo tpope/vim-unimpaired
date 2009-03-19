@@ -188,7 +188,8 @@ endfunction
 
 function! s:Transform(algorithm,type)
   let sel_save = &selection
-  let &selection = "inclusive"
+  let cb_save = &clipboard
+  set selection=inclusive clipboard-=unnamed
   let reg_save = @@
   if a:type =~ '^\d\+$'
     silent exe 'norm! ^v'.a:type.'$hy'
@@ -203,8 +204,9 @@ function! s:Transform(algorithm,type)
   endif
   let @@ = s:{a:algorithm}(@@)
   norm! gvp
-  let &selection = sel_save
   let @@ = reg_save
+  let &selection = sel_save
+  let &clipboard = cb_save
   if a:type =~ '^\d\+$'
     silent! call repeat#set("\<Plug>unimpairedLine".a:algorithm,a:type)
   endif
