@@ -177,7 +177,7 @@ function! s:XmlEntityDecode(str)
   let str = substitute(str,'\c&quot;','"','g')
   let str = substitute(str,'\c&gt;','>','g')
   let str = substitute(str,'\c&lt;','<','g')
-  let str = substitute(str,'\C&\(\w*\);','\=nr2char(get(g:impaired_html_entities,submatch(1),63))','g')
+  let str = substitute(str,'\C&\(\%(amp;\)\@!\w*\);','\=nr2char(get(g:impaired_html_entities,submatch(1),63))','g')
   return substitute(str,'\c&amp;','\&','g')
 endfunction
 
