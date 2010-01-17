@@ -93,7 +93,7 @@ endfunction
 
 " HTML entities {{{2
 
-let g:impaired_html_entities = {
+let g:unimpaired_html_entities = {
       \ 'nbsp':     160, 'iexcl':    161, 'cent':     162, 'pound':    163,
       \ 'curren':   164, 'yen':      165, 'brvbar':   166, 'sect':     167,
       \ 'uml':      168, 'copy':     169, 'ordf':     170, 'laquo':    171,
@@ -177,7 +177,7 @@ function! s:XmlEntityDecode(str)
   let str = substitute(str,'\c&quot;','"','g')
   let str = substitute(str,'\c&gt;','>','g')
   let str = substitute(str,'\c&lt;','<','g')
-  let str = substitute(str,'\C&\(\%(amp;\)\@!\w*\);','\=nr2char(get(g:impaired_html_entities,submatch(1),63))','g')
+  let str = substitute(str,'\C&\(\%(amp;\)\@!\w*\);','\=nr2char(get(g:unimpaired_html_entities,submatch(1),63))','g')
   return substitute(str,'\c&amp;','\&','g')
 endfunction
 
