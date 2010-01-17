@@ -1,5 +1,5 @@
 " unimpaired.vim - Pairs of bracket maps
-" Maintainer:   Tim Pope <vimNOSPAM@tpope.info>
+" Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
 
 " Exit quickly when:
 " - this plugin was already loaded (or disabled)
