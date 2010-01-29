@@ -5,12 +5,10 @@ License: Same terms as Vim itself (see |license|)
 
 This plugin is only available if 'compatible' is not set.
 
-==============================================================================
 INTRODUCTION                                    *unimpaired*
 
 This plugin provides several pairs of bracket maps.
 
-==============================================================================
 NEXT AND PREVIOUS                               *unimpaired-next*
 
 The following maps all correspond to normal mode commands.  If a count is
@@ -42,7 +40,6 @@ is "args" and for the "q" commands is "quickfix".
 ]o                      Go to the file succeeding the current one
                         alphabetically in the current file's directory.
 
-==============================================================================
 LINE OPERATIONS                                 *unimpaired-lines*
 
                                                 *[<Space>*
@@ -57,7 +54,6 @@ LINE OPERATIONS                                 *unimpaired-lines*
                                                 *]e* *v_]e*
 ]e                      Exchange the current line with the one below it.
 
-==============================================================================
 ENCODING AND DECODING                           *unimpaired-encoding*
 
 Each of these operations has a map that takes a motion, a map that
@@ -96,7 +92,6 @@ Mnenomic: encoding always comes before decoding; "[" always comes before "]".
 ]yy
 {Visual}]y
 
-==============================================================================
 TODO                                            *unimpaired-todo*
 
 Accept a count with |[e| and |]e|
