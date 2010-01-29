@@ -1,4 +1,4 @@
-" unimpaired.vim - Pairs of bracket maps
+" unimpaired.vim - Pairs of handy bracket maps
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
 
 if exists("g:loaded_unimpaired") || &cp || v:version < 700
