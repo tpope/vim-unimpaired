@@ -1,11 +1,8 @@
 " unimpaired.vim - Pairs of bracket maps
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
 
-" Exit quickly when:
-" - this plugin was already loaded (or disabled)
-" - when 'compatible' is set
-if (exists("g:loaded_unimpaired") && g:loaded_unimpaired) || &cp || v:version < 700
-    finish
+if exists("g:loaded_unimpaired") || &cp || v:version < 700
+  finish
 endif
 let g:loaded_unimpaired = 1
 
