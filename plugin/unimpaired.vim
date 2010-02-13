@@ -13,11 +13,16 @@ set cpo&vim
 " Next and previous {{{1
 
 function! s:MapNextFamily(map,cmd)
-    let end = ' ".(v:count ? v:count : "")<CR>'
-    execute 'nnoremap <silent> ['.        a:map .' :<C-U>exe "'.a:cmd.'previous'.end
-    execute 'nnoremap <silent> ]'.        a:map .' :<C-U>exe "'.a:cmd.'next'    .end
-    execute 'nnoremap <silent> ['.toupper(a:map).' :<C-U>exe "'.a:cmd.'first'   .end
-    execute 'nnoremap <silent> ]'.toupper(a:map).' :<C-U>exe "'.a:cmd.'last'    .end
+  let map = '<Plug>unimpaired'.toupper(a:map)
+  let end = ' ".(v:count ? v:count : "")<CR>'
+  execute 'nmap <silent> '.map.'Previous :<C-U>exe "'.a:cmd.'previous'.end
+  execute 'nmap <silent> '.map.'Next     :<C-U>exe "'.a:cmd.'next'.end
+  execute 'nmap <silent> '.map.'First    :<C-U>exe "'.a:cmd.'first'.end
+  execute 'nmap <silent> '.map.'Last     :<C-U>exe "'.a:cmd.'last'.end
+  execute 'nmap <silent> ['.        a:map .' '.map.'Previous'
+  execute 'nmap <silent> ]'.        a:map .' '.map.'Next'
+  execute 'nmap <silent> ['.toupper(a:map).' '.map.'First'
+  execute 'nmap <silent> ]'.toupper(a:map).' '.map.'Last'
 endfunction
 
 call s:MapNextFamily('a','')
