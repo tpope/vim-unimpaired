@@ -41,8 +41,10 @@ function! s:FileByOffset(num)
   elseif dir != ''
     let dir .= '/'
   endif
-  let files = split(glob(dir.".*[^~.]"),"\n")
-  let files += split(glob(dir."*[^~]"),"\n")
+  let files = split(glob(dir.".*"),"\n")
+  let files += split(glob(dir."*"),"\n")
+  call filter(files,'v:val !=# "." && v:val !=# ".."')
+  call filter(files,'v:val[-4:-1] !=# ".swp" && v:val[-1:-1] !=# "~"')
   if a:num < 0
     call reverse(sort(filter(files,'v:val < original')))
   else
