@@ -49,10 +49,10 @@ LINE OPERATIONS                                 *unimpaired-lines*
 ]<Space>                Add [count] blank lines below the cursor.
 
                                                 *[e* *v_[e*
-[e                      Exchange the current line with the one above it.
+[e                      Exchange the current line with [count] lines above it.
 
                                                 *]e* *v_]e*
-]e                      Exchange the current line with the one below it.
+]e                      Exchange the current line with [count] lines below it.
 
 ENCODING AND DECODING                           *unimpaired-encoding*
 
@@ -93,8 +93,6 @@ Mnenomic: encoding always comes before decoding; "[" always comes before "]".
 {Visual}]y
 
 TODO                                            *unimpaired-todo*
-
-Accept a count with |[e| and |]e|
 
 Descend into and ascend from directories with |[o| and |]o|.
 
