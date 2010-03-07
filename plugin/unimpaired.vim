@@ -1,6 +1,6 @@
 " unimpaired.vim - Pairs of handy bracket mappings
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
-" Version:      1.0
+" Version:      1.1
 
 if exists("g:loaded_unimpaired") || &cp || v:version < 700
   finish
