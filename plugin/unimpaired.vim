@@ -1,4 +1,4 @@
-" unimpaired.vim - Pairs of handy bracket maps
+" unimpaired.vim - Pairs of handy bracket mappings
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
 " Version:      1.0
 
