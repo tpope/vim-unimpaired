@@ -89,7 +89,7 @@ function! s:StringEncode(str)
 endfunction
 
 function! s:StringDecode(str)
-  let map = {'n': "\n", 'r': "\r", 't': "\t", 'b': "\b", 'f': "\f", 'e': "\e", 'a': "\001", 'v': "\013", '"': '"', '\': '\', "'": "'"}
+  let map = {'n': "\n", 'r': "\r", 't': "\t", 'b': "\b", 'f': "\f", 'e': "\e", 'a': "\007", 'v': "\013", '"': '"', '\': '\', "'": "'"}
   let str = a:str
   if str =~ '^\s*".\{-\}\\\@<!\%(\\\\\)*"\s*\n\=$'
     let str = substitute(substitute(str,'^\s*\zs"','',''),'"\ze\s*\n\=$','','')
