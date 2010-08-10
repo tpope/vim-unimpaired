@@ -30,28 +30,42 @@ call s:MapNextFamily('b','b')
 call s:MapNextFamily('l','l')
 call s:MapNextFamily('q','c')
 
-function! s:FileByOffset(num)
-  let original = expand("%")
-  if a:num == 0
-    return original
-  endif
-  let dir   = fnamemodify(original,':h')
-  if dir == '.'
-    let dir = ''
-  elseif dir != ''
-    let dir .= '/'
-  endif
-  let files = split(glob(dir.".*"),"\n")
-  let files += split(glob(dir."*"),"\n")
+function! s:entries(path)
+  let path = substitute(a:path,'[\\/]$','','')
+  let files = split(glob(path."/.*"),"\n")
+  let files += split(glob(path."/*"),"\n")
   call filter(files,'v:val !=# "." && v:val !=# ".."')
   call filter(files,'v:val[-4:-1] !=# ".swp" && v:val[-1:-1] !=# "~"')
-  if a:num < 0
-    call reverse(sort(filter(files,'v:val < original')))
-  else
-    call sort(filter(files,'v:val > original'))
-  end
-  let num = a:num < 0 ? -a:num : a:num
-  let file = get(files,num-1,get(files,-1,original))
+  call map(files,'substitute(v:val,"[\\/]$","","")')
+  return files
+endfunction
+
+function! s:FileByOffset(num)
+  let file = expand('%:p')
+  let num = a:num
+  while num
+    let files = s:entries(fnamemodify(file,':h'))
+    if a:num < 0
+      call reverse(sort(filter(files,'v:val < file')))
+    else
+      call sort(filter(files,'v:val > file'))
+    endif
+    let temp = get(files,0,'')
+    if temp == ''
+      let file = fnamemodify(file,':h')
+    else
+      let file = temp
+      while isdirectory(file)
+        let files = s:entries(file)
+        if files == []
+          " TODO: walk back up the tree and continue
+          break
+        endif
+        let file = files[num > 0 ? 0 : -1]
+      endwhile
+      let num += num > 0 ? -1 : 1
+    endif
+  endwhile
   return file
 endfunction
 
