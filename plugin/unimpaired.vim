@@ -34,9 +34,9 @@ function! s:entries(path)
   let path = substitute(a:path,'[\\/]$','','')
   let files = split(glob(path."/.*"),"\n")
   let files += split(glob(path."/*"),"\n")
-  call filter(files,'v:val !=# "." && v:val !=# ".."')
-  call filter(files,'v:val[-4:-1] !=# ".swp" && v:val[-1:-1] !=# "~"')
   call map(files,'substitute(v:val,"[\\/]$","","")')
+  call filter(files,'v:val !~# "[\\\\/]\\.\\.\\=$"')
+  call filter(files,'v:val[-4:-1] !=# ".swp" && v:val[-1:-1] !=# "~"')
   return files
 endfunction
 
