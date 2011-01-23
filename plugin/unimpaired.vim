@@ -219,7 +219,7 @@ endfunction
 function! s:Transform(algorithm,type)
   let sel_save = &selection
   let cb_save = &clipboard
-  set selection=inclusive clipboard-=unnamed
+  set selection=inclusive clipboard-=unnamed clipboard-=unnamedplus
   let reg_save = @@
   if a:type =~ '^\d\+$'
     silent exe 'norm! ^v'.a:type.'$hy'
