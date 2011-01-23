@@ -196,6 +196,9 @@ function! s:XmlEncode(str)
   let str = substitute(str,'<','\&lt;','g')
   let str = substitute(str,'>','\&gt;','g')
   let str = substitute(str,'"','\&quot;','g')
+  for key in keys(g:unimpaired_html_entities)
+      let str = substitute(str, nr2char(g:unimpaired_html_entities[key]),'\&'.key.';','g')
+  endfor
   return str
 endfunction
 
