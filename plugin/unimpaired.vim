@@ -103,13 +103,13 @@ function! s:StringEncode(str)
 endfunction
 
 function! s:StringDecode(str)
-  let map = {'n': "\n", 'r': "\r", 't': "\t", 'b': "\b", 'f': "\f", 'e': "\e", 'a': "\001", 'v': "\013", '"': '"', '\': '\', "'": "'"}
+  let map = {'n': "\n", 'r': "\r", 't': "\t", 'b': "\b", 'f': "\f", 'e': "\e", 'a': "\001", 'v': "\013"}
   let str = a:str
   if str =~ '^\s*".\{-\}\\\@<!\%(\\\\\)*"\s*\n\=$'
     let str = substitute(substitute(str,'^\s*\zs"','',''),'"\ze\s*\n\=$','','')
   endif
   let str = substitute(str,'\\n\%(\n$\)\=','\n','g')
-  return substitute(str,'\\\(\o\{1,3\}\|x\x\{1,2\}\|u\x\{1,4\}\|.\)','\=get(map,submatch(1),nr2char("0".substitute(submatch(1),"^[Uu]","x","")))','g')
+  return substitute(str,'\\\(\o\{1,3\}\|x\x\{1,2\}\|u\x\{1,4\}\|.\)','\=get(map,submatch(1),submatch(1) =~? "^[0-9xu]" ? nr2char("0".substitute(submatch(1),"^[Uu]","x","")) : submatch(1))','g')
 endfunction
 
 function! s:UrlEncode(str)
