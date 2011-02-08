@@ -94,8 +94,6 @@ Mnenomic: encoding always comes before decoding; "[" always comes before "]".
 
 TODO                                            *unimpaired-todo*
 
-Descend into and ascend from directories with |[o| and |]o|.
-
 Avoid munging null characters when encoding and decoding.
 
  vim:tw=78:et:ft=help:norl:
