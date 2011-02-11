@@ -94,6 +94,26 @@ nmap ]e <Plug>unimpairedMoveDown
 xmap [e <Plug>unimpairedMoveUp
 xmap ]e <Plug>unimpairedMoveDown
 
+nnoremap <silent> <Plug>unimpairedTabLeft   :tabNext<CR>
+nnoremap <silent> <Plug>unimpairedTabRight  :tabnext<CR>
+xnoremap <silent> <Plug>unimpairedTabLeft   :tabNext<CR>
+xnoremap <silent> <Plug>unimpairedTabRight  :tabnext<CR>
+
+nmap [t <Plug>unimpairedTabLeft
+nmap ]t <Plug>unimpairedTabRight
+xmap [t <Plug>unimpairedTabLeft
+xmap ]t <Plug>unimpairedTabRight
+
+nnoremap <silent> <Plug>unimpairedTabFirst   :tabfirst<CR>
+nnoremap <silent> <Plug>unimpairedTabLast    :tablast<CR>
+xnoremap <silent> <Plug>unimpairedTabFirst   :tabfirst<CR>
+xnoremap <silent> <Plug>unimpairedTabLast    :tablast<CR>
+
+nmap [T <Plug>unimpairedTabFirst
+nmap ]T <Plug>unimpairedTabLast
+xmap [T <Plug>unimpairedTabFirst
+xmap ]T <plug>unimpairedTabLast
+
 " }}}1
 " Encoding and decoding {{{1
 
