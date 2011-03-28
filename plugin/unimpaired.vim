@@ -51,8 +51,8 @@ function! s:FileByOffset(num)
     let files = s:entries(fnamemodify(file,':h'))
     if files == []
       " This should not happen, since at least the current file should be in here.
-      " In case this might be expected, just return the current file.
-      " return file
+      " (It happened on Windows when backtick-expansion was used to call this
+      " function.)
       throw "No files found in current directory!"
     endif
     if a:num < 0
