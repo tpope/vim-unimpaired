@@ -79,8 +79,8 @@ function! s:FileByOffset(num)
   return file
 endfunction
 
-nnoremap <silent> <Plug>unimpairedONext     :<C-U>edit `=<SID>FileByOffset(v:count1)`<CR>
-nnoremap <silent> <Plug>unimpairedOPrevious :<C-U>edit `=<SID>FileByOffset(-v:count1)`<CR>
+nnoremap <silent> <Plug>unimpairedONext     :<C-U>edit <C-R>=<SID>FileByOffset(v:count1)<CR><CR>
+nnoremap <silent> <Plug>unimpairedOPrevious :<C-U>edit <C-R>=<SID>FileByOffset(-v:count1)<CR><CR>
 
 nmap ]o <Plug>unimpairedONext
 nmap [o <Plug>unimpairedOPrevious
