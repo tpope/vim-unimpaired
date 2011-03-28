@@ -35,7 +35,11 @@ function! s:entries(path)
   let files += split(glob(path."/*"),"\n")
   call map(files,'substitute(v:val,"[\\/]$","","")')
   call filter(files,'v:val !~# "[\\\\/]\\.\\.\\=$"')
-  call filter(files,'v:val[-4:-1] !=# ".swp" && v:val[-1:-1] !=# "~"')
+
+  " filter out &suffixes
+  let filter_suffixes = substitute(escape(&suffixes, '~.*$^'), ',', '$\\|', 'g') .'$'
+  call filter(files, 'v:val !~# filter_suffixes')
+
   return files
 endfunction
 
