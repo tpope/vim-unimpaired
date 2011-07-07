@@ -92,6 +92,16 @@ Mnenomic: encoding always comes before decoding; "[" always comes before "]".
 ]yy
 {Visual}]y
 
+CUSTOMIZING                                     *unimpaired-customizing*
+
+It is possible to use different characters in place of '[' and ']' by setting
+the following global variable.
+
+>
+  let g:unimpaired_leader_prev = '('
+  lec g:unimpaired_leader_next = ')'
+<
+
 TODO                                            *unimpaired-todo*
 
 Avoid munging null characters when encoding and decoding.
