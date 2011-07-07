@@ -6,6 +6,12 @@ if exists("g:loaded_unimpaired") || &cp || v:version < 700
   finish
 endif
 let g:loaded_unimpaired = 1
+if !exists('g:unimpaired_leader_prev')
+  let g:unimpaired_leader_prev = '['
+fi
+if !exists('g:unimpaired_leader_next')
+  let g:unimpaired_leader_next = ']'
+fi
 
 let s:cpo_save = &cpo
 set cpo&vim
@@ -19,10 +25,10 @@ function! s:MapNextFamily(map,cmd)
   execute 'nmap <silent> '.map.'Next     :<C-U>exe "'.a:cmd.'next'.end
   execute 'nmap <silent> '.map.'First    :<C-U>exe "'.a:cmd.'first'.end
   execute 'nmap <silent> '.map.'Last     :<C-U>exe "'.a:cmd.'last'.end
-  execute 'nmap <silent> ['.        a:map .' '.map.'Previous'
-  execute 'nmap <silent> ]'.        a:map .' '.map.'Next'
-  execute 'nmap <silent> ['.toupper(a:map).' '.map.'First'
-  execute 'nmap <silent> ]'.toupper(a:map).' '.map.'Last'
+  execute 'nmap <silent> '. g:unimpaired_leader_prev .        a:map .' '.map.'Previous'
+  execute 'nmap <silent> '. g:unimpaired_leader_next .        a:map .' '.map.'Next'
+  execute 'nmap <silent> '. g:unimpaired_leader_prev .toupper(a:map).' '.map.'First'
+  execute 'nmap <silent> '. g:unimpaired_leader_next .toupper(a:map).' '.map.'Last'
 endfunction
 
 call s:MapNextFamily('a','')
