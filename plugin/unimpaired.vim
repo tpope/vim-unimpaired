@@ -8,10 +8,10 @@ endif
 let g:loaded_unimpaired = 1
 if !exists('g:unimpaired_leader_prev')
   let g:unimpaired_leader_prev = '['
-fi
+endif
 if !exists('g:unimpaired_leader_next')
   let g:unimpaired_leader_next = ']'
-fi
+endif
 
 let s:cpo_save = &cpo
 set cpo&vim
