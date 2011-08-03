@@ -1,6 +1,6 @@
 *unimpaired.txt*  Pairs of handy bracket mappings
 
-Author:  Tim Pope <vimNOSPAM@tpope.org>         *unimpaired-author*
+Author:  Tim Pope <http://tpo.pe/>
 License: Same terms as Vim itself (see |license|)
 
 This plugin is only available if 'compatible' is not set.
