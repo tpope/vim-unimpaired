@@ -78,8 +78,8 @@ endfunction
 nnoremap <silent> <Plug>unimpairedONext     :<C-U>edit `=<SID>FileByOffset(v:count1)`<CR>
 nnoremap <silent> <Plug>unimpairedOPrevious :<C-U>edit `=<SID>FileByOffset(-v:count1)`<CR>
 
-nmap ]o <Plug>unimpairedONext
-nmap [o <Plug>unimpairedOPrevious
+execute "nmap ". g:unimpaired_leader_next ."o <Plug>unimpairedONext"
+execute "nmap ". g:unimpaired_leader_prev ."o <Plug>unimpairedOPrevious"
 
 " }}}1
 " Line operations {{{1
@@ -87,18 +87,18 @@ nmap [o <Plug>unimpairedOPrevious
 nnoremap <silent> <Plug>unimpairedBlankUp   :<C-U>put!=repeat(nr2char(10),v:count)<Bar>']+1<CR>
 nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>put =repeat(nr2char(10),v:count)<Bar>'[-1<CR>
 
-nmap [<Space> <Plug>unimpairedBlankUp
-nmap ]<Space> <Plug>unimpairedBlankDown
+execute "nmap ". g:unimpaired_leader_prev ."<Space> <Plug>unimpairedBlankUp"
+execute "nmap ". g:unimpaired_leader_next ."<Space> <Plug>unimpairedBlankDown"
 
 nnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>exe 'norm m`'<Bar>exe 'move--'.v:count1<CR>``
 nnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe 'norm m`'<Bar>exe 'move+'.v:count1<CR>``
 xnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>exe 'norm m`'<Bar>exe '''<,''>move--'.v:count1<CR>``
 xnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe 'norm m`'<Bar>exe '''<,''>move''>+'.v:count1<CR>``
 
-nmap [e <Plug>unimpairedMoveUp
-nmap ]e <Plug>unimpairedMoveDown
-xmap [e <Plug>unimpairedMoveUp
-xmap ]e <Plug>unimpairedMoveDown
+execute "nmap ". g:unimpaired_leader_prev ."e <Plug>unimpairedMoveUp"
+execute "nmap ". g:unimpaired_leader_next ."e <Plug>unimpairedMoveDown"
+execute "xmap ". g:unimpaired_leader_prev ."e <Plug>unimpairedMoveUp"
+execute "xmap ". g:unimpaired_leader_next ."e <Plug>unimpairedMoveDown"
 
 " }}}1
 " Encoding and decoding {{{1
@@ -266,12 +266,12 @@ function! s:MapTransform(algorithm, key)
   exe 'nmap '.a:key.a:key[strlen(a:key)-1].' <Plug>unimpairedLine'.a:algorithm
 endfunction
 
-call s:MapTransform('StringEncode','[y')
-call s:MapTransform('StringDecode',']y')
-call s:MapTransform('UrlEncode','[u')
-call s:MapTransform('UrlDecode',']u')
-call s:MapTransform('XmlEncode','[x')
-call s:MapTransform('XmlDecode',']x')
+call s:MapTransform('StringEncode',g:unimpaired_leader_prev .'y')
+call s:MapTransform('StringDecode',g:unimpaired_leader_next .'y')
+call s:MapTransform('UrlEncode',g:unimpaired_leader_prev .'u')
+call s:MapTransform('UrlDecode',g:unimpaired_leader_next .'u')
+call s:MapTransform('XmlEncode',g:unimpaired_leader_prev .'x')
+call s:MapTransform('XmlDecode',g:unimpaired_leader_next .'x')
 
 " }}}1
 
