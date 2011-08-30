@@ -7,9 +7,6 @@ if exists("g:loaded_unimpaired") || &cp || v:version < 700
 endif
 let g:loaded_unimpaired = 1
 
-let s:cpo_save = &cpo
-set cpo&vim
-
 " Next and previous {{{1
 
 function! s:MapNextFamily(map,cmd)
@@ -270,6 +267,4 @@ call s:MapTransform('XmlDecode',']x')
 
 " }}}1
 
-let &cpo = s:cpo_save
-
-" vim:set ft=vim ts=8 sw=2 sts=2:
+" vim:set sw=2 sts=2:
