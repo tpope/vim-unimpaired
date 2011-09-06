@@ -110,7 +110,7 @@ nmap [<Space> <Plug>unimpairedBlankUp
 nmap ]<Space> <Plug>unimpairedBlankDown
 
 nnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>exe 'norm! m`'<Bar>exe 'move--'.v:count1<Bar>norm! ``<CR>
-nnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe 'norm! m`'<Bar>exe 'move+'.v:count1<CR>norm! ``<CR>
+nnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe 'norm! m`'<Bar>exe 'move+'.v:count1<Bar>norm! ``<CR>
 xnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>exe 'norm m`'<Bar>exe '''<,''>move--'.v:count1<CR>``
 xnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe 'norm m`'<Bar>exe '''<,''>move''>+'.v:count1<CR>``
 
