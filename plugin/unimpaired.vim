@@ -1,8 +1,6 @@
 " unimpaired.vim - Pairs of handy bracket mappings
 " Maintainer:   Tim Pope <http://tpo.pe/>
 " Version:      1.1
-" TODO: use :try
-" TODO: simpler modeline
 
 if exists("g:loaded_unimpaired") || &cp || v:version < 700
   finish
@@ -74,6 +72,31 @@ nnoremap <silent> <Plug>unimpairedOPrevious :<C-U>edit `=<SID>FileByOffset(-v:co
 
 nmap ]o <Plug>unimpairedONext
 nmap [o <Plug>unimpairedOPrevious
+
+nmap [, :call search('^[<=>]\{7\}','bW')<CR>
+nmap ], :call search('^[<=>]\{7\}','W')<CR>
+omap [, V:call search('^[<=>]\{7\}','bW')<CR>
+omap ], V:call search('^[<=>]\{7\}','W')<CR>
+xmap [, :<C-U>exe 'norm! gv'<Bar>call search('^[<=>]\{7\}','bW')<CR>
+xmap ], :<C-U>exe 'norm! gv'<Bar>call search('^[<=>]\{7\}','W')<CR>
+nmap [< :call search('^<<<<<<<','bW')<CR>
+nmap [= :call search('^=======','bW')<CR>
+nmap [> :call search('^>>>>>>>','bW')<CR>
+nmap ]< :call search('^<<<<<<<','W')<CR>
+nmap ]= :call search('^=======','W')<CR>
+nmap ]> :call search('^>>>>>>>','W')<CR>
+xmap [< :<C-U>exe 'norm! gv'<Bar>call search('^<<<<<<<','bW')<CR>
+xmap [= :<C-U>exe 'norm! gv'<Bar>call search('^=======','bW')<CR>
+xmap [> :<C-U>exe 'norm! gv'<Bar>call search('^>>>>>>>','bW')<CR>
+xmap ]< :<C-U>exe 'norm! gv'<Bar>call search('^<<<<<<<','W')<CR>
+xmap ]= :<C-U>exe 'norm! gv'<Bar>call search('^=======','W')<CR>
+xmap ]> :<C-U>exe 'norm! gv'<Bar>call search('^>>>>>>>','W')<CR>
+omap [< V:call search('^<<<<<<<','bW')<CR>
+omap [= V:call search('^=======','bW')<CR>
+omap [> V:call search('^>>>>>>>','bW')<CR>
+omap ]< V:call search('^<<<<<<<','W')<CR>
+omap ]= V:call search('^=======','W')<CR>
+omap ]> V:call search('^>>>>>>>','W')<CR>
 
 " }}}1
 " Line operations {{{1
