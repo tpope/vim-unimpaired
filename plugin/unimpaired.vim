@@ -105,13 +105,13 @@ omap ]> V:call search('^>>>>>>>','W')<CR>
 function! s:BlankUp(count) abort
   put!=repeat(nr2char(10), a:count)
   ']+1
-  call repeat#set("\<Plug>unimpairedBlankUp", a:count)
+  silent! call repeat#set("\<Plug>unimpairedBlankUp", a:count)
 endfunction
 
 function! s:BlankDown(count) abort
   put =repeat(nr2char(10), a:count)
   '[-1
-  call repeat#set("\<Plug>unimpairedBlankDown", a:count)
+  silent! call repeat#set("\<Plug>unimpairedBlankDown", a:count)
 endfunction
 
 nnoremap <silent> <Plug>unimpairedBlankUp   :<C-U>call <SID>BlankUp(v:count1)<CR>
