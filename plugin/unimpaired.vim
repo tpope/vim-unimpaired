@@ -103,13 +103,13 @@ omap ]> V:call search('^>>>>>>>','W')<CR>
 " Line operations {{{1
 
 function! s:BlankUp(count) abort
-  put!=repeat("\n", a:count)
+  put!=repeat(nr2char(10), a:count)
   ']+1
   call repeat#set("\<Plug>unimpairedBlankUp", a:count)
 endfunction
 
 function! s:BlankDown(count) abort
-  put =repeat("\n", a:count)
+  put =repeat(nr2char(10), a:count)
   '[-1
   call repeat#set("\<Plug>unimpairedBlankDown", a:count)
 endfunction
