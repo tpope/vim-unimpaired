@@ -102,16 +102,35 @@ omap ]> V:call search('^>>>>>>>','W')<CR>
 " }}}1
 " Line operations {{{1
 
-nnoremap <silent> <Plug>unimpairedBlankUp   :<C-U>put!=repeat(nr2char(10),v:count)<Bar>']+1<CR>
-nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>put =repeat(nr2char(10),v:count)<Bar>'[-1<CR>
+function! s:BlankUp(count) abort
+  put!=repeat("\n", a:count)
+  ']+1
+  call repeat#set("\<Plug>unimpairedBlankUp", a:count)
+endfunction
+
+function! s:BlankDown(count) abort
+  put =repeat("\n", a:count)
+  '[-1
+  call repeat#set("\<Plug>unimpairedBlankDown", a:count)
+endfunction
+
+nnoremap <silent> <Plug>unimpairedBlankUp   :<C-U>call <SID>BlankUp(v:count1)<CR>
+nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>call <SID>BlankDown(v:count1)<CR>
 
 nmap [<Space> <Plug>unimpairedBlankUp
 nmap ]<Space> <Plug>unimpairedBlankDown
 
-nnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>exe 'norm! m`'<Bar>exe 'move--'.v:count1<Bar>norm! ``<CR>
-nnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe 'norm! m`'<Bar>exe 'move+'.v:count1<Bar>norm! ``<CR>
-xnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>exe 'norm m`'<Bar>exe '''<,''>move--'.v:count1<CR>``
-xnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe 'norm m`'<Bar>exe '''<,''>move''>+'.v:count1<CR>``
+function! s:Move(cmd, count, map) abort
+  normal! m`
+  exe 'move'.a:cmd.a:count
+  norm! ``
+  call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
+endfunction
+
+nnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>call <SID>Move('--',v:count1,'Up')<CR>
+nnoremap <silent> <Plug>unimpairedMoveDown :<C-U>call <SID>Move('+',v:count1,'Down')<CR>
+xnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>exe 'normal! m`'<Bar>exe '''<,''>move--'.v:count1<CR>``
+xnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe 'normal! m`'<Bar>exe '''<,''>move''>+'.v:count1<CR>``
 
 nmap [e <Plug>unimpairedMoveUp
 nmap ]e <Plug>unimpairedMoveDown
