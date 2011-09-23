@@ -124,7 +124,7 @@ function! s:Move(cmd, count, map) abort
   normal! m`
   exe 'move'.a:cmd.a:count
   norm! ``
-  call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
+  silent! call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
 endfunction
 
 nnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>call <SID>Move('--',v:count1,'Up')<CR>
