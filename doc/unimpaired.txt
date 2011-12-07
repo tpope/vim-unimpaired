@@ -44,6 +44,14 @@ is "args" and for the "q" commands is "quickfix".
 ]o                      Go to the file succeeding the current one
                         alphabetically in the current file's directory.
 
+                                                *[n*
+]n                      Go to the previous SCM conflict marker.  Try d[n
+                        inside a conflict.
+
+                                                *]n*
+]n                      Go to the next SCM conflict marker.  Try d]n inside a
+                        conflict.
+
 LINE OPERATIONS                                 *unimpaired-lines*
 
                                                 *[<Space>*

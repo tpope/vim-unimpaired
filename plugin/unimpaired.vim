@@ -75,6 +75,53 @@ nmap ]o <Plug>unimpairedONext
 nmap [o <Plug>unimpairedOPrevious
 
 " }}}1
+" Diff {{{1
+
+nmap [n <Plug>unimpairedContextPrevious
+nmap ]n <Plug>unimpairedContextNext
+omap [n <Plug>unimpairedContextPrevious
+omap ]n <Plug>unimpairedContextNext
+
+nnoremap <silent> <Plug>unimpairedContextPrevious :call <SID>Context(1)<CR>
+nnoremap <silent> <Plug>unimpairedContextNext     :call <SID>Context(0)<CR>
+onoremap <silent> <Plug>unimpairedContextPrevious :call <SID>ContextMotion(1)<CR>
+onoremap <silent> <Plug>unimpairedContextNext     :call <SID>ContextMotion(0)<CR>
+
+function! s:Context(reverse)
+  call search('^@@ .* @@\|^[<=>|]\{7}[<=>|]\@!', a:reverse ? 'bW' : 'W')
+endfunction
+
+function! s:ContextMotion(reverse)
+  if a:reverse
+    -
+  endif
+  call search('^@@ .* @@\|^diff \|^[<=>|]\{7}[<=>|]\@!', 'bWc')
+  if getline('.') =~# '^diff '
+    let end = search('^diff ', 'Wn') - 1
+    if end < 0
+      let end = line('$')
+    endif
+  elseif getline('.') =~# '^@@ '
+    let end = search('^@@ .* @@\|^diff ', 'Wn') - 1
+    if end < 0
+      let end = line('$')
+    endif
+  elseif getline('.') =~# '^=\{7\}'
+    +
+    let end = search('^>\{7}>\@!', 'Wnc')
+  elseif getline('.') =~# '^[<=>|]\{7\}'
+    let end = search('^[<=>|]\{7}[<=>|]\@!', 'Wn') - 1
+  else
+    return
+  endif
+  if end > line('.')
+    execute 'normal! V'.(end - line('.')).'j'
+  elseif end == line('.')
+    normal! V
+  endif
+endfunction
+
+" }}}1
 " Line operations {{{1
 
 function! s:BlankUp(count) abort
