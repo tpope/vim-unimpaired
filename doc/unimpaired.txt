@@ -45,7 +45,7 @@ is "args" and for the "q" commands is "quickfix".
                         alphabetically in the current file's directory.
 
                                                 *[n*
-]n                      Go to the previous SCM conflict marker.  Try d[n
+[n                      Go to the previous SCM conflict marker.  Try d[n
                         inside a conflict.
 
                                                 *]n*
