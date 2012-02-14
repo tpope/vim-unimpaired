@@ -104,6 +104,16 @@ Mnenomic: encoding always comes before decoding; "[" always comes before "]".
 ]yy
 {Visual}]y
 
+                                                *[6* *[66* *v_[6*
+[6{motion}              Base64 encode.
+[66                     foo bar => Zm9vIGJhcg==
+{Visual}[6
+
+                                                *]6* *]66* *v_]6*
+]6{motion}              Base64 decode
+]66                     Input length must be a multiple of 4.
+{Visual}]6
+
 TODO                                            *unimpaired-todo*
 
 Avoid munging null characters when encoding and decoding.

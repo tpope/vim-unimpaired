@@ -20,6 +20,7 @@ Decoding/Encoding XML entities, URLs, C-strings
 Use `[` for encoding and `]` for decoding, followed by
 
  * `x` for XML entities,
+ * `6` for base64,
  * `u` for URL-encoding and
  * `y` for C strings. (`[c` and `]c` are already used for jumping through changes in diff mode).
 
