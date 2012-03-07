@@ -7,6 +7,12 @@ if exists("g:loaded_unimpaired") || &cp || v:version < 700
   finish
 endif
 let g:loaded_unimpaired = 1
+if !exists('g:unimpaired_leader_prev')
+  let g:unimpaired_leader_prev = '['
+endif
+if !exists('g:unimpaired_leader_next')
+  let g:unimpaired_leader_next = ']'
+endif
 
 " Next and previous {{{1
 
@@ -17,10 +23,10 @@ function! s:MapNextFamily(map,cmd)
   execute 'nmap <silent> '.map.'Next     :<C-U>exe "'.a:cmd.'next'.end
   execute 'nmap <silent> '.map.'First    :<C-U>exe "'.a:cmd.'first'.end
   execute 'nmap <silent> '.map.'Last     :<C-U>exe "'.a:cmd.'last'.end
-  execute 'nmap <silent> ['.        a:map .' '.map.'Previous'
-  execute 'nmap <silent> ]'.        a:map .' '.map.'Next'
-  execute 'nmap <silent> ['.toupper(a:map).' '.map.'First'
-  execute 'nmap <silent> ]'.toupper(a:map).' '.map.'Last'
+  execute 'nmap <silent> '. g:unimpaired_leader_prev .        a:map .' '.map.'Previous'
+  execute 'nmap <silent> '. g:unimpaired_leader_next .        a:map .' '.map.'Next'
+  execute 'nmap <silent> '. g:unimpaired_leader_prev .toupper(a:map).' '.map.'First'
+  execute 'nmap <silent> '. g:unimpaired_leader_next .toupper(a:map).' '.map.'Last'
 endfunction
 
 call s:MapNextFamily('a','')
@@ -71,8 +77,8 @@ endfunction
 nnoremap <silent> <Plug>unimpairedONext     :<C-U>edit `=<SID>FileByOffset(v:count1)`<CR>
 nnoremap <silent> <Plug>unimpairedOPrevious :<C-U>edit `=<SID>FileByOffset(-v:count1)`<CR>
 
-nmap ]o <Plug>unimpairedONext
-nmap [o <Plug>unimpairedOPrevious
+execute "nmap ". g:unimpaired_leader_next ."o <Plug>unimpairedONext"
+execute "nmap ". g:unimpaired_leader_prev ."o <Plug>unimpairedOPrevious"
 
 " }}}1
 " Diff {{{1
@@ -139,8 +145,8 @@ endfunction
 nnoremap <silent> <Plug>unimpairedBlankUp   :<C-U>call <SID>BlankUp(v:count1)<CR>
 nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>call <SID>BlankDown(v:count1)<CR>
 
-nmap [<Space> <Plug>unimpairedBlankUp
-nmap ]<Space> <Plug>unimpairedBlankDown
+execute "nmap ". g:unimpaired_leader_prev ."<Space> <Plug>unimpairedBlankUp"
+execute "nmap ". g:unimpaired_leader_next ."<Space> <Plug>unimpairedBlankDown"
 
 function! s:Move(cmd, count, map) abort
   normal! m`
@@ -154,10 +160,10 @@ nnoremap <silent> <Plug>unimpairedMoveDown :<C-U>call <SID>Move('+',v:count1,'Do
 xnoremap <silent> <Plug>unimpairedMoveUp   :<C-U>exe 'normal! m`'<Bar>exe '''<,''>move--'.v:count1<CR>``
 xnoremap <silent> <Plug>unimpairedMoveDown :<C-U>exe 'normal! m`'<Bar>exe '''<,''>move''>+'.v:count1<CR>``
 
-nmap [e <Plug>unimpairedMoveUp
-nmap ]e <Plug>unimpairedMoveDown
-xmap [e <Plug>unimpairedMoveUp
-xmap ]e <Plug>unimpairedMoveDown
+execute "nmap ". g:unimpaired_leader_prev ."e <Plug>unimpairedMoveUp"
+execute "nmap ". g:unimpaired_leader_next ."e <Plug>unimpairedMoveDown"
+execute "xmap ". g:unimpaired_leader_prev ."e <Plug>unimpairedMoveUp"
+execute "xmap ". g:unimpaired_leader_next ."e <Plug>unimpairedMoveDown"
 
 " }}}1
 " Encoding and decoding {{{1
@@ -325,12 +331,12 @@ function! s:MapTransform(algorithm, key)
   exe 'nmap '.a:key.a:key[strlen(a:key)-1].' <Plug>unimpairedLine'.a:algorithm
 endfunction
 
-call s:MapTransform('StringEncode','[y')
-call s:MapTransform('StringDecode',']y')
-call s:MapTransform('UrlEncode','[u')
-call s:MapTransform('UrlDecode',']u')
-call s:MapTransform('XmlEncode','[x')
-call s:MapTransform('XmlDecode',']x')
+call s:MapTransform('StringEncode',g:unimpaired_leader_prev .'y')
+call s:MapTransform('StringDecode',g:unimpaired_leader_next .'y')
+call s:MapTransform('UrlEncode',g:unimpaired_leader_prev .'u')
+call s:MapTransform('UrlDecode',g:unimpaired_leader_next .'u')
+call s:MapTransform('XmlEncode',g:unimpaired_leader_prev .'x')
+call s:MapTransform('XmlDecode',g:unimpaired_leader_next .'x')
 
 " }}}1
 
