@@ -390,8 +390,8 @@ call s:MapTransform('UrlEncode','[u')
 call s:MapTransform('UrlDecode',']u')
 call s:MapTransform('XmlEncode','[x')
 call s:MapTransform('XmlDecode',']x')
-call s:MapTransform('Base64Encode','[6')
-call s:MapTransform('Base64Decode',']6')
+call s:MapTransform('Base64Encode','[Y')
+call s:MapTransform('Base64Decode',']Y')
 
 " }}}1
 
