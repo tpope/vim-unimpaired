@@ -195,8 +195,8 @@ let g:unimpaired_base64_filler = '='
 let g:unimpaired_base64_reverse_map = {}
 let s:pos = 0
 for s:char in g:unimpaired_base64_chars
-    let g:unimpaired_base64_reverse_map[s:char] = s:pos
-    let s:pos = s:pos + 1
+  let g:unimpaired_base64_reverse_map[s:char] = s:pos
+  let s:pos = s:pos + 1
 endfor
 unlet s:pos
 
@@ -226,23 +226,23 @@ function! s:Base64Encode(str)
 endfunction
 
 function! s:Base64Decode(str)
-    let to_be_decoded=a:str
-    let decoded=''
-    while len(to_be_decoded) % 4 == 0
-        let decoded .= nr2char(   4 * (g:unimpaired_base64_reverse_map[to_be_decoded[0]]      )
-                             \  +     (g:unimpaired_base64_reverse_map[to_be_decoded[1]] / 16 )
-                             \)
-        if to_be_decoded[2] !=# g:unimpaired_base64_filler
-            let decoded .= nr2char(16 * (g:unimpaired_base64_reverse_map[to_be_decoded[1]] % 16) + (g:unimpaired_base64_reverse_map[to_be_decoded[2]]/4))
-            if to_be_decoded[3] !=# g:unimpaired_base64_filler
-                let decoded .= nr2char(64 * (g:unimpaired_base64_reverse_map[to_be_decoded[2]] % 4) + g:unimpaired_base64_reverse_map[to_be_decoded[3]])
-            endif
-        endif
-        let to_be_decoded = to_be_decoded[4:]
-        if empty(to_be_decoded)
-            return decoded
-        endif
-    endwhile
+  let to_be_decoded=a:str
+  let decoded=''
+  while len(to_be_decoded) % 4 == 0
+    let decoded .= nr2char(   4 * (g:unimpaired_base64_reverse_map[to_be_decoded[0]]      )
+                         \  +     (g:unimpaired_base64_reverse_map[to_be_decoded[1]] / 16 )
+                         \)
+    if to_be_decoded[2] !=# g:unimpaired_base64_filler
+      let decoded .= nr2char(16 * (g:unimpaired_base64_reverse_map[to_be_decoded[1]] % 16) + (g:unimpaired_base64_reverse_map[to_be_decoded[2]]/4))
+      if to_be_decoded[3] !=# g:unimpaired_base64_filler
+        let decoded .= nr2char(64 * (g:unimpaired_base64_reverse_map[to_be_decoded[2]] % 4) + g:unimpaired_base64_reverse_map[to_be_decoded[3]])
+      endif
+    endif
+    let to_be_decoded = to_be_decoded[4:]
+    if empty(to_be_decoded)
+      return decoded
+    endif
+  endwhile
 endfunction
 
 function! s:HexEncode(str)
