@@ -104,6 +104,16 @@ Mnenomic: encoding always comes before decoding; "[" always comes before "]".
 ]yy
 {Visual}]y
 
+                                                *[X* *[XX* *v_[X*
+[X{motion}              Hexadecimal encode.
+[XX                     foo bar => 666F6F20626172
+{Visual}[X
+
+                                                *]X* *]XX* *v_]X*
+]X{motion}              Hexadecimal decode
+]XX                     Input is freed from non-hexa characters.
+{Visual}]X
+
                                                 *[Y* *[YY* *v_[Y*
 [Y{motion}              Base64 encode.
 [YY                     foo bar => Zm9vIGJhcg==

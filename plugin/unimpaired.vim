@@ -245,8 +245,27 @@ function! s:Base64Decode(str)
     endwhile
 endfunction
 
-" HTML entities {{{2
+function! s:HexEncode(str)
+  let to_be_encoded=a:str
+  let encoded=''
+  while len(to_be_encoded) > 0
+    let encoded .= printf('%X',char2nr(to_be_encoded[0]))
+    let to_be_encoded = to_be_encoded[1:]
+  endwhile
+  return encoded
+endfunction
 
+function! s:HexDecode(str)
+  let to_be_decoded=substitute(a:str,'\X','','g') "prevent against injection in exec
+  let decoded=''
+  while len(to_be_decoded) > 1
+    exec 'let decoded .= "\x' . to_be_decoded[0:1].'"'
+    let to_be_decoded=to_be_decoded[2:]
+  endwhile
+  return decoded
+endfunction
+
+" HTML entities {{{2
 let g:unimpaired_html_entities = {
       \ 'nbsp':     160, 'iexcl':    161, 'cent':     162, 'pound':    163,
       \ 'curren':   164, 'yen':      165, 'brvbar':   166, 'sect':     167,
@@ -390,6 +409,8 @@ call s:MapTransform('UrlEncode','[u')
 call s:MapTransform('UrlDecode',']u')
 call s:MapTransform('XmlEncode','[x')
 call s:MapTransform('XmlDecode',']x')
+call s:MapTransform('HexEncode','[X')
+call s:MapTransform('HexDecode',']X')
 call s:MapTransform('Base64Encode','[Y')
 call s:MapTransform('Base64Decode',']Y')
 
