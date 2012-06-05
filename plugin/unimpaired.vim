@@ -416,4 +416,4 @@ call s:MapTransform('Base64Decode',']Y')
 
 " }}}1
 
-" vim:set sw=2 sts=2:
+" vim:set sw=2 sts=2 fdm=marker:
