@@ -245,21 +245,21 @@ function! s:Base64Decode(str)
 endfunction
 
 function! s:HexEncode(str)
-  let to_be_encoded=a:str
+  let input=a:str
   let encoded=''
-  while len(to_be_encoded) > 0
-    let encoded .= printf('%X',char2nr(to_be_encoded[0]))
-    let to_be_encoded = to_be_encoded[1:]
+  while !empty(input)
+    let encoded .= printf('%X',char2nr(input[0]))
+    let input = input[1:]
   endwhile
   return encoded
 endfunction
 
 function! s:HexDecode(str)
-  let to_be_decoded=substitute(a:str,'\X','','g') "prevent against injection in exec
+  let input=substitute(a:str,'\X','','g') "exec call safety: remove all non-hex chars
   let decoded=''
-  while len(to_be_decoded) > 1
-    exec 'let decoded .= "\x' . to_be_decoded[0:1].'"'
-    let to_be_decoded=to_be_decoded[2:]
+  while len(input) > 1
+    exec 'let decoded .= "\x' . input[0:1].'"'
+    let input=input[2:]
   endwhile
   return decoded
 endfunction
