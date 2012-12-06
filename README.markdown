@@ -11,8 +11,9 @@ commonly used ex commands. `]q` is :cnext. `[q` is :cprevious. `]a` is
 20 mappings and mnemonics.  All of them take a count.
 
 There are linewise mappings. `[<Space>` and `]<Space>` add newlines
-before and after the cursor line. `[e` and `]e` exchange the current
-line with the one above or below it.
+before and after the cursor line. `[d` and `]d` delete lines before and
+after the cursor.`[e` and `]e` exchange the current line with the one
+above or below it.
 
 There are mappings for encoding and decoding. `[x` and `]x` encode and
 decode XML (and HTML). `[u` and `]u` encode and decode URLs. `[y` and

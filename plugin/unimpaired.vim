@@ -142,6 +142,38 @@ nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>call <SID>BlankDown(v:count1)<
 nmap [<Space> <Plug>unimpairedBlankUp
 nmap ]<Space> <Plug>unimpairedBlankDown
 
+function! s:DeleteUp(count) abort
+  normal! m`
+  normal ix
+  normal x
+  if a:count > 1
+    exe "normal k".eval(a:count-1)."dk"
+  else
+    exe "normal k".a:count."dd"
+  endif
+  norm! ``
+  silent! call repeat#set("\<Plug>unimpairedDeleteUp", a:count)
+endfunction
+
+function! s:DeleteDown(count) abort
+  normal! m`
+  normal ix
+  normal x
+  if a:count > 1
+    exe "normal j".eval(a:count-1)."dj"
+  else
+    exe "normal j".a:count."dd"
+  endif
+  norm! ``
+  silent! call repeat#set("\<Plug>unimpairedDeleteDown", a:count)
+endfunction
+
+nnoremap <silent> <Plug>unimpairedDeleteUp   :<C-U>call <SID>DeleteUp(v:count1)<CR>
+nnoremap <silent> <Plug>unimpairedDeleteDown :<C-U>call <SID>DeleteDown(v:count1)<CR>
+
+nmap [d <Plug>unimpairedDeleteUp
+nmap ]d <Plug>unimpairedDeleteDown
+
 function! s:Move(cmd, count, map) abort
   normal! m`
   exe 'move'.a:cmd.a:count

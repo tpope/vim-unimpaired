@@ -60,6 +60,12 @@ LINE OPERATIONS                                 *unimpaired-lines*
                                                 *]<Space>*
 ]<Space>                Add [count] blank lines below the cursor.
 
+                                                *[d*
+[d                      Delete [count] lines above the cursor.
+
+                                                ]d
+]d                      Delete [count] lines below the cursor.
+
                                                 *[e* *v_[e*
 [e                      Exchange the current line with [count] lines above it.
 
