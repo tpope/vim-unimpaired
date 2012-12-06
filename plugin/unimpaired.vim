@@ -125,14 +125,16 @@ endfunction
 " Line operations {{{1
 
 function! s:BlankUp(count) abort
+  normal! m`
   put!=repeat(nr2char(10), a:count)
-  ']+1
+  norm! ``
   silent! call repeat#set("\<Plug>unimpairedBlankUp", a:count)
 endfunction
 
 function! s:BlankDown(count) abort
+  normal! m`
   put =repeat(nr2char(10), a:count)
-  '[-1
+  norm! ``
   silent! call repeat#set("\<Plug>unimpairedBlankDown", a:count)
 endfunction
 
