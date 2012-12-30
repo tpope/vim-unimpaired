@@ -144,7 +144,22 @@ nmap ]<Space> <Plug>unimpairedBlankDown
 
 function! s:Move(cmd, count, map) abort
   normal! m`
-  exe 'move'.a:cmd.a:count
+
+  let range = ''
+  let address = ''
+
+  if foldclosed(line('.')) >= 0
+    let start_fold = foldclosed(line('.'))
+    let end_fold = foldclosedend(line('.'))
+
+    let range = start_fold.','.end_fold
+
+    if a:map =~ 'Down'
+      let address = end_fold
+    endif
+  endif
+
+  exe range.'move'.address.a:cmd.a:count
   norm! ``
   silent! call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
 endfunction
