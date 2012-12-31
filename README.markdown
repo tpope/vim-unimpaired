@@ -22,8 +22,9 @@ And in the miscellaneous category, there's `[o` and `]o` to go to the
 next/previous file in the directory, and `[n` and `]n` to jump between
 SCM conflict markers.
 
-The `.` command will work with the linewise encoding mappings if you
-install [repeat.vim](https://github.com/tpope/vim-repeat).
+The `.` command works with all operator mappings, and will work with the
+linewise mappings as well if you install
+[repeat.vim](https://github.com/tpope/vim-repeat).
 
 Installation
 ------------
