@@ -35,7 +35,11 @@ function! s:entries(path)
   let files += split(glob(path."/*"),"\n")
   call map(files,'substitute(v:val,"[\\/]$","","")')
   call filter(files,'v:val !~# "[\\\\/]\\.\\.\\=$"')
-  call filter(files,'v:val[-4:-1] !=# ".swp" && v:val[-1:-1] !=# "~"')
+
+  " filter out &suffixes
+  let filter_suffixes = substitute(escape(&suffixes, '~.*$^'), ',', '$\\|', 'g') .'$'
+  call filter(files, 'v:val !~# filter_suffixes')
+
   return files
 endfunction
 
@@ -44,6 +48,12 @@ function! s:FileByOffset(num)
   let num = a:num
   while num
     let files = s:entries(fnamemodify(file,':h'))
+    if files == []
+      " This should not happen, since at least the current file should be in here.
+      " (It happened on Windows when backtick-expansion was used to call this
+      " function.)
+      throw "No files found in current directory!"
+    endif
     if a:num < 0
       call reverse(sort(filter(files,'v:val < file')))
     else
@@ -68,8 +78,8 @@ function! s:FileByOffset(num)
   return file
 endfunction
 
-nnoremap <silent> <Plug>unimpairedONext     :<C-U>edit `=<SID>FileByOffset(v:count1)`<CR>
-nnoremap <silent> <Plug>unimpairedOPrevious :<C-U>edit `=<SID>FileByOffset(-v:count1)`<CR>
+nnoremap <silent> <Plug>unimpairedONext     :<C-U>edit <C-R>=<SID>FileByOffset(v:count1)<CR><CR>
+nnoremap <silent> <Plug>unimpairedOPrevious :<C-U>edit <C-R>=<SID>FileByOffset(-v:count1)<CR><CR>
 
 nmap ]o <Plug>unimpairedONext
 nmap [o <Plug>unimpairedOPrevious
