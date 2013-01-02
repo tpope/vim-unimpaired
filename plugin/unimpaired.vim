@@ -351,6 +351,35 @@ function! s:XmlDecode(str)
   return s:XmlEntityDecode(str)
 endfunction
 
+function! s:MakeDataUri(filename)
+  let mimetype = system('mimetype -b ' . shellescape(a:filename))
+  let mimetype = substitute(mimetype, '\v^[\s\n]+|[\n\s]+$', '', 'g')
+
+  let base64 = system('base64 -w 0 ' . shellescape(a:filename))
+  let replacement = printf('data:%s;base64,%s', mimetype, base64)
+
+  return replacement
+endfunction
+
+function! s:DataUriFile(str)
+  let named_file = ''
+
+  if a:str[0] == '/'
+    " Simple absolute path
+    let named_file=simplify(a:str)
+  elseif a:str[0] == '~'
+    " File in home directory
+    let named_file=simplify(expand('~') . a:str[1:])
+  else
+    " Relative file name. Taken as relative to the current file, like files
+    " named in CSS `url()` declarations
+    let base_directory = expand('%:h')
+    let named_file = simplify(base_directory . '/' . a:str)
+  end
+
+  return s:MakeDataUri(named_file)
+endfunction
+
 function! s:Transform(algorithm,type)
   let sel_save = &selection
   let cb_save = &clipboard
@@ -403,6 +432,8 @@ call s:MapTransform('XmlEncode','[x')
 call s:MapTransform('XmlDecode',']x')
 call s:MapTransform('Base64Encode','[Y')
 call s:MapTransform('Base64Decode',']Y')
+
+call s:MapTransform('DataUriFile','[D')
 
 " }}}1
 
