@@ -8,15 +8,22 @@ if exists("g:loaded_unimpaired") || &cp || v:version < 700
 endif
 let g:loaded_unimpaired = 1
 
+nnoremap g/ /\v\C
+onoremap g/ /\v\C
+xnoremap g/ /\v\C
+nnoremap z/ /\v\c
+onoremap z/ /\v\c
+xnoremap z/ /\v\c
+
 " Next and previous {{{1
 
 function! s:MapNextFamily(map,cmd)
   let map = '<Plug>unimpaired'.toupper(a:map)
   let end = ' ".(v:count ? v:count : "")<CR>'
-  execute 'nmap <silent> '.map.'Previous :<C-U>exe "'.a:cmd.'previous'.end
-  execute 'nmap <silent> '.map.'Next     :<C-U>exe "'.a:cmd.'next'.end
-  execute 'nmap <silent> '.map.'First    :<C-U>exe "'.a:cmd.'first'.end
-  execute 'nmap <silent> '.map.'Last     :<C-U>exe "'.a:cmd.'last'.end
+  execute 'nnoremap <silent> '.map.'Previous :<C-U>exe "'.a:cmd.'previous'.end
+  execute 'nnoremap <silent> '.map.'Next     :<C-U>exe "'.a:cmd.'next'.end
+  execute 'nnoremap <silent> '.map.'First    :<C-U>exe "'.a:cmd.'first'.end
+  execute 'nnoremap <silent> '.map.'Last     :<C-U>exe "'.a:cmd.'last'.end
   execute 'nmap <silent> ['.        a:map .' '.map.'Previous'
   execute 'nmap <silent> ]'.        a:map .' '.map.'Next'
   execute 'nmap <silent> ['.toupper(a:map).' '.map.'First'
