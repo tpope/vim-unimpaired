@@ -36,12 +36,12 @@ is "args" and for the "q" commands is "quickfix".
 *[T* |:tfirst|
 *]T* |:tlast|
 
-                                                *[o*
-[o                      Go to the file preceding the current one
+                                                *[f*
+[f                      Go to the file preceding the current one
                         alphabetically in the current file's directory.
 
-                                                *]o*
-]o                      Go to the file succeeding the current one
+                                                *]f*
+]f                      Go to the file succeeding the current one
                         alphabetically in the current file's directory.
 
                                                 *[n*

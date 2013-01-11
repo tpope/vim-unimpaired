@@ -87,11 +87,15 @@ function! s:fnameescape(file) abort
   endif
 endfunction
 
-nnoremap <silent> <Plug>unimpairedONext     :<C-U>edit <C-R>=<SID>fnameescape(<SID>FileByOffset(v:count1))<CR><CR>
-nnoremap <silent> <Plug>unimpairedOPrevious :<C-U>edit <C-R>=<SID>fnameescape(<SID>FileByOffset(-v:count1))<CR><CR>
+nnoremap <silent> <Plug>unimpairedDirectoryNext     :<C-U>edit <C-R>=<SID>fnameescape(<SID>FileByOffset(v:count1))<CR><CR>
+nnoremap <silent> <Plug>unimpairedDirectoryPrevious :<C-U>edit <C-R>=<SID>fnameescape(<SID>FileByOffset(-v:count1))<CR><CR>
 
-nmap ]o <Plug>unimpairedONext
-nmap [o <Plug>unimpairedOPrevious
+nmap <Plug>unimpairedONext     <Plug>unimpairedDirectoryNext
+nmap <Plug>unimpairedOPrevious <Plug>unimpairedDirectoryPrevious
+nmap ]f <Plug>unimpairedDirectoryNext
+nmap [f <Plug>unimpairedDirectoryPrevious
+nmap ]o <Plug>unimpairedDirectoryNext
+nmap [o <Plug>unimpairedDirectoryPrevious
 
 " }}}1
 " Diff {{{1
