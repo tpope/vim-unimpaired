@@ -15,26 +15,30 @@ The following maps all correspond to normal mode commands.  If a count is
 given, it becomes an argument to the command.  A mnemonic for the "a" commands
 is "args" and for the "q" commands is "quickfix".
 
-*[a* |:previous|
-*]a* |:next|
-*[A* |:first|
-*]A* |:last|
-*[b* |:bprevious|
-*]b* |:bnext|
-*[B* |:bfirst|
-*]B* |:blast|
-*[l* |:lprevious|
-*]l* |:lnext|
-*[L* |:lfirst|
-*]L* |:llast|
-*[q* |:cprevious|
-*]q* |:cnext|
-*[Q* |:cfirst|
-*]Q* |:clast|
-*[t* |:tprevious|
-*]t* |:tnext|
-*[T* |:tfirst|
-*]T* |:tlast|
+*[a*     |:previous|
+*]a*     |:next|
+*[A*     |:first|
+*]A*     |:last|
+*[b*     |:bprevious|
+*]b*     |:bnext|
+*[B*     |:bfirst|
+*]B*     |:blast|
+*[l*     |:lprevious|
+*]l*     |:lnext|
+*[L*     |:lfirst|
+*]L*     |:llast|
+*[<C-L>* |:lpfile|
+*]<C-L>* |:lnfile|
+*[q*     |:cprevious|
+*]q*     |:cnext|
+*[Q*     |:cfirst|
+*]Q*     |:clast|
+*[<C-Q>* |:cpfile| (Note that <C-Q> only works in a terminal if you disable
+*]<C-Q>* |:cnfile| flow control: stty -ixon)
+*[t*     |:tprevious|
+*]t*     |:tnext|
+*[T*     |:tfirst|
+*]T*     |:tlast|
 
                                                 *[f*
 [f                      Go to the file preceding the current one

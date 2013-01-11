@@ -21,6 +21,12 @@ function! s:MapNextFamily(map,cmd)
   execute 'nmap <silent> ]'.        a:map .' '.map.'Next'
   execute 'nmap <silent> ['.toupper(a:map).' '.map.'First'
   execute 'nmap <silent> ]'.toupper(a:map).' '.map.'Last'
+  if exists(':'.a:cmd.'nfile')
+    execute 'nnoremap <silent> '.map.'PFile :<C-U>exe "'.a:cmd.'prfile'.end
+    execute 'nnoremap <silent> '.map.'NFile :<C-U>exe "'.a:cmd.'nfile'.end
+    execute 'nmap <silent> [<C-'.a:map.'> '.map.'PFile'
+    execute 'nmap <silent> ]<C-'.a:map.'> '.map.'NFile'
+  endif
 endfunction
 
 call s:MapNextFamily('a','')
