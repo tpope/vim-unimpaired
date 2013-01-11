@@ -8,13 +8,6 @@ if exists("g:loaded_unimpaired") || &cp || v:version < 700
 endif
 let g:loaded_unimpaired = 1
 
-nnoremap g/ /\v\C
-onoremap g/ /\v\C
-xnoremap g/ /\v\C
-nnoremap z/ /\v\c
-onoremap z/ /\v\c
-xnoremap z/ /\v\c
-
 " Next and previous {{{1
 
 function! s:MapNextFamily(map,cmd)
