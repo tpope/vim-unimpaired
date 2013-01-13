@@ -387,7 +387,7 @@ function! s:Transform(algorithm,type)
   let &selection = sel_save
   let &clipboard = cb_save
   if a:type =~ '^\d\+$'
-    silent! call repeat#set("\<Plug>unimpairedLine".a:algorithm,a:type)
+    silent! call repeat#set("\<Plug>unimpaired_line_".a:algorithm,a:type)
   endif
 endfunction
 
