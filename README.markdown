@@ -15,7 +15,7 @@ line with the one above or below it.
 
 There are mappings for encoding and decoding. `[x` and `]x` encode and
 decode XML (and HTML). `[u` and `]u` encode and decode URLs. `[y` and
-`]y` do C String style escaping. `[Y` and `]Y` encode and decode Base64.
+`]y` do C String style escaping.
 
 And in the miscellaneous category, there's `[f` and `]f` to go to the
 next/previous file in the directory, and `[n` and `]n` to jump between
