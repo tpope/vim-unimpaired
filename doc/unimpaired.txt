@@ -70,6 +70,21 @@ LINE OPERATIONS                                 *unimpaired-lines*
                                                 *]e* *v_]e*
 ]e                      Exchange the current line with [count] lines below it.
 
+OPTION TOGGLING                                 *unimpaired-toggling*
+
+On	Off	Toggle	Option
+*[oc*	*]oc*	*coc*	'cursorline'
+*[od*	*]od*	*cod*	'diff' (actually |:diffthis| / |:diffoff|)
+*[oh*	*]oh*	*coh*	'hlsearch'
+*[oi*	*]oi*	*coi*	'ignorecase'
+*[ol*	*]ol*	*col*	'list'
+*[on*	*]on*	*con*	'number'
+*[or*	*]or*	*cor*	'relativenumber'
+*[os*	*]os*	*cos*	'spell'
+*[ou*	*]ou*	*cou*	'cursorcolumn'
+*[ow*	*]ow*	*cow*	'wrap'
+*[ox*	*]ox*	*cox*	'cursorline' 'cursorcolumn' (mnemonic: crosshairs)
+
 ENCODING AND DECODING                           *unimpaired-encoding*
 
 Each of these operations has a map that takes a motion, a map that

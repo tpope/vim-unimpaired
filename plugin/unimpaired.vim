@@ -182,6 +182,37 @@ xmap [e <Plug>unimpairedMoveUp
 xmap ]e <Plug>unimpairedMoveDown
 
 " }}}1
+" Option toggling {{{1
+
+function! s:toggle(op)
+  return eval('&'.a:op) ? 'no'.a:op : a:op
+endfunction
+
+function! s:option_map(letter, option)
+  exe 'nnoremap [o'.a:letter.' :set '.a:option.'<CR>'
+  exe 'nnoremap ]o'.a:letter.' :set no'.a:option.'<CR>'
+  exe 'nnoremap co'.a:letter.' :set <C-R>=<SID>toggle("'.a:option.'")<CR><CR>'
+endfunction
+
+call s:option_map('c', 'cursorline')
+call s:option_map('u', 'cursorcolumn')
+nnoremap [od :diffthis<CR>
+nnoremap ]od :diffoff<CR>
+nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
+call s:option_map('h', 'hlsearch')
+call s:option_map('i', 'ignorecase')
+call s:option_map('l', 'list')
+nnoremap [on :set <C-R>=(exists('+rnu') && &rnu ? 'norelativenumber ' : '')<CR>number<CR>
+nnoremap ]on :set <C-R>=(exists('+rnu') && &rnu ? 'norelativenumber ' : '')<CR>nonumber<CR>
+nnoremap con :set <C-R>=(exists('+rnu') && &rnu ? 'norelativenumber ' : '').<SID>toggle('number')<CR><CR>
+call s:option_map('r', 'relativenumber')
+call s:option_map('s', 'spell')
+call s:option_map('w', 'wrap')
+nnoremap [ox :set cursorline cursorcolumn<CR>
+nnoremap ]ox :set nocursorline nocursorcolumn<CR>
+nnoremap cox :set <C-R>=&cursorline && &cursorcolumn ? 'nocursorline nocursorcolumn' : 'cursorline cursorcolumn'<CR><CR>
+
+" }}}1
 " Encoding and decoding {{{1
 
 function! s:string_encode(str)

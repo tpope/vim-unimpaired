@@ -1,7 +1,7 @@
 # unimpaired.vim
 
 Much of unimpaired.vim was extracted from my vimrc when I noticed a
-pattern: complementary pairs of mappings.  They mostly fall into three
+pattern: complementary pairs of mappings.  They mostly fall into four
 categories.
 
 There are mappings which are simply short normal mode aliases for
@@ -12,6 +12,11 @@ commonly used ex commands. `]q` is :cnext. `[q` is :cprevious. `]a` is
 There are linewise mappings. `[<Space>` and `]<Space>` add newlines
 before and after the cursor line. `[e` and `]e` exchange the current
 line with the one above or below it.
+
+There are mappings for toggling options. `[os`, `]os`, and `cos` perform
+`:set spell`, `:set nospell`, and `:set invspell`, respectively.  There's also
+`l` (`list`), `n` (`number`), `w` (`wrap`), `x` (`cursorline cursorcolumn`),
+and several others.  Consult the documentation.
 
 There are mappings for encoding and decoding. `[x` and `]x` encode and
 decode XML (and HTML). `[u` and `]u` encode and decode URLs. `[y` and
