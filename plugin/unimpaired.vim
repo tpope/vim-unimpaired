@@ -208,6 +208,7 @@ nnoremap con :set <C-R>=(exists('+rnu') && &rnu ? 'norelativenumber ' : '').<SID
 call s:option_map('r', 'relativenumber')
 call s:option_map('s', 'spell')
 call s:option_map('w', 'wrap')
+call s:option_map('p', 'paste')
 nnoremap [ox :set cursorline cursorcolumn<CR>
 nnoremap ]ox :set nocursorline nocursorcolumn<CR>
 nnoremap cox :set <C-R>=&cursorline && &cursorcolumn ? 'nocursorline nocursorcolumn' : 'cursorline cursorcolumn'<CR><CR>
