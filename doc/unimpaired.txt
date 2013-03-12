@@ -85,6 +85,14 @@ On	Off	Toggle	Option
 *[ow*	*]ow*	*cow*	'wrap'
 *[ox*	*]ox*	*cox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
 
+                                                *yp* *yP* *yo* *yO* *yI* *yA*
+A toggle has not been provided for 'paste' because the typical use case of
+wrapping of a solitary insertion is so wasteful:  You toggle twice, but
+you only paste once (YOPO).  Instead, press yp or yP to invoke |a| or |i| with
+'paste' already set.  Leaving insert mode sets 'nopaste' automatically.  You
+can also use yo, yO, yI, or yA to do the same operation with |o|, |O|,
+|I|, or |A|.
+
 ENCODING AND DECODING                           *unimpaired-encoding*
 
 Each of these operations has a map that takes a motion, a map that
