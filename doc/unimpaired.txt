@@ -83,7 +83,7 @@ On	Off	Toggle	Option
 *[os*	*]os*	*cos*	'spell'
 *[ou*	*]ou*	*cou*	'cursorcolumn'
 *[ow*	*]ow*	*cow*	'wrap'
-*[ox*	*]ox*	*cox*	'cursorline' 'cursorcolumn' (mnemonic: crosshairs)
+*[ox*	*]ox*	*cox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
 
 ENCODING AND DECODING                           *unimpaired-encoding*
 
