@@ -52,7 +52,7 @@ See the contribution guidelines for
 
 Like unimpaired.vim? Follow the repository on
 [GitHub](https://github.com/tpope/vim-unimpaired) and vote for it on
-[vim.org](http://www.vim.org/scripts/script.php?script_id=1697).  And if
+[vim.org](http://www.vim.org/scripts/script.php?script_id=1590).  And if
 you're feeling especially charitable, follow [tpope](http://tpo.pe/) on
 [Twitter](http://twitter.com/tpope) and
 [GitHub](https://github.com/tpope).
