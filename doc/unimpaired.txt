@@ -82,6 +82,7 @@ On	Off	Toggle	Option
 *[or*	*]or*	*cor*	'relativenumber'
 *[os*	*]os*	*cos*	'spell'
 *[ou*	*]ou*	*cou*	'cursorcolumn'
+*[ov*	*]ov*	*cov*	'laststatus'
 *[ow*	*]ow*	*cow*	'wrap'
 *[ox*	*]ox*	*cox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
 
