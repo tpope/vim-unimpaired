@@ -103,7 +103,7 @@ Mnenomic: encoding always comes before decoding; "[" always comes before "]".
 
                                                 *[x* *[xx* *v_[x*
 [x{motion}              XML encode.
-[xx                     <foo bar="baz"> => &lt;foo bar=&quot;baz&quot&gt;
+[xx                     <foo bar="baz"> => &lt;foo bar=&quot;baz&quot;&gt;
 {Visual}[x
 
                                                 *]x* *]xx* *v_]x*
