@@ -202,9 +202,7 @@ nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
 call s:option_map('h', 'hlsearch')
 call s:option_map('i', 'ignorecase')
 call s:option_map('l', 'list')
-nnoremap [on :set <C-R>=(exists('+rnu') && &rnu ? 'norelativenumber ' : '')<CR>number<CR>
-nnoremap ]on :set <C-R>=(exists('+rnu') && &rnu ? 'norelativenumber ' : '')<CR>nonumber<CR>
-nnoremap con :set <C-R>=(exists('+rnu') && &rnu ? 'norelativenumber ' : '').<SID>toggle('number')<CR><CR>
+call s:option_map('n', 'number')
 call s:option_map('r', 'relativenumber')
 call s:option_map('s', 'spell')
 call s:option_map('w', 'wrap')
@@ -236,6 +234,28 @@ augroup unimpaired_paste
         \   unlet s:paste |
         \ endif
 augroup END
+
+" }}}1
+" Put {{{1
+
+function! s:putline(how) abort
+  let [body, type] = [getreg(v:register), getregtype(v:register)]
+  call setreg(v:register, body, 'l')
+  exe 'normal! "'.v:register.a:how
+  call setreg(v:register, body, type)
+endfunction
+
+nnoremap <silent> <Plug>unimpairedPutAbove :call <SID>putline('[p')<CR>
+nnoremap <silent> <Plug>unimpairedPutBelow :call <SID>putline(']p')<CR>
+
+nmap [p <Plug>unimpairedPutAbove
+nmap ]p <Plug>unimpairedPutBelow
+nnoremap <silent> >P :call <SID>putline('[p')<CR>>']
+nnoremap <silent> >p :call <SID>putline(']p')<CR>>']
+nnoremap <silent> <P :call <SID>putline('[p')<CR><']
+nnoremap <silent> <p :call <SID>putline(']p')<CR><']
+nnoremap <silent> =P :call <SID>putline('[p')<CR>=']
+nnoremap <silent> =p :call <SID>putline(']p')<CR>=']
 
 " }}}1
 " Encoding and decoding {{{1
