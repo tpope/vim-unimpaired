@@ -99,7 +99,7 @@ Each of these operations has a map that takes a motion, a map that
 targets [count] lines, and a visual mode map.  The linewise variant integrates
 with repeat.vim.
 
-Mnenomic: encoding always comes before decoding; "[" always comes before "]".
+Mnemonic: encoding always comes before decoding; "[" always comes before "]".
 
                                                 *[x* *[xx* *v_[x*
 [x{motion}              XML encode.
