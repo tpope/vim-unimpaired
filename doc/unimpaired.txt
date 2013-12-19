@@ -85,6 +85,20 @@ On	Off	Toggle	Option
 *[ow*	*]ow*	*cow*	'wrap'
 *[ox*	*]ox*	*cox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
 
+PASTING                                         *unimpaired-pasting*
+
+These are experimental:
+
+*>p*    Paste after linewise, increasing indent.
+*>P*    Paste before linewise, increasing indent.
+*<p*    Paste after linewise, decreasing indent.
+*<P*    Paste before linewise, decreasing indent.
+*=p*    Paste after linewise, reindenting.
+*=P*    Paste before linewise, reindenting.
+
+|]p| and |[p| have also been remapped to force linewise pasting, while
+preserving their usual indent matching behavior.
+
                                                 *yp* *yP* *yo* *yO* *yI* *yA*
 A toggle has not been provided for 'paste' because the typical use case of
 wrapping of a solitary insertion is so wasteful:  You toggle twice, but
