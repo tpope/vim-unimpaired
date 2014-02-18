@@ -73,6 +73,7 @@ LINE OPERATIONS                                 *unimpaired-lines*
 OPTION TOGGLING                                 *unimpaired-toggling*
 
 On	Off	Toggle	Option
+*[ob*	*]ob*	*cob*	'background' (dark is off, light is on)
 *[oc*	*]oc*	*coc*	'cursorline'
 *[od*	*]od*	*cod*	'diff' (actually |:diffthis| / |:diffoff|)
 *[oh*	*]oh*	*coh*	'hlsearch'

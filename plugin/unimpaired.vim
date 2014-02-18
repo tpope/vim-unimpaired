@@ -209,6 +209,9 @@ function! s:option_map(letter, option)
   exe 'nnoremap co'.a:letter.' :set <C-R>=<SID>toggle("'.a:option.'")<CR><CR>'
 endfunction
 
+nnoremap [ob :set background=light<CR>
+nnoremap ]ob :set background=dark<CR>
+nnoremap cob :set background=<C-R>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
 call s:option_map('c', 'cursorline')
 call s:option_map('u', 'cursorcolumn')
 nnoremap [od :diffthis<CR>
