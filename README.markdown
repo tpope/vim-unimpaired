@@ -43,6 +43,25 @@ then simply copy and paste:
 Once help tags have been generated, you can view the manual with
 `:help unimpaired`.
 
+## FAQ
+
+> My non-US keyboard makes it hard to type `[` and `]`.  Can I configure
+> different prefix characters?
+
+Not en masse, but you can just map to `[` and `]` directly:
+
+    nmap < [
+    nmap > ]
+    omap < [
+    omap > ]
+    xmap < [
+    xmap > ]
+
+Note we're not using the `noremap` family because we *do* want to recursively
+invoke unimpaired.vim's maps.
+
+There are also `<Plug>` maps if you want a more granular approach.
+
 ## Contributing
 
 See the contribution guidelines for
