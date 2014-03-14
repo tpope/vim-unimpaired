@@ -147,6 +147,22 @@ Mnemonic: encoding always comes before decoding; "[" always comes before "]".
 ]yy
 {Visual}]y
 
+OPTIONS                                       *unimpaired-options*
+
+By putting the variables *g:unimpaired_left* and *g:unimpaired_right* in
+your vimrc the activating keys [ and ] can be changed.
+
+E.g.
+>
+    let g:unimpaired_left = '<'
+    let g:unimpaired_right = '>'
+<
+
+will change all mappings to <a >a <ob >ob and so on. If either < > or
+= is used for either value, the |unimpaired_pasting| mappings will be
+replaced by {left}ip {right}ip =ip and so on.
+
+
 TODO                                            *unimpaired-todo*
 
 Avoid munging null characters when encoding and decoding.
