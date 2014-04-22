@@ -240,14 +240,8 @@ endfunction
 
 nnoremap <silent> <Plug>unimpairedPaste :call <SID>setup_paste()<CR>
 
-nnoremap <silent> yp  :call <SID>setup_paste()<CR>a
-nnoremap <silent> yP  :call <SID>setup_paste()<CR>i
 nnoremap <silent> yo  :call <SID>setup_paste()<CR>o
 nnoremap <silent> yO  :call <SID>setup_paste()<CR>O
-nnoremap <silent> yA  :call <SID>setup_paste()<CR>A
-nnoremap <silent> yI  :call <SID>setup_paste()<CR>I
-nnoremap <silent> ygi :call <SID>setup_paste()<CR>gi
-nnoremap <silent> ygI :call <SID>setup_paste()<CR>gI
 
 augroup unimpaired_paste
   autocmd!
