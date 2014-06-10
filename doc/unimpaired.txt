@@ -49,12 +49,12 @@ is "args" and for the "q" commands is "quickfix".
                         alphabetically in the current file's directory.
 
                                                 *[n*
-[n                      Go to the previous SCM conflict marker.  Try d[n
-                        inside a conflict.
+[n                      Go to the previous SCM conflict marker or diff/patch
+                        hunk.  Try d[n inside a conflict.
 
                                                 *]n*
-]n                      Go to the next SCM conflict marker.  Try d]n inside a
-                        conflict.
+]n                      Go to the next SCM conflict marker or diff/patch hunk.
+                        Try d]n inside a conflict.
 
 LINE OPERATIONS                                 *unimpaired-lines*
 
