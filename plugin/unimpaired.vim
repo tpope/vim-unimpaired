@@ -241,14 +241,28 @@ function! s:toggle(op) abort
   return eval('&'.a:op) ? 'no'.a:op : a:op
 endfunction
 
-function! s:cursor_options() abort
-  return &cursorline && &cursorcolumn ? 'nocursorline nocursorcolumn' : 'cursorline cursorcolumn'
+function! s:windo(command)
+  " By entering a window, its height is potentially increased from 0 to 1 (the
+  " minimum for the current window). To avoid any modification, save the
+  " window sizes and restore them after visiting all windows.
+  let winrestcmd = winrestcmd()
+  let currwin = winnr()
+  let prevwin = winnr('#') ? winnr('#') : 1
+  execute 'windo '.a:command
+  execute prevwin.'wincmd w'
+  execute currwin.'wincmd w'
+  silent! execute winrestcmd
 endfunction
 
 function! s:option_map(letter, option, mode) abort
   call s:map('n', '[o'.a:letter, ':'.a:mode.' '.a:option.'<C-R>=<SID>statusbump()<CR><CR>')
   call s:map('n', ']o'.a:letter, ':'.a:mode.' no'.a:option.'<C-R>=<SID>statusbump()<CR><CR>')
   call s:map('n', '=o'.a:letter, ':'.a:mode.' <C-R>=<SID>toggle("'.a:option.'")<CR><CR>')
+
+  exe s:map('n', '[O'.a:letter, ':call <SID>windo('''.a:mode.' '.a:option.''')<CR><C-R>=<SID>statusbump()<CR><CR>')
+  exe s:map('n', ']O'.a:letter, ':call <SID>windo('''.a:mode.' no'.a:option.''')<CR><C-R>=<SID>statusbump()<CR><CR>')
+  " NOTE: uses the value of the current window to toggle all.
+  exe s:map('n', '=O'.a:letter, ':call <SID>windo('''.a:mode.' <C-R>=<SID>toggle("'.a:option.'")<CR>'')<CR>')
 endfunction
 
 call s:map('n', '[ob', ':set background=light<CR>')
