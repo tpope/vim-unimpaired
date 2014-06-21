@@ -256,15 +256,18 @@ augroup END
 " }}}1
 " Put {{{1
 
-function! s:putline(how) abort
+function! s:putline(how, map) abort
   let [body, type] = [getreg(v:register), getregtype(v:register)]
   call setreg(v:register, body, 'l')
   exe 'normal! "'.v:register.a:how
   call setreg(v:register, body, type)
+  if type !=# 'V'
+    call repeat#set("\<Plug>unimpairedPut".a:map)
+  endif
 endfunction
 
-nnoremap <silent> <Plug>unimpairedPutAbove :call <SID>putline('[p')<CR>
-nnoremap <silent> <Plug>unimpairedPutBelow :call <SID>putline(']p')<CR>
+nnoremap <silent> <Plug>unimpairedPutAbove :call <SID>putline('[p', 'Above')<CR>
+nnoremap <silent> <Plug>unimpairedPutBelow :call <SID>putline(']p', 'Below')<CR>
 
 nmap [p <Plug>unimpairedPutAbove
 nmap ]p <Plug>unimpairedPutBelow
