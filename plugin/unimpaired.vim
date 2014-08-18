@@ -262,7 +262,7 @@ function! s:putline(how, map) abort
   exe 'normal! "'.v:register.a:how
   call setreg(v:register, body, type)
   if type !=# 'V'
-    call repeat#set("\<Plug>unimpairedPut".a:map)
+    silent! call repeat#set("\<Plug>unimpairedPut".a:map)
   endif
 endfunction
 
