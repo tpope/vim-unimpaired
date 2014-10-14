@@ -55,9 +55,9 @@ function! s:FileByOffset(num)
   while num
     let files = s:entries(fnamemodify(file,':h'))
     if a:num < 0
-      call reverse(sort(filter(files,'v:val < file')))
+      call reverse(sort(filter(files,'v:val <# file')))
     else
-      call sort(filter(files,'v:val > file'))
+      call sort(filter(files,'v:val ># file'))
     endif
     let temp = get(files,0,'')
     if temp == ''
