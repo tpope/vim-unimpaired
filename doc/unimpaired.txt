@@ -56,6 +56,12 @@ is "args" and for the "q" commands is "quickfix".
 ]n                      Go to the next SCM conflict marker or diff/patch hunk.
                         Try d]n inside a conflict.
 
+                                                *[g*
+[g                      Move the cursor to the next help-file tag.
+
+                                                *]g*
+]g                      Move the cursor to the previous help-file tag.
+
 LINE OPERATIONS                                 *unimpaired-lines*
 
                                                 *[<Space>*

@@ -144,6 +144,19 @@ function! s:ContextMotion(reverse)
 endfunction
 
 " }}}1
+" Help tag next, previous {{{1
+
+nmap [g <Plug>unimpairedHelpTagPrevious
+nmap ]g <Plug>unimpairedHelpTagNext
+
+nnoremap <silent> <Plug>unimpairedHelpTagPrevious :call <SID>HelpTag(1)<CR>
+nnoremap <silent> <Plug>unimpairedHelpTagNext     :call <SID>HelpTag(0)<CR>
+
+function! s:HelpTag(reverse)
+  call search('|\S\+|', a:reverse ? 'bW' : 'W')
+endfunction
+
+" }}}1
 " Line operations {{{1
 
 function! s:BlankUp(count) abort
