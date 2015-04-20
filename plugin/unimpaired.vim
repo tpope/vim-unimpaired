@@ -51,6 +51,9 @@ endfunction
 
 function! s:FileByOffset(num)
   let file = expand('%:p')
+  if file == ''
+    let file = getcwd() . '/'
+  endif
   let num = a:num
   while num
     let files = s:entries(fnamemodify(file,':h'))
