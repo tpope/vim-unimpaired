@@ -198,14 +198,20 @@ xmap ]e <Plug>unimpairedMoveSelectionDown
 " }}}1
 " Option toggling {{{1
 
-function! s:toggle(op)
+function! s:statusbump() abort
+  let &readonly = &readonly
+  return ''
+endfunction
+
+function! s:toggle(op) abort
+  call s:statusbump()
   return eval('&'.a:op) ? 'no'.a:op : a:op
 endfunction
 
-function! s:option_map(letter, option)
-  exe 'nnoremap [o'.a:letter.' :set '.a:option.'<CR>'
-  exe 'nnoremap ]o'.a:letter.' :set no'.a:option.'<CR>'
-  exe 'nnoremap co'.a:letter.' :set <C-R>=<SID>toggle("'.a:option.'")<CR><CR>'
+function! s:option_map(letter, option) abort
+  exe 'nnoremap [o'.a:letter ':set '.a:option.'<C-R>=<SID>statusbump()<CR>'
+  exe 'nnoremap ]o'.a:letter ':set no'.a:option.'<C-R>=<SID>statusbump()<CR>'
+  exe 'nnoremap co'.a:letter ':set <C-R>=<SID>toggle("'.a:option.'")<CR><CR>'
 endfunction
 
 nnoremap [ob :set background=light<CR>
