@@ -110,7 +110,7 @@ onoremap <silent> <Plug>unimpairedContextPrevious :call <SID>ContextMotion(1)<CR
 onoremap <silent> <Plug>unimpairedContextNext     :call <SID>ContextMotion(0)<CR>
 
 function! s:Context(reverse)
-  call search('^@@ .* @@\|^[<=>|]\{7}[<=>|]\@!', a:reverse ? 'bW' : 'W')
+  call search('^\(@@ .* @@\|[<=>|]\{7}[<=>|]\@!\)', a:reverse ? 'bW' : 'W')
 endfunction
 
 function! s:ContextMotion(reverse)
