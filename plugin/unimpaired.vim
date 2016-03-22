@@ -166,21 +166,30 @@ nmap ]<Space> <Plug>unimpairedBlankDown
 
 function! s:Move(cmd, count, map) abort
   normal! m`
+  let fdm_sav=&l:fdm
+  setlocal fdm=manual
   silent! exe 'move'.a:cmd.a:count
+  let &l:fdm=fdm_sav
   norm! ``
   silent! call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
 endfunction
 
 function! s:MoveSelectionUp(count) abort
   normal! m`
+  let fdm_sav=&l:fdm
+  setlocal fdm=manual
   silent! exe "'<,'>move'<--".a:count
+  let &l:fdm=fdm_sav
   norm! ``
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionUp", a:count)
 endfunction
 
 function! s:MoveSelectionDown(count) abort
   normal! m`
-  exe "'<,'>move'>+".a:count
+  let fdm_sav=&l:fdm
+  setlocal fdm=manual
+  silent! exe "'<,'>move'>+".a:count
+  let &l:fdm=fdm_sav
   norm! ``
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionDown", a:count)
 endfunction
