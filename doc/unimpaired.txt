@@ -86,6 +86,7 @@ On	Off	Toggle	Option
 *[ov*	*]ov*	*cov*	'virtualedit'
 *[ow*	*]ow*	*cow*	'wrap'
 *[ox*	*]ox*	*cox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
+*[oy*	*]oy*	*coy*	'syntax'
 
 PASTING                                         *unimpaired-pasting*
 
