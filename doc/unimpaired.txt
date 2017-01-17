@@ -75,10 +75,13 @@ OPTION TOGGLING                                 *unimpaired-toggling*
 On	Off	Toggle	Option
 *[ob*	*]ob*	*cob*	'background' (dark is off, light is on)
 *[oc*	*]oc*	*coc*	'cursorline'
+*[oC*	*]oC*	*coC*	'colorcolumn'
 *[od*	*]od*	*cod*	'diff' (actually |:diffthis| / |:diffoff|)
+*[of*	*]of*	*cof*	'foldcolumn'
 *[oh*	*]oh*	*coh*	'hlsearch'
 *[oi*	*]oi*	*coi*	'ignorecase'
-*[ol*	*]ol*	*col*	'list'
+*[oI*	*]oI*	*coI*	'incsearch'
+*[ol*	*]ol*	*col*	'list' (toggles IndentLines if installed)
 *[on*	*]on*	*con*	'number'
 *[or*	*]or*	*cor*	'relativenumber'
 *[os*	*]os*	*cos*	'spell'

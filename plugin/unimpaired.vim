@@ -223,18 +223,27 @@ nnoremap [od :diffthis<CR>
 nnoremap ]od :diffoff<CR>
 nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
 call s:option_map('h', 'hlsearch', 'set')
+call s:option_map('I', 'incsearch', 'set')
 call s:option_map('i', 'ignorecase', 'set')
-call s:option_map('l', 'list', 'setlocal')
 call s:option_map('n', 'number', 'setlocal')
 call s:option_map('r', 'relativenumber', 'setlocal')
 call s:option_map('s', 'spell', 'setlocal')
 call s:option_map('w', 'wrap', 'setlocal')
+nnoremap [of :setlocal foldcolumn=4<CR>
+nnoremap ]of :setlocal foldcolumn=0<CR>
+nnoremap cof :setlocal fdc=<C-R>=&fdc == 0 ? 4 : 0<CR><CR>
+nnoremap [oC :setlocal colorcolumn=+1<CR>
+nnoremap ]oC :setlocal colorcolumn=<CR>
+nnoremap coC :setlocal cc=<C-R>=&cc == '' ? '+1' : ''<CR><CR>
 nnoremap [ox :set cursorline cursorcolumn<CR>
 nnoremap ]ox :set nocursorline nocursorcolumn<CR>
 nnoremap cox :set <C-R>=&cursorline && &cursorcolumn ? 'nocursorline nocursorcolumn' : 'cursorline cursorcolumn'<CR><CR>
 nnoremap [ov :set virtualedit+=all<CR>
 nnoremap ]ov :set virtualedit-=all<CR>
 nnoremap cov :set <C-R>=(&virtualedit =~# "all") ? 'virtualedit-=all' : 'virtualedit+=all'<CR><CR>
+nnoremap [ol :setlocal list <C-R>=exists(':IndentLinesEnable') ? '<Bar> IndentLinesEnable' : ''<CR><CR>
+nnoremap ]ol :setlocal nolist <C-R>=exists(':IndentLinesDisable') ? '<Bar> IndentLinesDisable' : ''<CR><CR>
+nnoremap col :setlocal list! <C-R>=exists(':IndentLinesToggle') ? '<Bar> IndentLinesToggle' : ''<CR><CR>
 
 function! s:setup_paste() abort
   let s:paste = &paste
