@@ -167,21 +167,21 @@ nmap ]<Space> <Plug>unimpairedBlankDown
 function! s:Move(cmd, count, map) abort
   normal! m`
   silent! exe 'move'.a:cmd.a:count
-  norm! ``
+  norm! zx``
   silent! call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
 endfunction
 
 function! s:MoveSelectionUp(count) abort
   normal! m`
   silent! exe "'<,'>move'<--".a:count
-  norm! ``
+  norm! zx``
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionUp", a:count)
 endfunction
 
 function! s:MoveSelectionDown(count) abort
   normal! m`
   exe "'<,'>move'>+".a:count
-  norm! ``
+  norm! zx``
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionDown", a:count)
 endfunction
 
