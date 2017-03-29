@@ -164,24 +164,31 @@ nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>call <SID>BlankDown(v:count1)<
 nmap [<Space> <Plug>unimpairedBlankUp
 nmap ]<Space> <Plug>unimpairedBlankDown
 
-function! s:Move(cmd, count, map) abort
+function s:ExecMove(cmd) abort
+  let old_fdm = &foldmethod
+  if old_fdm != 'manual'
+    let &foldmethod = 'manual'
+  endif
   normal! m`
-  silent! exe 'move'.a:cmd.a:count
+  silent! exe a:cmd
   norm! ``
+  if old_fdm != 'manual'
+    let &foldmethod = old_fdm
+  endif
+endfunction
+
+function! s:Move(cmd, count, map) abort
+  call s:ExecMove('move'.a:cmd.a:count)
   silent! call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
 endfunction
 
 function! s:MoveSelectionUp(count) abort
-  normal! m`
-  silent! exe "'<,'>move'<--".a:count
-  norm! ``
+  call s:ExecMove("'<,'>move'<--".a:count)
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionUp", a:count)
 endfunction
 
 function! s:MoveSelectionDown(count) abort
-  normal! m`
-  exe "'<,'>move'>+".a:count
-  norm! ``
+  call s:ExecMove("'<,'>move'>+".a:count)
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionDown", a:count)
 endfunction
 
