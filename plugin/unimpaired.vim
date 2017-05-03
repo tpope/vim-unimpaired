@@ -64,15 +64,16 @@ function! s:FileByOffset(num)
       let file = fnamemodify(file,':h')
     else
       let file = temp
+      let found = 1
       while isdirectory(file)
         let files = s:entries(file)
-        if files == []
-          " TODO: walk back up the tree and continue
+        if empty(files)
+          let found = 0
           break
         endif
         let file = files[num > 0 ? 0 : -1]
       endwhile
-      let num += num > 0 ? -1 : 1
+      let num += (num > 0 ? -1 : 1) * found
     endif
   endwhile
   return file
