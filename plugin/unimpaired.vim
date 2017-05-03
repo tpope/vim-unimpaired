@@ -164,7 +164,7 @@ nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>call <SID>BlankDown(v:count1)<
 nmap [<Space> <Plug>unimpairedBlankUp
 nmap ]<Space> <Plug>unimpairedBlankDown
 
-function s:ExecMove(cmd) abort
+function! s:ExecMove(cmd) abort
   let old_fdm = &foldmethod
   if old_fdm != 'manual'
     let &foldmethod = 'manual'
