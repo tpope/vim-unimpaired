@@ -51,6 +51,9 @@ endfunction
 
 function! s:FileByOffset(num)
   let file = expand('%:p')
+  if file == ''
+    let file = getcwd() . '/'
+  endif
   let num = a:num
   while num
     let files = s:entries(fnamemodify(file,':h'))
@@ -64,15 +67,16 @@ function! s:FileByOffset(num)
       let file = fnamemodify(file,':h')
     else
       let file = temp
+      let found = 1
       while isdirectory(file)
         let files = s:entries(file)
-        if files == []
-          " TODO: walk back up the tree and continue
+        if empty(files)
+          let found = 0
           break
         endif
         let file = files[num > 0 ? 0 : -1]
       endwhile
-      let num += num > 0 ? -1 : 1
+      let num += (num > 0 ? -1 : 1) * found
     endif
   endwhile
   return file
@@ -164,24 +168,31 @@ nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>call <SID>BlankDown(v:count1)<
 nmap [<Space> <Plug>unimpairedBlankUp
 nmap ]<Space> <Plug>unimpairedBlankDown
 
-function! s:Move(cmd, count, map) abort
+function! s:ExecMove(cmd) abort
+  let old_fdm = &foldmethod
+  if old_fdm != 'manual'
+    let &foldmethod = 'manual'
+  endif
   normal! m`
-  silent! exe 'move'.a:cmd.a:count
+  silent! exe a:cmd
   norm! zx``
+  if old_fdm != 'manual'
+    let &foldmethod = old_fdm
+  endif
+endfunction
+
+function! s:Move(cmd, count, map) abort
+  call s:ExecMove('move'.a:cmd.a:count)
   silent! call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
 endfunction
 
 function! s:MoveSelectionUp(count) abort
-  normal! m`
-  silent! exe "'<,'>move'<--".a:count
-  norm! zx``
+  call s:ExecMove("'<,'>move'<--".a:count)
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionUp", a:count)
 endfunction
 
 function! s:MoveSelectionDown(count) abort
-  normal! m`
-  exe "'<,'>move'>+".a:count
-  norm! zx``
+  call s:ExecMove("'<,'>move'>+".a:count)
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionDown", a:count)
 endfunction
 
