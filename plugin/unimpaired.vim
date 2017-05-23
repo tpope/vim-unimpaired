@@ -101,6 +101,35 @@ nmap ]o <Plug>unimpairedONext
 nmap [o <Plug>unimpairedOPrevious
 
 " }}}1
+
+" Repeat Default Keys {{{1
+
+function! s:MapRepeatDefaultKey(key,name)
+  let name = '<Plug>unimpaired'.a:name
+  execute 'nmap '.a:key.'  '.name
+  execute "nnoremap <silent> ".name." :<C-U>call <SID>RepeatDefaultKey('".name."', '".a:key."', v:count1)<CR>"
+endfunction
+
+function! s:RepeatDefaultKey(plug, key, count) abort
+  execute 'normal! '. a:count . a:key
+  execute 'silent! call repeat#set("\'.a:plug.'", '.a:count.')'
+endfunction
+call s:MapRepeatDefaultKey('[c','DiffPrev')
+call s:MapRepeatDefaultKey(']c','DiffNext')
+
+call s:MapRepeatDefaultKey(']m','MethodJumpNextBegin')
+call s:MapRepeatDefaultKey(']M','MethodJumpNextEnd')
+call s:MapRepeatDefaultKey('[m','MethodJumpPrevBegin')
+call s:MapRepeatDefaultKey('[M','MethodJumpPrevEnd')
+
+call s:MapRepeatDefaultKey('zj','FoldJumpDownBegin')
+call s:MapRepeatDefaultKey('zk','FoldJumpPrevEnd')
+
+call s:MapRepeatDefaultKey('g+','OlderState')
+call s:MapRepeatDefaultKey('g-','NewerState')
+
+
+" }}}1
 " Diff {{{1
 
 nmap [n <Plug>unimpairedContextPrevious
