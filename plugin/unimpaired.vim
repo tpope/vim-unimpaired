@@ -241,6 +241,9 @@ call s:option_map('r', 'relativenumber', 'setlocal')
 call s:option_map('s', 'spell', 'setlocal')
 call s:option_map('w', 'wrap', 'setlocal')
 nnoremap [ox :set cursorline cursorcolumn<CR>
+nnoremap [o<bar> :set colorcolumn+=+1<CR>
+nnoremap ]o<bar> :set colorcolumn-=+1<CR>
+nnoremap co<bar> :set colorcolumn<C-R>=match(&colorcolumn,'+1')>=0?'-=+1':'+=+1'<CR><CR>
 nnoremap ]ox :set nocursorline nocursorcolumn<CR>
 nnoremap <expr> cox ':set ' . (&cursorline && &cursorcolumn ? 'nocursorline nocursorcolumn' : 'cursorline cursorcolumn').'<CR>'
 nnoremap [ov :set virtualedit+=all<CR>
