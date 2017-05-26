@@ -87,6 +87,10 @@ On	Off	Toggle	Option
 *[ow*	*]ow*	*cow*	'wrap'
 *[ox*	*]ox*	*cox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
 
+If you want to switch so that '[o' is off and ']o' is on, set the following in
+your .vimrc:
+ let g:unimpaired_swap_option_switches = 1
+
 PASTING                                         *unimpaired-pasting*
 
 These are experimental:
