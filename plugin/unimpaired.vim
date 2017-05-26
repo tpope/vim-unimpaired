@@ -209,6 +209,13 @@ xmap ]e <Plug>unimpairedMoveSelectionDown
 " }}}1
 " Option toggling {{{1
 
+let s:on  = '[o'
+let s:off = ']o'
+if get(g:, 'unimpaired_swap_option_switches')
+  let s:on  = ']o'
+  let s:off = '[o'
+endif
+
 function! s:statusbump() abort
   let &l:readonly = &l:readonly
   return ''
@@ -220,18 +227,18 @@ function! s:toggle(op) abort
 endfunction
 
 function! s:option_map(letter, option, mode) abort
-  exe 'nnoremap [o'.a:letter ':'.a:mode.' '.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
-  exe 'nnoremap ]o'.a:letter ':'.a:mode.' no'.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
+  exe 'nnoremap 's:on .a:letter ':'.a:mode.' '.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
+  exe 'nnoremap 's:off.a:letter ':'.a:mode.' no'.a:option.'<C-R>=<SID>statusbump()<CR><CR>'
   exe 'nnoremap co'.a:letter ':'.a:mode.' <C-R>=<SID>toggle("'.a:option.'")<CR><CR>'
 endfunction
 
-nnoremap [ob :set background=light<CR>
-nnoremap ]ob :set background=dark<CR>
+exe 'nnoremap '.s:on .'b :set background=light<CR>'
+exe 'nnoremap '.s:off.'b :set background=dark<CR>'
 nnoremap cob :set background=<C-R>=&background == 'dark' ? 'light' : 'dark'<CR><CR>
 call s:option_map('c', 'cursorline', 'setlocal')
 call s:option_map('u', 'cursorcolumn', 'setlocal')
-nnoremap [od :diffthis<CR>
-nnoremap ]od :diffoff<CR>
+exe 'nnoremap '.s:on .'d :diffthis<CR>'
+exe 'nnoremap '.s:off.'d :diffoff<CR>'
 nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
 call s:option_map('h', 'hlsearch', 'set')
 call s:option_map('i', 'ignorecase', 'set')
@@ -240,11 +247,11 @@ call s:option_map('n', 'number', 'setlocal')
 call s:option_map('r', 'relativenumber', 'setlocal')
 call s:option_map('s', 'spell', 'setlocal')
 call s:option_map('w', 'wrap', 'setlocal')
-nnoremap [ox :set cursorline cursorcolumn<CR>
-nnoremap ]ox :set nocursorline nocursorcolumn<CR>
+exe 'nnoremap '.s:on .'x :set cursorline cursorcolumn<CR>'
+exe 'nnoremap '.s:off.'x :set nocursorline nocursorcolumn<CR>'
 nnoremap <expr> cox ':set ' . (&cursorline && &cursorcolumn ? 'nocursorline nocursorcolumn' : 'cursorline cursorcolumn').'<CR>'
-nnoremap [ov :set virtualedit+=all<CR>
-nnoremap ]ov :set virtualedit-=all<CR>
+exe 'nnoremap '.s:on .'v :set virtualedit+=all<CR>'
+exe 'nnoremap '.s:off.'v :set virtualedit-=all<CR>'
 nnoremap cov :set <C-R>=(&virtualedit =~# "all") ? 'virtualedit-=all' : 'virtualedit+=all'<CR><CR>
 
 function! s:setup_paste() abort
