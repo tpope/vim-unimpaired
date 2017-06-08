@@ -76,6 +76,7 @@ On	Off	Toggle	Option
 *[ob*	*]ob*	*cob*	'background' (dark is off, light is on)
 *[oc*	*]oc*	*coc*	'cursorline'
 *[od*	*]od*	*cod*	'diff' (actually |:diffthis| / |:diffoff|)
+*[oD*	*]oD*	*coD*	'windo diff' (|:diffthis| / |:diffoff|)
 *[oh*	*]oh*	*coh*	'hlsearch'
 *[oi*	*]oi*	*coi*	'ignorecase'
 *[ol*	*]ol*	*col*	'list'
