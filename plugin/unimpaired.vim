@@ -233,6 +233,9 @@ call s:option_map('u', 'cursorcolumn', 'setlocal')
 nnoremap [od :diffthis<CR>
 nnoremap ]od :diffoff<CR>
 nnoremap cod :<C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
+nnoremap [oD :windo diffthis<CR>
+nnoremap ]oD :windo diffoff<CR>
+nnoremap coD :windo <C-R>=&diff ? 'diffoff' : 'diffthis'<CR><CR>
 call s:option_map('h', 'hlsearch', 'set')
 call s:option_map('i', 'ignorecase', 'set')
 call s:option_map('l', 'list', 'setlocal')
