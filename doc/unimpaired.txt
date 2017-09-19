@@ -73,22 +73,22 @@ LINE OPERATIONS                                 *unimpaired-lines*
 OPTION TOGGLING                                 *unimpaired-toggling*
 
 On	Off	Toggle	Option
-*[ob*	*]ob*	*cob*	'background' (dark is off, light is on)
-*[oc*	*]oc*	*coc*	'cursorline'
-*[oC*	*]oC*	*coC*	'colorcolumn'
-*[od*	*]od*	*cod*	'diff' (actually |:diffthis| / |:diffoff|)
-*[of*	*]of*	*cof*	'foldcolumn'
-*[oh*	*]oh*	*coh*	'hlsearch'
-*[oi*	*]oi*	*coi*	'ignorecase'
-*[oI*	*]oI*	*coI*	'incsearch'
-*[ol*	*]ol*	*col*	'list' (toggles IndentLines if installed)
-*[on*	*]on*	*con*	'number'
-*[or*	*]or*	*cor*	'relativenumber'
-*[os*	*]os*	*cos*	'spell'
-*[ou*	*]ou*	*cou*	'cursorcolumn'
-*[ov*	*]ov*	*cov*	'virtualedit'
-*[ow*	*]ow*	*cow*	'wrap'
-*[ox*	*]ox*	*cox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
+*[ob*	*]ob*	*=ob*	'background' (dark is off, light is on)
+*[oc*	*]oc*	*=oc*	'cursorline'
+*[oC*	*]oC*	*=oC*	'colorcolumn'
+*[od*	*]od*	*=od*	'diff' (actually |:diffthis| / |:diffoff|)
+*[of*	*]of*	*=of*	'foldcolumn'
+*[oh*	*]oh*	*=oh*	'hlsearch'
+*[oi*	*]oi*	*=oi*	'ignorecase'
+*[oI*	*]oI*	*=oI*	'incsearch'
+*[ol*	*]ol*	*=ol*	'list' (toggles IndentLines if installed)
+*[on*	*]on*	*=on*	'number'
+*[or*	*]or*	*=or*	'relativenumber'
+*[os*	*]os*	*=os*	'spell'
+*[ou*	*]ou*	*=ou*	'cursorcolumn'
+*[ov*	*]ov*	*=ov*	'virtualedit'
+*[ow*	*]ow*	*=ow*	'wrap'
+*[ox*	*]ox*	*=ox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
 
 PASTING                                         *unimpaired-pasting*
 
