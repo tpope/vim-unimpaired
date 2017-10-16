@@ -255,7 +255,7 @@ call s:map('n', '=ov', ':set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all"
 call s:map('n', '[ox', ':set cursorline cursorcolumn<CR>')
 call s:map('n', ']ox', ':set nocursorline nocursorcolumn<CR>')
 call s:map('n', '=ox', ':set <C-R>=<SID>cursor_options()<CR><CR>')
-if empty(maparg('co', 'n'))
+if empty(mapcheck('co', 'n'))
   nmap co =o
 endif
 
