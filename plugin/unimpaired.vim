@@ -211,6 +211,37 @@ call s:map('n', ']e', '<Plug>unimpairedMoveDown')
 call s:map('x', '[e', '<Plug>unimpairedMoveSelectionUp')
 call s:map('x', ']e', '<Plug>unimpairedMoveSelectionDown')
 
+function! s:Copy(cmd, count, map) abort
+  normal! m`
+  silent! exe 'copy'.a:cmd.a:count
+  norm! ``
+  silent! call repeat#set("\<Plug>unimpairedCopy".a:map, a:count)
+endfunction
+
+function! s:CopySelectionUp(count) abort
+  normal! m`
+  silent! exe "'<,'>copy'>".a:count
+  norm! ``
+  silent! call repeat#set("\<Plug>unimpairedCopySelectionUp", a:count)
+endfunction
+
+function! s:CopySelectionDown(count) abort
+  normal! m`
+  exe "'<,'>copy'<-".a:count
+  norm! ``
+  silent! call repeat#set("\<Plug>unimpairedCopySelectionDown", a:count)
+endfunction
+
+nnoremap <silent> <Plug>unimpairedCopyUp            :<C-U>call <SID>Copy('',v:count1,'Down')<CR>
+nnoremap <silent> <Plug>unimpairedCopyDown          :<C-U>call <SID>Copy('-',v:count1,'Up')<CR>
+noremap  <silent> <Plug>unimpairedCopySelectionUp   :<C-U>call <SID>CopySelectionUp(v:count1)<CR>
+noremap  <silent> <Plug>unimpairedCopySelectionDown :<C-U>call <SID>CopySelectionDown(v:count1)<CR>
+
+nmap [E <Plug>unimpairedCopyUp
+nmap ]E <Plug>unimpairedCopyDown
+xmap [E <Plug>unimpairedCopySelectionUp
+xmap ]E <Plug>unimpairedCopySelectionDown
+
 " }}}1
 " Option toggling {{{1
 
