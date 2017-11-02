@@ -232,10 +232,6 @@ function! s:ve_options() abort
   return (&virtualedit =~# 'all') ? 'virtualedit-=all' : 'virtualedit+=all'
 endfunction
 
-function! s:indent_lines(cmd) abort
-  return exists(':IndentLines'.a:cmd) ? '| IndentLines'.a:cmd : ''
-endfunction
-
 function! s:fdc_options() abort
   return &foldcolumn == 0 ? 4 : 0
 endfunction
@@ -273,6 +269,7 @@ call s:option_map('n', 'number', 'setlocal')
 call s:option_map('r', 'relativenumber', 'setlocal')
 call s:option_map('s', 'spell', 'setlocal')
 call s:option_map('w', 'wrap', 'setlocal')
+call s:option_map('l', 'list', 'setlocal')
 call s:map('n', '[ov', ':set virtualedit+=all<CR>')
 call s:map('n', ']ov', ':set virtualedit-=all<CR>')
 call s:map('n', '=ov', ':set <C-R>=<SID>ve_options()<CR><CR>')
@@ -285,9 +282,6 @@ call s:map('n', '=of', ':setlocal foldcolumn=<C-R>=<SID>fdc_options()<CR><CR>')
 call s:map('n', '[oC', ':setlocal colorcolumn=+1<CR>')
 call s:map('n', ']oC', ':setlocal colorcolumn=<CR>')
 call s:map('n', '=oC', ':setlocal colorcolumn=<C-R>=<SID>cc_options()<CR><CR>')
-call s:map('n', '[ol', ':setlocal list <C-R>=<SID>indent_lines("Enable")<CR><CR>')
-call s:map('n', ']ol', ':setlocal nolist <C-R>=<SID>indent_lines("Disable")<CR><CR>')
-call s:map('n', '=ol', ':setlocal list! <C-R>=<SID>indent_lines("Toggle")<CR><CR>')
 if empty(maparg('co', 'n'))
   nmap co =o
 endif
