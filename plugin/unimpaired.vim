@@ -16,6 +16,7 @@ endfunction
 " Next and previous {{{1
 
 function! s:MapNextFamily(map,cmd) abort
+  let key = (a:map ==# 'tab' ? '<Tab>' : a:map)
   let map = '<Plug>unimpaired'.toupper(a:map)
   let cmd = '".(v:count ? v:count : "")."'.a:cmd
   let end = '"<CR>'.(a:cmd == 'l' || a:cmd == 'c' ? 'zv' : '')
@@ -23,10 +24,10 @@ function! s:MapNextFamily(map,cmd) abort
   execute 'nnoremap <silent> '.map.'Next     :<C-U>exe "'.cmd.'next'.end
   execute 'nnoremap <silent> '.map.'First    :<C-U>exe "'.cmd.'first'.end
   execute 'nnoremap <silent> '.map.'Last     :<C-U>exe "'.cmd.'last'.end
-  call s:map('n', '['.        a:map , map.'Previous')
-  call s:map('n', ']'.        a:map , map.'Next')
-  call s:map('n', '['.toupper(a:map), map.'First')
-  call s:map('n', ']'.toupper(a:map), map.'Last')
+  call s:map('n', '['.        key , map.'Previous')
+  call s:map('n', ']'.        key , map.'Next')
+  call s:map('n', '['.(a:map ==# 'tab' ? '<S-Tab>' : toupper(key)), map.'First')
+  call s:map('n', ']'.(a:map ==# 'tab' ? '<S-Tab>' : toupper(key)), map.'Last')
   if exists(':'.a:cmd.'nfile')
     execute 'nnoremap <silent> '.map.'PFile :<C-U>exe "'.cmd.'pfile'.end
     execute 'nnoremap <silent> '.map.'NFile :<C-U>exe "'.cmd.'nfile'.end
@@ -40,6 +41,7 @@ call s:MapNextFamily('b','b')
 call s:MapNextFamily('l','l')
 call s:MapNextFamily('q','c')
 call s:MapNextFamily('t','t')
+call s:MapNextFamily('tab', 'tab')
 
 function! s:entries(path)
   let path = substitute(a:path,'[\\/]$','','')
