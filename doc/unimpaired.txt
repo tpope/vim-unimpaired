@@ -85,7 +85,7 @@ On	Off	Toggle	Option
 *[oh*	*]oh*	*=oh*	'hlsearch'
 *[oi*	*]oi*	*=oi*	'ignorecase'
 *[oI*	*]oI*	*=oI*	'incsearch'
-*[ol*	*]ol*	*=ol*	'list' (toggles IndentLines if installed)
+*[ol*	*]ol*	*=ol*	'list'
 *[on*	*]on*	*=on*	'number'
 *[or*	*]or*	*=or*	'relativenumber'
 *[os*	*]os*	*=os*	'spell'
