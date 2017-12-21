@@ -13,7 +13,7 @@ There are linewise mappings. `[<Space>` and `]<Space>` add newlines
 before and after the cursor line. `[e` and `]e` exchange the current
 line with the one above or below it.
 
-There are mappings for toggling options. `[os`, `]os`, and `cos` perform
+There are mappings for toggling options. `[os`, `]os`, and `=os` perform
 `:set spell`, `:set nospell`, and `:set invspell`, respectively.  There's also
 `l` (`list`), `n` (`number`), `w` (`wrap`), `x` (`cursorline cursorcolumn`),
 and several others, plus mappings to help alleviate the `set paste` dance.
