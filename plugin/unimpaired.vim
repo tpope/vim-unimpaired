@@ -10,7 +10,24 @@ let g:loaded_unimpaired = 1
 
 function! s:map(mode, lhs, rhs, ...) abort
   let flags = (a:0 ? a:1 : '') . (a:rhs =~# '^<Plug>' ? '' : '<script>')
-  exe a:mode . 'map' flags a:lhs a:rhs
+  let head = a:lhs
+  let tail = ''
+  let keys = extend(copy(get(g:, 'remap', {})), get(g:, a:mode.'remap', {}))
+  if type(keys) != type({})
+    return
+  endif
+  while !empty(head)
+    if has_key(keys, head)
+      let head = keys[head]
+      if empty(head)
+        return
+      endif
+      break
+    endif
+    let tail = matchstr(head, '<[^<>]*>$\|.$') . tail
+    let head = substitute(head, '<[^<>]*>$\|.$', '', '')
+  endwhile
+  exe a:mode.'map' flags head.tail a:rhs
 endfunction
 
 " Next and previous {{{1
