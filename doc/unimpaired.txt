@@ -148,15 +148,15 @@ Mnemonic: encoding always comes before decoding; "[" always comes before "]".
 CUSTOMIZATION                                   *unimpaired-customization*
 
 Maps for normal, visual, and operator pending mode can be customized by
-assigning dictionaries to g:nnoremap, g:xnoremap, and g:onoremap respectively.
-The key can be either a complete map or a prefix thereof, and the value is the
-key sequence to use instead, or an empty string to disable the mapping or
-mappings entirely.  For example, to replace all square bracket maps with angle
-bracket maps, one could use the following:
+assigning dictionaries to g:nremap, g:xremap, and g:oremap respectively.  The
+key can be either a complete map or a prefix thereof, and the value is the key
+sequence to use instead, or an empty string to disable the mapping or mappings
+entirely.  For example, to replace all square bracket maps with angle bracket
+maps, one could use the following:
 >
-  let g:nnoremap = {"[": "<", "]": ">"}
-  let g:xnoremap = {"[": "<", "]": ">"}
-  let g:onoremap = {"[": "<", "]": ">"}
+  let g:nremap = {"[": "<", "]": ">"}
+  let g:xremap = {"[": "<", "]": ">"}
+  let g:oremap = {"[": "<", "]": ">"}
 <
 Generally, you will want to pair this with a set of global maps to handle the
 built-ins as well:
