@@ -12,7 +12,7 @@ function! s:map(mode, lhs, rhs, ...) abort
   let flags = (a:0 ? a:1 : '') . (a:rhs =~# '^<Plug>' ? '' : '<script>')
   let head = a:lhs
   let tail = ''
-  let keys = extend(copy(get(g:, 'remap', {})), get(g:, a:mode.'remap', {}))
+  let keys = get(g:, a:mode.'remap', {})
   if type(keys) != type({})
     return
   endif
