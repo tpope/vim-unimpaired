@@ -44,8 +44,9 @@ function! s:MapNextFamily(map,cmd) abort
   let map = '<Plug>unimpaired'.toupper(a:map)
   let cmd = '".(v:count ? v:count : "")."'.a:cmd
   let end = '"<CR>'.(a:cmd ==# 'l' || a:cmd ==# 'c' ? 'zv' : '')
-  execute 'nnoremap <silent> '.map.'Previous :<C-U>exe "'.cmd.'previous'.end
-  execute 'nnoremap <silent> '.map.'Next     :<C-U>exe "'.cmd.'next'.end
+  let prevnext = printf('["normal \%sPrevious", "normal \%sNext"]', map, map)
+  execute 'nnoremap <silent> '.map.'Previous :<C-U>exe <SID>prevnext("'.a:cmd.'", "previous", '.prevnext.')<CR>'
+  execute 'nnoremap <silent> '.map.'Next     :<C-U>exe <SID>prevnext("'.a:cmd.'", "next", '.prevnext.')<CR>'
   execute 'nnoremap <silent> '.map.'First    :<C-U>exe "'.cmd.'first'.end
   execute 'nnoremap <silent> '.map.'Last     :<C-U>exe "'.cmd.'last'.end
   call s:map('n', '['.        a:map , map.'Previous')
@@ -83,6 +84,36 @@ function! s:entries(path) abort
 
   return files
 endfunction
+
+" Handle previous/next movements, storing the last used one.
+function! s:prevnext(cmd, dir, prevnext) abort
+  let g:unimpaired_prevnext = a:prevnext
+  let cmd = (v:count ? v:count : '').a:cmd.a:dir
+  if a:cmd ==# 'l' || a:cmd ==# 'c'
+    let cmd .= '|normal zv'
+  endif
+  return cmd
+endfunction
+function! s:last_prevnext_cmd(dir) abort
+  let prevnext = get(g:, 'unimpaired_prevnext', [])
+  if empty(prevnext)
+    if &diff
+      let m = 'c'
+    elseif !empty(getloclist(0))
+      let m = 'l'
+    elseif !empty(getqflist())
+      let m = 'q'
+    else
+      let m = 'n'
+    endif
+    return 'normal '.(a:dir ==# 'previous' ? '[' : ']').m
+  endif
+  return (a:dir ==# 'previous' ? prevnext[0] : prevnext[1])
+endfunction
+execute 'nnoremap <silent> <Plug>unimpairedRepeatPrevious :<C-U>exe <SID>last_prevnext_cmd("previous")<CR>'
+execute 'nnoremap <silent> <Plug>unimpairedRepeatNext :<C-U>exe <SID>last_prevnext_cmd("next")<CR>'
+call s:map('n', '[.', '<Plug>unimpairedRepeatPrevious')
+call s:map('n', '].', '<Plug>unimpairedRepeatNext')
 
 function! s:FileByOffset(num) abort
   let file = expand('%:p')
