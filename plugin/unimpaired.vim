@@ -35,7 +35,7 @@ endfunction
 function! s:MapNextFamily(map,cmd) abort
   let map = '<Plug>unimpaired'.toupper(a:map)
   let cmd = '".(v:count ? v:count : "")."'.a:cmd
-  let end = '"<CR>'.(a:cmd == 'l' || a:cmd == 'c' ? 'zv' : '')
+  let end = '"<CR>'.(a:cmd ==# 'l' || a:cmd ==# 'c' ? 'zv' : '')
   execute 'nnoremap <silent> '.map.'Previous :<C-U>exe "'.cmd.'previous'.end
   execute 'nnoremap <silent> '.map.'Next     :<C-U>exe "'.cmd.'next'.end
   execute 'nnoremap <silent> '.map.'First    :<C-U>exe "'.cmd.'first'.end
@@ -73,7 +73,7 @@ endfunction
 
 function! s:FileByOffset(num)
   let file = expand('%:p')
-  if file == ''
+  if empty(file)
     let file = getcwd() . '/'
   endif
   let num = a:num
@@ -85,7 +85,7 @@ function! s:FileByOffset(num)
       call sort(filter(files,'v:val ># file'))
     endif
     let temp = get(files,0,'')
-    if temp == ''
+    if empty(temp)
       let file = fnamemodify(file,':h')
     else
       let file = temp
@@ -192,13 +192,13 @@ call s:map('n', ']<Space>', '<Plug>unimpairedBlankDown')
 
 function! s:ExecMove(cmd) abort
   let old_fdm = &foldmethod
-  if old_fdm != 'manual'
+  if old_fdm !=# 'manual'
     let &foldmethod = 'manual'
   endif
   normal! m`
   silent! exe a:cmd
   norm! ``
-  if old_fdm != 'manual'
+  if old_fdm !=# 'manual'
     let &foldmethod = old_fdm
   endif
 endfunction
@@ -335,7 +335,7 @@ endfunction
 function! s:string_decode(str)
   let map = {'n': "\n", 'r': "\r", 't': "\t", 'b': "\b", 'f': "\f", 'e': "\e", 'a': "\001", 'v': "\013", "\n": ''}
   let str = a:str
-  if str =~ '^\s*".\{-\}\\\@<!\%(\\\\\)*"\s*\n\=$'
+  if str =~# '^\s*".\{-\}\\\@<!\%(\\\\\)*"\s*\n\=$'
     let str = substitute(substitute(str,'^\s*\zs"','',''),'"\ze\s*\n\=$','','')
   endif
   return substitute(str,'\\\(\o\{1,3\}\|x\x\{1,2\}\|u\x\{1,4\}\|.\)','\=get(map,submatch(1),submatch(1) =~? "^[0-9xu]" ? nr2char("0".substitute(submatch(1),"^[Uu]","x","")) : submatch(1))','g')
@@ -450,13 +450,13 @@ function! s:Transform(algorithm,type)
   let cb_save = &clipboard
   set selection=inclusive clipboard-=unnamed clipboard-=unnamedplus
   let reg_save = @@
-  if a:type =~ '^\d\+$'
+  if a:type =~# '^\d\+$'
     silent exe 'norm! ^v'.a:type.'$hy'
-  elseif a:type =~ '^.$'
+  elseif a:type =~# '^.$'
     silent exe "normal! `<" . a:type . "`>y"
-  elseif a:type == 'line'
+  elseif a:type ==# 'line'
     silent exe "normal! '[V']y"
-  elseif a:type == 'block'
+  elseif a:type ==# 'block'
     silent exe "normal! `[\<C-V>`]y"
   else
     silent exe "normal! `[v`]y"
@@ -470,7 +470,7 @@ function! s:Transform(algorithm,type)
   let @@ = reg_save
   let &selection = sel_save
   let &clipboard = cb_save
-  if a:type =~ '^\d\+$'
+  if a:type =~# '^\d\+$'
     silent! call repeat#set("\<Plug>unimpaired_line_".a:algorithm,a:type)
   endif
 endfunction
