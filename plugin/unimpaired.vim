@@ -30,7 +30,7 @@ function! s:map(mode, lhs, rhs, ...) abort
   exe a:mode.'map' flags head.tail a:rhs
 endfunction
 
-" Next and previous {{{1
+" Section: Next and previous
 
 function! s:MapNextFamily(map,cmd) abort
   let map = '<Plug>unimpaired'.toupper(a:map)
@@ -122,8 +122,7 @@ nmap <silent> <Plug>unimpairedOPrevious <Plug>unimpairedDirectoryPrevious:echohl
 call s:map('n', ']o', '<Plug>unimpairedONext')
 call s:map('n', '[o', '<Plug>unimpairedOPrevious')
 
-" }}}1
-" Diff {{{1
+" Section: Diff
 
 call s:map('n', '[n', '<Plug>unimpairedContextPrevious')
 call s:map('n', ']n', '<Plug>unimpairedContextNext')
@@ -169,8 +168,7 @@ function! s:ContextMotion(reverse) abort
   endif
 endfunction
 
-" }}}1
-" Line operations {{{1
+" Section: Line operations
 
 function! s:BlankUp(count) abort
   put!=repeat(nr2char(10), a:count)
@@ -228,8 +226,7 @@ call s:map('n', ']e', '<Plug>unimpairedMoveDown')
 call s:map('x', '[e', '<Plug>unimpairedMoveSelectionUp')
 call s:map('x', ']e', '<Plug>unimpairedMoveSelectionDown')
 
-" }}}1
-" Option toggling {{{1
+" Section: Option toggling
 
 function! s:statusbump() abort
   let &l:readonly = &l:readonly
@@ -299,8 +296,7 @@ nnoremap <silent> <Plug>unimpairedPaste :call <SID>setup_paste()<CR>
 call s:map('n', 'yo', ':call <SID>setup_paste()<CR>o', '<silent>')
 call s:map('n', 'yO', ':call <SID>setup_paste()<CR>O', '<silent>')
 
-" }}}1
-" Put {{{1
+" Section: Put
 
 function! s:putline(how, map) abort
   let [body, type] = [getreg(v:register), getregtype(v:register)]
@@ -324,8 +320,7 @@ call s:map('n', '<p', ":call <SID>putline(']p', 'Below')<CR><']", '<silent>')
 call s:map('n', '=P', ":call <SID>putline('[p', 'Above')<CR>=']", '<silent>')
 call s:map('n', '=p', ":call <SID>putline(']p', 'Below')<CR>=']", '<silent>')
 
-" }}}1
-" Encoding and decoding {{{1
+" Section: Encoding and decoding
 
 function! s:string_encode(str) abort
   let map = {"\n": 'n', "\r": 'r', "\t": 't', "\b": 'b', "\f": '\f', '"': '"', '\': '\'}
@@ -500,6 +495,5 @@ call UnimpairedMapTransform('url_decode',']u')
 call UnimpairedMapTransform('xml_encode','[x')
 call UnimpairedMapTransform('xml_decode',']x')
 
-" }}}1
 
 " vim:set sw=2 sts=2:
