@@ -58,7 +58,7 @@ call s:MapNextFamily('l','l')
 call s:MapNextFamily('q','c')
 call s:MapNextFamily('t','t')
 
-function! s:entries(path)
+function! s:entries(path) abort
   let path = substitute(a:path,'[\\/]$','','')
   let files = split(glob(path."/.*"),"\n")
   let files += split(glob(path."/*"),"\n")
@@ -71,7 +71,7 @@ function! s:entries(path)
   return files
 endfunction
 
-function! s:FileByOffset(num)
+function! s:FileByOffset(num) abort
   let file = expand('%:p')
   if empty(file)
     let file = getcwd() . '/'
@@ -135,11 +135,11 @@ nnoremap <silent> <Plug>unimpairedContextNext     :call <SID>Context(0)<CR>
 onoremap <silent> <Plug>unimpairedContextPrevious :call <SID>ContextMotion(1)<CR>
 onoremap <silent> <Plug>unimpairedContextNext     :call <SID>ContextMotion(0)<CR>
 
-function! s:Context(reverse)
+function! s:Context(reverse) abort
   call search('^\(@@ .* @@\|[<=>|]\{7}[<=>|]\@!\)', a:reverse ? 'bW' : 'W')
 endfunction
 
-function! s:ContextMotion(reverse)
+function! s:ContextMotion(reverse) abort
   if a:reverse
     -
   endif
@@ -327,12 +327,12 @@ call s:map('n', '=p', ":call <SID>putline(']p', 'Below')<CR>=']", '<silent>')
 " }}}1
 " Encoding and decoding {{{1
 
-function! s:string_encode(str)
+function! s:string_encode(str) abort
   let map = {"\n": 'n', "\r": 'r', "\t": 't', "\b": 'b', "\f": '\f', '"': '"', '\': '\'}
   return substitute(a:str,"[\001-\033\\\\\"]",'\="\\".get(map,submatch(0),printf("%03o",char2nr(submatch(0))))','g')
 endfunction
 
-function! s:string_decode(str)
+function! s:string_decode(str) abort
   let map = {'n': "\n", 'r': "\r", 't': "\t", 'b': "\b", 'f': "\f", 'e': "\e", 'a': "\001", 'v': "\013", "\n": ''}
   let str = a:str
   if str =~# '^\s*".\{-\}\\\@<!\%(\\\\\)*"\s*\n\=$'
@@ -341,11 +341,11 @@ function! s:string_decode(str)
   return substitute(str,'\\\(\o\{1,3\}\|x\x\{1,2\}\|u\x\{1,4\}\|.\)','\=get(map,submatch(1),submatch(1) =~? "^[0-9xu]" ? nr2char("0".substitute(submatch(1),"^[Uu]","x","")) : submatch(1))','g')
 endfunction
 
-function! s:url_encode(str)
+function! s:url_encode(str) abort
   return substitute(a:str,'[^A-Za-z0-9_.~-]','\="%".printf("%02X",char2nr(submatch(0)))','g')
 endfunction
 
-function! s:url_decode(str)
+function! s:url_decode(str) abort
   let str = substitute(substitute(substitute(a:str,'%0[Aa]\n$','%0A',''),'%0[Aa]','\n','g'),'+',' ','g')
   return substitute(str,'%\(\x\x\)','\=nr2char("0x".submatch(1))','g')
 endfunction
@@ -419,7 +419,7 @@ let g:unimpaired_html_entities = {
 
 " }}}2
 
-function! s:xml_encode(str)
+function! s:xml_encode(str) abort
   let str = a:str
   let str = substitute(str,'&','\&amp;','g')
   let str = substitute(str,'<','\&lt;','g')
@@ -428,7 +428,7 @@ function! s:xml_encode(str)
   return str
 endfunction
 
-function! s:xml_entity_decode(str)
+function! s:xml_entity_decode(str) abort
   let str = substitute(a:str,'\c&#\%(0*38\|x0*26\);','&amp;','g')
   let str = substitute(str,'\c&#\(\d\+\);','\=nr2char(submatch(1))','g')
   let str = substitute(str,'\c&#\(x\x\+\);','\=nr2char("0".submatch(1))','g')
@@ -440,12 +440,12 @@ function! s:xml_entity_decode(str)
   return substitute(str,'\c&amp;','\&','g')
 endfunction
 
-function! s:xml_decode(str)
+function! s:xml_decode(str) abort
   let str = substitute(a:str,'<\%([[:alnum:]-]\+=\%("[^"]*"\|''[^'']*''\)\|.\)\{-\}>','','g')
   return s:xml_entity_decode(str)
 endfunction
 
-function! s:Transform(algorithm,type)
+function! s:Transform(algorithm,type) abort
   let sel_save = &selection
   let cb_save = &clipboard
   set selection=inclusive clipboard-=unnamed clipboard-=unnamedplus
@@ -475,11 +475,11 @@ function! s:Transform(algorithm,type)
   endif
 endfunction
 
-function! s:TransformOpfunc(type)
+function! s:TransformOpfunc(type) abort
   return s:Transform(s:encode_algorithm, a:type)
 endfunction
 
-function! s:TransformSetup(algorithm)
+function! s:TransformSetup(algorithm) abort
   let s:encode_algorithm = a:algorithm
   let &opfunc = matchstr(expand('<sfile>'), '<SNR>\d\+_').'TransformOpfunc'
 endfunction
