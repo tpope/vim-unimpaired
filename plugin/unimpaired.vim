@@ -270,7 +270,7 @@ call s:map('n', '[ox', ':set cursorline cursorcolumn<CR>')
 call s:map('n', ']ox', ':set nocursorline nocursorcolumn<CR>')
 call s:map('n', '=ox', ':set <C-R>=<SID>cursor_options()<CR><CR>')
 if empty(maparg('co', 'n'))
-  nmap co =o
+  nmap <script><silent> co :<C-U>echoerr 'co has been replaced by =o'<CR>
 endif
 
 function! s:setup_paste() abort
