@@ -300,10 +300,12 @@ call s:map('n', 'yO', ':call <SID>setup_paste()<CR>O', '<silent>')
 
 function! s:putline(how, map) abort
   let [body, type] = [getreg(v:register), getregtype(v:register)]
-  call setreg(v:register, body, 'l')
-  exe 'normal! "'.v:register.a:how
-  call setreg(v:register, body, type)
-  if type !=# 'V'
+  if type ==# 'V'
+    exe 'normal! "'.v:register.a:how
+  else
+    call setreg(v:register, body, 'l')
+    exe 'normal! "'.v:register.a:how
+    call setreg(v:register, body, type)
     silent! call repeat#set("\<Plug>unimpairedPut".a:map)
   endif
 endfunction
