@@ -46,7 +46,7 @@ support:
 > My non-US keyboard makes it hard to type `[` and `]`.  Can I configure
 > different prefix characters?
 
-Not en masse, but you can just map to `[` and `]` directly:
+The easiest solution is to map to `[` and `]` directly:
 
     nmap < [
     nmap > ]
@@ -58,7 +58,7 @@ Not en masse, but you can just map to `[` and `]` directly:
 Note we're not using the `noremap` family because we *do* want to recursively
 invoke unimpaired.vim's maps.
 
-There are also `<Plug>` maps if you want a more granular approach.
+See `:help unimpaired-customization` for more advanced options.
 
 ## Contributing
 
