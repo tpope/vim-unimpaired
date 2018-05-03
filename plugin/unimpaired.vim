@@ -295,6 +295,12 @@ nnoremap <silent> <Plug>unimpairedPaste :call <SID>setup_paste()<CR>
 
 call s:map('n', 'yo', ':call <SID>setup_paste()<CR>o', '<silent>')
 call s:map('n', 'yO', ':call <SID>setup_paste()<CR>O', '<silent>')
+call s:map('n', '[op', ':call <SID>setup_paste()<CR>O', '<silent>')
+call s:map('n', ']op', ':call <SID>setup_paste()<CR>o', '<silent>')
+call s:map('n', '=op', ':call <SID>setup_paste()<CR>A', '<silent>')
+call s:map('n', '[O', ':call <SID>setup_paste()<CR>O', '<silent>')
+call s:map('n', ']O', ':call <SID>setup_paste()<CR>o', '<silent>')
+call s:map('n', '=O', ':call <SID>setup_paste()<CR>A', '<silent>')
 
 " Section: Put
 
