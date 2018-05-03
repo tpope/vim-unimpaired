@@ -288,8 +288,8 @@ endfunction
 
 nnoremap <silent> <Plug>unimpairedPaste :call <SID>setup_paste()<CR>
 
-call s:map('n', 'yo', ':call <SID>setup_paste()<CR>o', '<silent>')
-call s:map('n', 'yO', ':call <SID>setup_paste()<CR>O', '<silent>')
+call s:map('n', 'yo', ':<C-U>echoerr "Use ]op"<CR>', '<silent>')
+call s:map('n', 'yO', ':<C-U>echoerr "Use [op"<CR>', '<silent>')
 call s:map('n', '[op', ':call <SID>setup_paste()<CR>O', '<silent>')
 call s:map('n', ']op', ':call <SID>setup_paste()<CR>o', '<silent>')
 call s:map('n', '=op', ':call <SID>setup_paste()<CR>A', '<silent>')
