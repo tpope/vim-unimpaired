@@ -33,15 +33,13 @@ linewise mappings as well if you install
 
 ## Installation
 
-If you don't have a preferred installation method, I recommend
-installing [pathogen.vim](https://github.com/tpope/vim-pathogen), and
-then simply copy and paste:
+Install using your favorite package manager, or use Vim's built-in package
+support:
 
-    cd ~/.vim/bundle
-    git clone git://github.com/tpope/vim-unimpaired.git
-
-Once help tags have been generated, you can view the manual with
-`:help unimpaired`.
+    mkdir -p ~/.vim/pack/tpope/start
+    cd ~/.vim/pack/tpope/start
+    git clone https://tpope.io/vim/unimpaired.git
+    vim -u NONE -c "helptags unimpaired/doc" -c q
 
 ## FAQ
 
