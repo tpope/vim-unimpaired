@@ -448,11 +448,7 @@ function! s:Transform(algorithm,type) abort
   let cb_save = &clipboard
   set selection=inclusive clipboard-=unnamed clipboard-=unnamedplus
   let reg_save = @@
-  if a:type =~# '^\d\+$'
-    silent exe 'norm! ^v'.a:type.'$hy'
-  elseif a:type =~# '^.$'
-    silent exe "normal! `<" . a:type . "`>y"
-  elseif a:type ==# 'line'
+  if a:type ==# 'line'
     silent exe "normal! '[V']y"
   elseif a:type ==# 'block'
     silent exe "normal! `[\<C-V>`]y"
@@ -468,9 +464,6 @@ function! s:Transform(algorithm,type) abort
   let @@ = reg_save
   let &selection = sel_save
   let &clipboard = cb_save
-  if a:type =~# '^\d\+$'
-    silent! call repeat#set("\<Plug>unimpaired_line_".a:algorithm,a:type)
-  endif
 endfunction
 
 function! s:TransformOpfunc(type) abort
@@ -480,12 +473,13 @@ endfunction
 function! s:TransformSetup(algorithm) abort
   let s:encode_algorithm = a:algorithm
   let &opfunc = matchstr(expand('<sfile>'), '<SNR>\d\+_').'TransformOpfunc'
+  return 'g@'
 endfunction
 
 function! UnimpairedMapTransform(algorithm, key) abort
-  exe 'nnoremap <silent> <Plug>unimpaired_'    .a:algorithm.' :<C-U>call <SID>TransformSetup("'.a:algorithm.'")<CR>g@'
-  exe 'xnoremap <silent> <Plug>unimpaired_'    .a:algorithm.' :<C-U>call <SID>Transform("'.a:algorithm.'",visualmode())<CR>'
-  exe 'nnoremap <silent> <Plug>unimpaired_line_'.a:algorithm.' :<C-U>call <SID>Transform("'.a:algorithm.'",v:count1)<CR>'
+  exe 'nnoremap <expr> <Plug>unimpaired_'    .a:algorithm.' <SID>TransformSetup("'.a:algorithm.'")'
+  exe 'xnoremap <expr> <Plug>unimpaired_'    .a:algorithm.' <SID>TransformSetup("'.a:algorithm.'")'
+  exe 'nnoremap <expr> <Plug>unimpaired_line_'.a:algorithm.' <SID>TransformSetup("'.a:algorithm.'")."_"'
   call s:map('n', a:key, '<Plug>unimpaired_'.a:algorithm)
   call s:map('x', a:key, '<Plug>unimpaired_'.a:algorithm)
   call s:map('n', a:key.a:key[strlen(a:key)-1], '<Plug>unimpaired_line_'.a:algorithm)
