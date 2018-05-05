@@ -117,11 +117,6 @@ nnoremap <silent> <Plug>unimpairedDirectoryPrevious :<C-U>edit <C-R>=<SID>fnamee
 call s:map('n', ']f', '<Plug>unimpairedDirectoryNext')
 call s:map('n', '[f', '<Plug>unimpairedDirectoryPrevious')
 
-nmap <silent> <Plug>unimpairedONext     <Plug>unimpairedDirectoryNext:echohl WarningMSG<Bar>echo "]o is deprecated. Use ]f"<Bar>echohl NONE<CR>
-nmap <silent> <Plug>unimpairedOPrevious <Plug>unimpairedDirectoryPrevious:echohl WarningMSG<Bar>echo "[o is deprecated. Use [f"<Bar>echohl NONE<CR>
-call s:map('n', ']o', '<Plug>unimpairedONext')
-call s:map('n', '[o', '<Plug>unimpairedOPrevious')
-
 " Section: Diff
 
 call s:map('n', '[n', '<Plug>unimpairedContextPrevious')
