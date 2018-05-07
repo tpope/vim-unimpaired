@@ -25,14 +25,16 @@ function! s:maps() abort
       if has_key(keys, head)
         let head = keys[head]
         if empty(head)
-          return
+          let head = '<skip>'
         endif
         break
       endif
       let tail = matchstr(head, '<[^<>]*>$\|.$') . tail
       let head = substitute(head, '<[^<>]*>$\|.$', '', '')
     endwhile
-    exe mode.'map' flags head.tail rhs
+    if head !=# '<skip>'
+      exe mode.'map' flags head.tail rhs
+    endif
   endfor
 endfunction
 
