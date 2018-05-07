@@ -8,26 +8,32 @@ if exists("g:loaded_unimpaired") || &cp || v:version < 700
 endif
 let g:loaded_unimpaired = 1
 
-function! s:map(mode, lhs, rhs, ...) abort
-  let flags = (a:0 ? a:1 : '') . (a:rhs =~# '^<Plug>' ? '' : '<script>')
-  let head = a:lhs
-  let tail = ''
-  let keys = get(g:, a:mode.'remap', {})
-  if type(keys) != type({})
-    return
-  endif
-  while !empty(head)
-    if has_key(keys, head)
-      let head = keys[head]
-      if empty(head)
-        return
-      endif
-      break
+let s:maps = []
+function! s:map(...) abort
+  call add(s:maps, a:000)
+endfunction
+
+function! s:maps() abort
+  for [mode, head, rhs; rest] in s:maps
+    let flags = get(rest, 0, '') . (rhs =~# '^<Plug>' ? '' : '<script>')
+    let tail = ''
+    let keys = get(g:, mode.'remap', {})
+    if type(keys) != type({})
+      continue
     endif
-    let tail = matchstr(head, '<[^<>]*>$\|.$') . tail
-    let head = substitute(head, '<[^<>]*>$\|.$', '', '')
-  endwhile
-  exe a:mode.'map' flags head.tail a:rhs
+    while !empty(head)
+      if has_key(keys, head)
+        let head = keys[head]
+        if empty(head)
+          return
+        endif
+        break
+      endif
+      let tail = matchstr(head, '<[^<>]*>$\|.$') . tail
+      let head = substitute(head, '<[^<>]*>$\|.$', '', '')
+    endwhile
+    exe mode.'map' flags head.tail rhs
+  endfor
 endfunction
 
 " Section: Next and previous
@@ -492,5 +498,15 @@ call UnimpairedMapTransform('url_decode',']u')
 call UnimpairedMapTransform('xml_encode','[x')
 call UnimpairedMapTransform('xml_decode',']x')
 
+" Section: Activation
+
+augroup unimpaired
+  autocmd!
+  autocmd VimEnter * call s:maps()
+augroup END
+
+if !has('vim_starting')
+  call s:maps()
+endif
 
 " vim:set sw=2 sts=2:
