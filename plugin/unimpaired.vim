@@ -272,6 +272,9 @@ call s:map('n', 'yov', ':set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all"
 call s:map('n', '[ox', ':set cursorline cursorcolumn<CR>')
 call s:map('n', ']ox', ':set nocursorline nocursorcolumn<CR>')
 call s:map('n', 'yox', ':set <C-R>=<SID>cursor_options()<CR><CR>')
+call s:map('n', '[o<bar>', ':set colorcolumn+=+1<CR>')
+call s:map('n', ']o<bar>', ':set colorcolumn-=+1<CR>')
+call s:map('n', 'yo<bar>', ':set colorcolumn<C-R>=match(&colorcolumn,"+1")>=0?"-=+1":"+=+1"<CR><CR>')
 nmap =o yo
 if empty(maparg('co', 'n'))
   nmap <script><silent><expr> co ":\<C-U>echoerr 'Use =o'.nr2char(getchar())\<CR>"
