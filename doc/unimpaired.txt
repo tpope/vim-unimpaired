@@ -73,19 +73,21 @@ LINE OPERATIONS                                 *unimpaired-lines*
 OPTION TOGGLING                                 *unimpaired-toggling*
 
 On	Off	Toggle	Option
-*[ob*	*]ob*	*=ob*	'background' (dark is off, light is on)
-*[oc*	*]oc*	*=oc*	'cursorline'
-*[od*	*]od*	*=od*	'diff' (actually |:diffthis| / |:diffoff|)
-*[oh*	*]oh*	*=oh*	'hlsearch'
-*[oi*	*]oi*	*=oi*	'ignorecase'
-*[ol*	*]ol*	*=ol*	'list'
-*[on*	*]on*	*=on*	'number'
-*[or*	*]or*	*=or*	'relativenumber'
-*[os*	*]os*	*=os*	'spell'
-*[ou*	*]ou*	*=ou*	'cursorcolumn'
-*[ov*	*]ov*	*=ov*	'virtualedit'
-*[ow*	*]ow*	*=ow*	'wrap'
-*[ox*	*]ox*	*=ox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
+*[ob*	*]ob*	*yob*	'background' (dark is off, light is on)
+*[oc*	*]oc*	*yoc*	'cursorline'
+*[od*	*]od*	*yod*	'diff' (actually |:diffthis| / |:diffoff|)
+*[oh*	*]oh*	*yoh*	'hlsearch'
+*[oi*	*]oi*	*yoi*	'ignorecase'
+*[ol*	*]ol*	*yol*	'list'
+*[on*	*]on*	*yon*	'number'
+*[or*	*]or*	*yor*	'relativenumber'
+*[os*	*]os*	*yos*	'spell'
+*[ou*	*]ou*	*you*	'cursorcolumn'
+*[ov*	*]ov*	*yov*	'virtualedit'
+*[ow*	*]ow*	*yow*	'wrap'
+*[ox*	*]ox*	*yox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
+
+The mnemonic for y is that if you tilt it a bit it looks like a switch.
 
 PASTING                                         *unimpaired-pasting*
 
