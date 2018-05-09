@@ -255,7 +255,10 @@ call s:map('n', '[ob', ':set background=light<CR>')
 call s:map('n', ']ob', ':set background=dark<CR>')
 call s:map('n', 'yob', ':set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><CR>')
 call s:option_map('c', 'cursorline', 'setlocal')
+call s:option_map('-', 'cursorline', 'setlocal')
+call s:option_map('_', 'cursorline', 'setlocal')
 call s:option_map('u', 'cursorcolumn', 'setlocal')
+call s:option_map('<Bar>', 'cursorcolumn', 'setlocal')
 call s:map('n', '[od', ':diffthis<CR>')
 call s:map('n', ']od', ':diffoff<CR>')
 call s:map('n', 'yod', ':<C-R>=&diff ? "diffoff" : "diffthis"<CR><CR>')
@@ -272,6 +275,9 @@ call s:map('n', 'yov', ':set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all"
 call s:map('n', '[ox', ':set cursorline cursorcolumn<CR>')
 call s:map('n', ']ox', ':set nocursorline nocursorcolumn<CR>')
 call s:map('n', 'yox', ':set <C-R>=<SID>cursor_options()<CR><CR>')
+call s:map('n', '[o+', ':set cursorline cursorcolumn<CR>')
+call s:map('n', ']o+', ':set nocursorline nocursorcolumn<CR>')
+call s:map('n', 'yo+', ':set <C-R>=<SID>cursor_options()<CR><CR>')
 nmap =o yo
 
 function! s:legacy_option_map(letter) abort
