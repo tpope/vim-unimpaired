@@ -103,11 +103,12 @@ These are experimental:
 |]p| and |[p| have also been remapped to force linewise pasting, while
 preserving their usual indent matching behavior.
 
-                                                *[op* *]op* *yo* *yO*
+                                                *[op* *]op* *yop*
 A toggle has not been provided for 'paste' because the typical use case of
 wrapping of a solitary insertion is inefficient:  You toggle twice, but
-you only paste once (YOPO).  Instead, press [op or ]op to invoke |o| or |O|
-with 'paste' already set.  Leaving insert mode sets 'nopaste' automatically.
+you only paste once (YOPO).  Instead, press [op, ]op, or yop to invoke |o|,
+|O|, or |0||C| with 'paste' already set.  Leaving insert mode sets 'nopaste'
+automatically.
 
 ENCODING AND DECODING                           *unimpaired-encoding*
 

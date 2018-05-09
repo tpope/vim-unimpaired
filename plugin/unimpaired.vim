@@ -311,7 +311,7 @@ call s:map('n', 'yo', ':<C-U>echoerr "Use ]op"<CR>', '<silent>')
 call s:map('n', 'yO', ':<C-U>echoerr "Use [op"<CR>', '<silent>')
 call s:map('n', '[op', ':call <SID>setup_paste()<CR>O', '<silent>')
 call s:map('n', ']op', ':call <SID>setup_paste()<CR>o', '<silent>')
-call s:map('n', 'yop', ':call <SID>setup_paste()<CR>A', '<silent>')
+call s:map('n', 'yop', ':call <SID>setup_paste()<CR>0C', '<silent>')
 
 " Section: Put
 
