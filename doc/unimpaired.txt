@@ -39,6 +39,8 @@ is "args" and for the "q" commands is "quickfix".
 *]t*     |:tnext|
 *[T*     |:tfirst|
 *]T*     |:tlast|
+*[<C-T>* |:ptprevious|
+*]<C-T>* |:ptnext|
 
                                                 *[f*
 [f                      Go to the file preceding the current one
