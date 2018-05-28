@@ -102,8 +102,8 @@ These are experimental:
 *=p*    Paste after linewise, reindenting.
 *=P*    Paste before linewise, reindenting.
 
-|]p| and |[p| have also been remapped to force linewise pasting, while
-preserving their usual indent matching behavior.
+|]p|, |[p|, |[P|, and |]P| have also been remapped to force linewise pasting,
+while preserving their usual indent matching behavior.
 
                                                 *[op* *]op* *yop*
 A toggle has not been provided for 'paste' because the typical use case of

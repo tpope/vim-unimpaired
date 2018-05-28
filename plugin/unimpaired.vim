@@ -341,6 +341,8 @@ nnoremap <silent> <Plug>unimpairedPutBelow :call <SID>putline(']p', 'Below')<CR>
 
 call s:map('n', '[p', '<Plug>unimpairedPutAbove')
 call s:map('n', ']p', '<Plug>unimpairedPutBelow')
+call s:map('n', '[P', '<Plug>unimpairedPutAbove')
+call s:map('n', ']P', '<Plug>unimpairedPutBelow')
 call s:map('n', '>P', ":call <SID>putline('[p', 'Above')<CR>>']", '<silent>')
 call s:map('n', '>p', ":call <SID>putline(']p', 'Below')<CR>>']", '<silent>')
 call s:map('n', '<P', ":call <SID>putline('[p', 'Above')<CR><']", '<silent>')
