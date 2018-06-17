@@ -291,9 +291,11 @@ endfunction
 
 if empty(maparg('co', 'n'))
   nmap <silent><expr> co <SID>legacy_option_map(nr2char(getchar()))
+  nnoremap cop <Nop>
 endif
 if empty(maparg('=o', 'n'))
   nmap <silent><expr> =o <SID>legacy_option_map(nr2char(getchar()))
+  nnoremap =op <Nop>
 endif
 
 function! s:setup_paste() abort
