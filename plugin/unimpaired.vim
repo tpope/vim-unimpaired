@@ -528,7 +528,7 @@ augroup unimpaired
   autocmd VimEnter * call s:maps()
 augroup END
 
-if !has('vim_starting')
+if get(v:, 'vim_did_enter', !has('vim_starting'))
   call s:maps()
 endif
 
