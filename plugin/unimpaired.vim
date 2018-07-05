@@ -512,6 +512,13 @@ function! UnimpairedMapTransform(algorithm, key) abort
   call s:map('n', a:key, '<Plug>unimpaired_'.a:algorithm)
   call s:map('x', a:key, '<Plug>unimpaired_'.a:algorithm)
   call s:map('n', a:key.a:key[strlen(a:key)-1], '<Plug>unimpaired_line_'.a:algorithm)
+  if a:key =~# '^\[\|^\]'
+    let key = tr(a:key, '[]', '<>')
+    call s:map('n', key, '<Plug>unimpaired_'.a:algorithm)
+    call s:map('x', key, '<Plug>unimpaired_'.a:algorithm)
+    call s:map('n', key.key[strlen(key)-1], '<Plug>unimpaired_line_'.a:algorithm)
+    call s:map('n', key.key[0], '<Plug>unimpaired_line_'.a:algorithm)
+  endif
 endfunction
 
 call UnimpairedMapTransform('string_encode','[y')
