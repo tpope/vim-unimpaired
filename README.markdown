@@ -58,8 +58,6 @@ The easiest solution is to map to `[` and `]` directly:
 Note we're not using the `noremap` family because we *do* want to recursively
 invoke unimpaired.vim's maps.
 
-See `:help unimpaired-customization` for more advanced options.
-
 ## Contributing
 
 See the contribution guidelines for
