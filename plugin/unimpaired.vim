@@ -284,6 +284,20 @@ call s:map('n', '[o+', ':set cursorline cursorcolumn<CR>')
 call s:map('n', ']o+', ':set nocursorline nocursorcolumn<CR>')
 call s:map('n', 'yo+', ':set <C-R>=<SID>cursor_options()<CR><CR>')
 
+function! s:legacy_option_map(letter) abort
+  let y = get(get(g:, 'nremap', {}), 'y', 'y')
+  return y . 'o' . a:letter . ':echo "Use ' . y . 'o' . a:letter . ' instead"' . "\<CR>"
+endfunction
+
+if empty(maparg('co', 'n'))
+  nmap <silent><expr> co <SID>legacy_option_map(nr2char(getchar()))
+  nnoremap cop <Nop>
+endif
+if empty(maparg('=o', 'n'))
+  nmap <silent><expr> =o <SID>legacy_option_map(nr2char(getchar()))
+  nnoremap =op <Nop>
+endif
+
 function! s:setup_paste() abort
   let s:paste = &paste
   let s:mouse = &mouse
