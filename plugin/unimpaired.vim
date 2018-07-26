@@ -10,7 +10,7 @@ let g:loaded_unimpaired = 1
 
 let s:maps = []
 function! s:map(...) abort
-  call add(s:maps, a:000)
+  call add(s:maps, copy(a:000))
 endfunction
 
 function! s:maps() abort
