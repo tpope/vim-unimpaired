@@ -179,14 +179,18 @@ endfunction
 " Section: Line operations
 
 function! s:BlankUp(count) abort
+  let l:col = col('.')
   put!=repeat(nr2char(10), a:count)
   ']+1
+  execute 'normal! ' . l:col . '|'
   silent! call repeat#set("\<Plug>unimpairedBlankUp", a:count)
 endfunction
 
 function! s:BlankDown(count) abort
+  let l:col = col('.')
   put =repeat(nr2char(10), a:count)
   '[-1
+  execute 'normal! ' . l:col . '|'
   silent! call repeat#set("\<Plug>unimpairedBlankDown", a:count)
 endfunction
 
