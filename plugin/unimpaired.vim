@@ -367,7 +367,18 @@ function! s:string_decode(str) abort
 endfunction
 
 function! s:url_encode(str) abort
-  return substitute(a:str,'[^A-Za-z0-9_.~-]','\="%".printf("%02X",char2nr(submatch(0)))','g')
+  let out = ''
+  let i = 0
+  while i < len(a:str)
+    let c = a:str[i]
+    if c =~# '[A-Za-z0-9_.~-]' || i == len(a:str) - 1 && c ==# "\n"
+      let out .= c
+    else
+      let out .= printf('%%%02X', char2nr(a:str[i]))
+    endif
+    let i += 1
+  endwhile
+  return out
 endfunction
 
 function! s:url_decode(str) abort
