@@ -108,8 +108,8 @@ while preserving their usual indent matching behavior.
                                                 *[op* *]op* *yop*
 A toggle has not been provided for 'paste' because the typical use case of
 wrapping of a solitary insertion is inefficient:  You toggle twice, but
-you only paste once (YOPO).  Instead, press [op, ]op, or yop to invoke |o|,
-|O|, or |0||C| with 'paste' already set.  Leaving insert mode sets 'nopaste'
+you only paste once (YOPO).  Instead, press [op, ]op, or yop to invoke |O|,
+|o|, or |0||C| with 'paste' already set.  Leaving insert mode sets 'nopaste'
 automatically.
 
 ENCODING AND DECODING                           *unimpaired-encoding*
