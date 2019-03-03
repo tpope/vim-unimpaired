@@ -134,16 +134,57 @@ call s:map('n', '[f', '<Plug>unimpairedDirectoryPrevious')
 
 call s:map('n', '[n', '<Plug>unimpairedContextPrevious')
 call s:map('n', ']n', '<Plug>unimpairedContextNext')
+call s:map('v', '[n', '<Plug>unimpairedContextPrevious')
+call s:map('v', ']n', '<Plug>unimpairedContextNext')
 call s:map('o', '[n', '<Plug>unimpairedContextPrevious')
 call s:map('o', ']n', '<Plug>unimpairedContextNext')
 
-nnoremap <silent> <Plug>unimpairedContextPrevious :call <SID>Context(1)<CR>
-nnoremap <silent> <Plug>unimpairedContextNext     :call <SID>Context(0)<CR>
+nnoremap <silent> <Plug>unimpairedContextPrevious :call <SID>Context(1, 0)<CR>
+nnoremap <silent> <Plug>unimpairedContextNext     :call <SID>Context(0, 0)<CR>
+vnoremap <silent> <Plug>unimpairedContextPrevious :<C-U>call <SID>Context(1, 1)<CR>
+vnoremap <silent> <Plug>unimpairedContextNext     :<C-U>call <SID>Context(0, 1)<CR>
 onoremap <silent> <Plug>unimpairedContextPrevious :call <SID>ContextMotion(1)<CR>
 onoremap <silent> <Plug>unimpairedContextNext     :call <SID>ContextMotion(0)<CR>
 
-function! s:Context(reverse) abort
-  call search('^\(@@ .* @@\|[<=>|]\{7}[<=>|]\@!\)', a:reverse ? 'bW' : 'W')
+" take note of where the cursor moves to in visual mode,
+" since calling `Context()` takes vim out of visual mode and moves
+" the cursor to the top of the selection
+let s:last_vcursor = v:null
+augroup unimpaired_context
+  autocmd!
+  autocmd CursorMoved *
+        \ if mode() =~? 'v' |
+        \   let s:last_vcursor = getcurpos() |
+        \ endif
+augroup END
+
+function! s:Context(reverse, visual) abort
+  let pattern = '^\(@@ .* @@\|[<=>|]\{7}[<=>|]\@!\)'
+  if a:visual
+    let vmode = visualmode()
+    " set cursor position to last visual position so that `search()`
+    " works with selected text
+    call setpos('.', s:last_vcursor)
+    let lnum = search(pattern, a:reverse ? 'nbW' : 'nW')
+    " take note if the cursor was on the top side of the selection or on the
+    " bottom when the user activated the mapping
+    let cursor_on_top = getpos("'<")[1] == s:last_vcursor[1]
+    execute 'normal! g`'.(cursor_on_top ? '>' : '<').vmode
+    if lnum > 0
+      execute 'normal! '.lnum.'G'
+    else
+      execute 'normal! g`'.(cursor_on_top ? '<' : '>').'0'
+      " if nothing found, do a bunch of trickery to restore the cursor to
+      " where it was
+      if s:last_vcursor[4] == 2147483647
+        normal! $
+      elseif s:last_vcursor[2] > 1
+        execute 'normal! '.(s:last_vcursor[2] - 1).'l'
+      endif
+    endif
+  else
+    call search(pattern, a:reverse ? 'bW' : 'W')
+  endif
 endfunction
 
 function! s:ContextMotion(reverse) abort
