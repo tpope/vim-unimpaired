@@ -173,14 +173,8 @@ function! s:Context(reverse, visual) abort
     if lnum > 0
       execute 'normal! '.lnum.'G'
     else
-      execute 'normal! g`'.(cursor_on_top ? '<' : '>').'0'
-      " if nothing found, do a bunch of trickery to restore the cursor to
-      " where it was
-      if s:last_vcursor[4] == 2147483647
-        normal! $
-      elseif s:last_vcursor[2] > 1
-        execute 'normal! '.(s:last_vcursor[2] - 1).'l'
-      endif
+      execute 'normal! g`'.(cursor_on_top ? '<' : '>')
+      call setpos('.', s:last_vcursor)
     endif
   else
     call search(pattern, a:reverse ? 'bW' : 'W')
