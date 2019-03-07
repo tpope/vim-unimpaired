@@ -178,6 +178,28 @@ endfunction
 
 " Section: Line operations
 
+function! s:DeleteUp(count) abort
+  normal! m`
+  silent! exe "normal! " . repeat(nr2char(107), a:count)
+  silent! exe "normal! " . repeat(nr2char(100), a:count * 2)
+  norm! ``
+  silent! call repeat#set("\<Plug>unimpairedDeleteUp", a:count)
+endfunction
+
+function! s:DeleteDown(count) abort
+  normal! m`
+  normal! j
+  silent! exe "normal! " . repeat(nr2char(100), a:count * 2)
+  norm! ``
+  silent! call repeat#set("\<Plug>unimpairedDeleteDown", a:count)
+endfunction
+
+nnoremap <silent> <Plug>unimpairedDeleteUp :<C-U>call <SID>DeleteUp(v:count1)<CR>
+nnoremap <silent> <Plug>unimpairedDeleteDown :<C-U>call <SID>DeleteDown(v:count1)<CR>
+
+call s:map('n', '[d', '<Plug>unimpairedDeleteUp')
+call s:map('n', ']d', '<Plug>unimpairedDeleteDown')
+
 function! s:BlankUp(count) abort
   put!=repeat(nr2char(10), a:count)
   ']+1
