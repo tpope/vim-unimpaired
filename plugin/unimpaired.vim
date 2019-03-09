@@ -451,6 +451,7 @@ function! s:xml_encode(str) abort
   let str = substitute(str,'<','\&lt;','g')
   let str = substitute(str,'>','\&gt;','g')
   let str = substitute(str,'"','\&quot;','g')
+  let str = substitute(str,"'",'\&apos;','g')
   return str
 endfunction
 
