@@ -332,8 +332,8 @@ function! s:putline(how, map) abort
     call setreg(v:register, body, 'l')
     exe 'normal! "'.v:register.a:how
     call setreg(v:register, body, type)
-    silent! call repeat#set("\<Plug>unimpairedPut".a:map)
   endif
+  silent! call repeat#set("\<Plug>unimpairedPut".a:map)
 endfunction
 
 nnoremap <silent> <Plug>unimpairedPutAbove :call <SID>putline('[p', 'Above')<CR>
