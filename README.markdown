@@ -37,7 +37,7 @@ Install using your favorite package manager, or use Vim's built-in package
 support:
 
     git clone https://tpope.io/vim/unimpaired.git ~/.vim/pack/tpope/start/unimpaired
-    vim -u NONE -c "helptags unimpaired/doc" -c q
+    vim -u NONE -c "helptags ~/.vim/pack/tpope/start/unimpaired/doc" -c q
 
 ## FAQ
 
