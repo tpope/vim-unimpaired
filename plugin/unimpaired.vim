@@ -289,11 +289,11 @@ function! s:legacy_option_map(letter) abort
   return y . 'o' . a:letter . ':echo "Use ' . y . 'o' . a:letter . ' instead"' . "\<CR>"
 endfunction
 
-if empty(maparg('co', 'n'))
+if empty(maparg('co', 'n')) && empty(maparg('c', 'n'))
   nmap <silent><expr> co <SID>legacy_option_map(nr2char(getchar()))
   nnoremap cop <Nop>
 endif
-if empty(maparg('=o', 'n'))
+if empty(maparg('=o', 'n')) && empty(maparg('=', 'n'))
   nmap <silent><expr> =o <SID>legacy_option_map(nr2char(getchar()))
   nnoremap =op <Nop>
 endif
