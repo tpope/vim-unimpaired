@@ -32,7 +32,7 @@ function! s:maps() abort
       let tail = matchstr(head, '<[^<>]*>$\|.$') . tail
       let head = substitute(head, '<[^<>]*>$\|.$', '', '')
     endwhile
-    if head !=# '<skip>' && (flags !~? '<unique>' || empty(maparg(head.tail, mode)))
+    if head !=# '<skip>' && empty(maparg(head.tail, mode))
       exe mode.'map' flags head.tail rhs
     endif
   endfor
@@ -339,8 +339,8 @@ endfunction
 nnoremap <silent> <Plug>unimpairedPutAbove :call <SID>putline('[p', 'Above')<CR>
 nnoremap <silent> <Plug>unimpairedPutBelow :call <SID>putline(']p', 'Below')<CR>
 
-call s:map('n', '[p', '<Plug>unimpairedPutAbove', '<unique>')
-call s:map('n', ']p', '<Plug>unimpairedPutBelow', '<unique>')
+call s:map('n', '[p', '<Plug>unimpairedPutAbove')
+call s:map('n', ']p', '<Plug>unimpairedPutBelow')
 call s:map('n', '[P', '<Plug>unimpairedPutAbove')
 call s:map('n', ']P', '<Plug>unimpairedPutBelow')
 call s:map('n', '>P', ":call <SID>putline('[p', 'Above')<CR>>']", '<silent>')
