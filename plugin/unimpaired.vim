@@ -343,12 +343,12 @@ call s:map('n', '[p', '<Plug>unimpairedPutAbove')
 call s:map('n', ']p', '<Plug>unimpairedPutBelow')
 call s:map('n', '[P', '<Plug>unimpairedPutAbove')
 call s:map('n', ']P', '<Plug>unimpairedPutBelow')
-call s:map('n', '>P', ":call <SID>putline('[p', 'Above')<CR>>']", '<silent>')
-call s:map('n', '>p', ":call <SID>putline(']p', 'Below')<CR>>']", '<silent>')
-call s:map('n', '<P', ":call <SID>putline('[p', 'Above')<CR><']", '<silent>')
-call s:map('n', '<p', ":call <SID>putline(']p', 'Below')<CR><']", '<silent>')
-call s:map('n', '=P', ":call <SID>putline('[p', 'Above')<CR>=']", '<silent>')
-call s:map('n', '=p', ":call <SID>putline(']p', 'Below')<CR>=']", '<silent>')
+call s:map('n', '>P', ":<C-U>call <SID>putline(v:count1 . '[p', 'Above')<CR>>']", '<silent>')
+call s:map('n', '>p', ":<C-U>call <SID>putline(v:count1 . ']p', 'Below')<CR>>']", '<silent>')
+call s:map('n', '<P', ":<C-U>call <SID>putline(v:count1 . '[p', 'Above')<CR><']", '<silent>')
+call s:map('n', '<p', ":<C-U>call <SID>putline(v:count1 . ']p', 'Below')<CR><']", '<silent>')
+call s:map('n', '=P', ":<C-U>call <SID>putline(v:count1 . '[p', 'Above')<CR>=']", '<silent>')
+call s:map('n', '=p', ":<C-U>call <SID>putline(v:count1 . ']p', 'Below')<CR>=']", '<silent>')
 
 " Section: Encoding and decoding
 
