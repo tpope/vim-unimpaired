@@ -134,13 +134,17 @@ call s:map('n', '[f', '<Plug>unimpairedDirectoryPrevious')
 
 call s:map('n', '[n', '<Plug>unimpairedContextPrevious')
 call s:map('n', ']n', '<Plug>unimpairedContextNext')
+call s:map('x', '[n', '<Plug>unimpairedContextPrevious')
+call s:map('x', ']n', '<Plug>unimpairedContextNext')
 call s:map('o', '[n', '<Plug>unimpairedContextPrevious')
 call s:map('o', ']n', '<Plug>unimpairedContextNext')
 
-nnoremap <silent> <Plug>unimpairedContextPrevious :call <SID>Context(1)<CR>
-nnoremap <silent> <Plug>unimpairedContextNext     :call <SID>Context(0)<CR>
-onoremap <silent> <Plug>unimpairedContextPrevious :call <SID>ContextMotion(1)<CR>
-onoremap <silent> <Plug>unimpairedContextNext     :call <SID>ContextMotion(0)<CR>
+nnoremap <silent> <Plug>unimpairedContextPrevious :<C-U>call <SID>Context(1)<CR>
+nnoremap <silent> <Plug>unimpairedContextNext     :<C-U>call <SID>Context(0)<CR>
+xnoremap <silent> <Plug>unimpairedContextPrevious :<C-U>exe 'normal! gv'<Bar>call <SID>Context(1)<CR>
+xnoremap <silent> <Plug>unimpairedContextNext     :<C-U>exe 'normal! gv'<Bar>call <SID>Context(0)<CR>
+onoremap <silent> <Plug>unimpairedContextPrevious :<C-U>call <SID>ContextMotion(1)<CR>
+onoremap <silent> <Plug>unimpairedContextNext     :<C-U>call <SID>ContextMotion(0)<CR>
 
 function! s:Context(reverse) abort
   call search('^\(@@ .* @@\|[<=>|]\{7}[<=>|]\@!\)', a:reverse ? 'bW' : 'W')
