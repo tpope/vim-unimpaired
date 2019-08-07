@@ -141,6 +141,12 @@ nnoremap <silent> <Plug>unimpairedContextPrevious :call <SID>Context(1)<CR>
 nnoremap <silent> <Plug>unimpairedContextNext     :call <SID>Context(0)<CR>
 onoremap <silent> <Plug>unimpairedContextPrevious :call <SID>ContextMotion(1)<CR>
 onoremap <silent> <Plug>unimpairedContextNext     :call <SID>ContextMotion(0)<CR>
+if has('nvim-0.3.0')
+  call s:map('v', '[n', '<Plug>unimpairedContextPrevious')
+  call s:map('v', ']n', '<Plug>unimpairedContextNext')
+  vnoremap <silent> <Plug>unimpairedContextPrevious <Cmd>call <SID>Context(1)<CR>
+  vnoremap <silent> <Plug>unimpairedContextNext     <Cmd>call <SID>Context(0)<CR>
+endif
 
 function! s:Context(reverse) abort
   call search('^\(@@ .* @@\|[<=>|]\{7}[<=>|]\@!\)', a:reverse ? 'bW' : 'W')
