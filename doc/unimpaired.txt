@@ -85,6 +85,7 @@ On	Off	Toggle	Option
 *[ol*	*]ol*	*yol*	'list'
 *[on*	*]on*	*yon*	'number'
 *[or*	*]or*	*yor*	'relativenumber'
+*[ot*	*]ot*	*yot*	'colorcolumn'+=+1 (colored column at `t`extwidth+1)
 *[ou*	*]ou*	*you*	'cursorcolumn'
 *[ov*	*]ov*	*yov*	'virtualedit'
 *[ow*	*]ow*	*yow*	'wrap'
