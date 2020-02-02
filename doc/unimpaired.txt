@@ -39,6 +39,10 @@ is "args" and for the "q" commands is "quickfix".
 *]t*     |:tnext|
 *[T*     |:tfirst|
 *]T*     |:tlast|
+*[z*     |:tabprevious|
+*]z*     |:tabnext|
+*[Z*     |:tabfirst|
+*]Z*     |:tablast|
 *[<C-T>* |:ptprevious|
 *]<C-T>* |:ptnext|
 
