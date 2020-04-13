@@ -221,17 +221,19 @@ endfunction
 function! s:MoveSelectionUp(count) abort
   call s:ExecMove("'<,'>move'<--".a:count)
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionUp", a:count)
+  normal! gv
 endfunction
 
 function! s:MoveSelectionDown(count) abort
   call s:ExecMove("'<,'>move'>+".a:count)
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionDown", a:count)
+  normal! gv
 endfunction
 
 nnoremap <silent> <Plug>unimpairedMoveUp            :<C-U>call <SID>Move('--',v:count1,'Up')<CR>
 nnoremap <silent> <Plug>unimpairedMoveDown          :<C-U>call <SID>Move('+',v:count1,'Down')<CR>
-noremap  <silent> <Plug>unimpairedMoveSelectionUp   :<C-U>call <SID>MoveSelectionUp(v:count1)<Bar>exe 'normal! gv'<CR>
-noremap  <silent> <Plug>unimpairedMoveSelectionDown :<C-U>call <SID>MoveSelectionDown(v:count1)<Bar>exe 'normal! gv'<CR>
+noremap  <silent> <Plug>unimpairedMoveSelectionUp   :<C-U>call <SID>MoveSelectionUp(v:count1)<CR>
+noremap  <silent> <Plug>unimpairedMoveSelectionDown :<C-U>call <SID>MoveSelectionDown(v:count1)<CR>
 
 call s:map('n', '[e', '<Plug>unimpairedMoveUp')
 call s:map('n', ']e', '<Plug>unimpairedMoveDown')
