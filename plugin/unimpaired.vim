@@ -21,7 +21,7 @@ function! s:maps() abort
     if type(keys) != type({})
       continue
     endif
-    while !empty(head)
+    while !empty(head) && len(keys)
       if has_key(keys, head)
         let head = keys[head]
         if empty(head)
