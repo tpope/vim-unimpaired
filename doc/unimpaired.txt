@@ -58,6 +58,13 @@ is "args" and for the "q" commands is "quickfix".
 ]n                      Go to the next SCM conflict marker or diff/patch hunk.
                         Try d]n inside a conflict.
 
+NEWER AND OLDER                                 *unimpaired-newer*
+
+*<q*     |:colder|
+*>q*     |:cnewer|
+*<l*     |:lolder|
+*>l*     |:lnewer|
+
 LINE OPERATIONS                                 *unimpaired-lines*
 
                                                 *[<Space>*
