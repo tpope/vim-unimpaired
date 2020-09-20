@@ -371,8 +371,13 @@ function! s:string_decode(str) abort
 endfunction
 
 function! s:url_encode(str) abort
-  " iconv trick to convert utf-8 bytes to 8bits indiviual char.
+  " iconv trick to convert utf-8 bytes to 8bits individual char.
   return substitute(iconv(a:str, 'latin1', 'utf-8'),'[^A-Za-z0-9_.~-]','\="%".printf("%02X",char2nr(submatch(0)))','g')
+endfunction
+
+function! s:url_encode_all(str) abort
+  " iconv trick to convert utf-8 bytes to 8bits individual char.
+  return substitute(iconv(a:str, 'latin1', 'utf-8'),'.','\="%".printf("%02X",char2nr(submatch(0)))','g')
 endfunction
 
 function! s:url_decode(str) abort
@@ -521,6 +526,7 @@ endfunction
 call UnimpairedMapTransform('string_encode','[y')
 call UnimpairedMapTransform('string_decode',']y')
 call UnimpairedMapTransform('url_encode','[u')
+call UnimpairedMapTransform('url_encode_all','[U')
 call UnimpairedMapTransform('url_decode',']u')
 call UnimpairedMapTransform('xml_encode','[x')
 call UnimpairedMapTransform('xml_decode',']x')

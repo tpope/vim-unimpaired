@@ -131,9 +131,16 @@ Mnemonic: encoding always comes before decoding; "[" always comes before "]".
 {Visual}]x
 
                                                 *[u* *[uu* *v_[u*
-[u{motion}              URL encode.
+[u{motion}              URL (percent) encode. This only encodes characters which are
+                        reserved in a URL.
 [uu                     foo bar => foo%20bar
 {Visual}[u
+
+                                                *[U* *[UU* *v_[U*
+[U{motion}              URL (percent) encode _all_ characters, regardless of whether
+                        they are reserved or unreserved in a URL.
+[UU                     foo bar => %66%6F%6F%20%62%61%72%
+{Visual}[U
 
                                                 *]u* *]uu* *v_]u*
 ]u{motion}              URL decode.
