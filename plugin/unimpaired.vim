@@ -65,11 +65,13 @@ function! s:MapNextFamily(map,cmd) abort
   endif
 endfunction
 
-call s:MapNextFamily('a','')
-call s:MapNextFamily('b','b')
-call s:MapNextFamily('l','l')
-call s:MapNextFamily('q','c')
-call s:MapNextFamily('t','t')
+let s:np_maps = { 'a': '', 'b': 'b', 'l': 'l', 'q': 'c', 't': 't' }
+if exists("g:unimpaired_np_maps")
+  call extend(s:np_maps, g:unimpaired_np_maps)
+endif
+for [key, map] in items(s:np_maps)
+  call s:MapNextFamily(key,map)
+endfor
 
 function! s:entries(path) abort
   let path = substitute(a:path,'[\\/]$','','')
