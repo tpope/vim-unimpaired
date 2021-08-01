@@ -183,15 +183,23 @@ endfunction
 " Section: Line operations
 
 function! s:BlankUp(count) abort
-  put!=repeat(nr2char(10), a:count)
-  ']+1
-  silent! call repeat#set("\<Plug>unimpairedBlankUp", a:count)
+  if !&modifiable
+    echo "File is not modifiable."
+  else
+    put!=repeat(nr2char(10), a:count)
+    ']+1
+    silent! call repeat#set("\<Plug>unimpairedBlankUp", a:count)
+  endif
 endfunction
 
 function! s:BlankDown(count) abort
-  put =repeat(nr2char(10), a:count)
-  '[-1
-  silent! call repeat#set("\<Plug>unimpairedBlankDown", a:count)
+  if !&modifiable
+    echo "File is not modifiable."
+  else
+    put =repeat(nr2char(10), a:count)
+    '[-1
+    silent! call repeat#set("\<Plug>unimpairedBlankDown", a:count)
+  endif
 endfunction
 
 nnoremap <silent> <Plug>unimpairedBlankUp   :<C-U>call <SID>BlankUp(v:count1)<CR>
