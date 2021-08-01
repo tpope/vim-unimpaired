@@ -182,20 +182,24 @@ endfunction
 
 " Section: Line operations
 
-function! s:BlankUp(count) abort
-  put!=repeat(nr2char(10), a:count)
-  ']+1
-  silent! call repeat#set("\<Plug>unimpairedBlankUp", a:count)
+function! s:BlankUp() abort
+  let cmd = 'put!=repeat(nr2char(10), v:count1)|silent '']+'
+  if &modifiable
+    let cmd .= '|silent! call repeat#set("\<Plug>unimpairedBlankUp", v:count1)'
+  endif
+  return cmd
 endfunction
 
-function! s:BlankDown(count) abort
-  put =repeat(nr2char(10), a:count)
-  '[-1
-  silent! call repeat#set("\<Plug>unimpairedBlankDown", a:count)
+function! s:BlankDown() abort
+  let cmd = 'put =repeat(nr2char(10), v:count1)|silent ''[-'
+  if &modifiable
+    let cmd .= '|silent! call repeat#set("\<Plug>unimpairedBlankDown", v:count1)'
+  endif
+  return cmd
 endfunction
 
-nnoremap <silent> <Plug>unimpairedBlankUp   :<C-U>call <SID>BlankUp(v:count1)<CR>
-nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>call <SID>BlankDown(v:count1)<CR>
+nnoremap <silent> <Plug>unimpairedBlankUp   :<C-U>exe <SID>BlankUp()<CR>
+nnoremap <silent> <Plug>unimpairedBlankDown :<C-U>exe <SID>BlankDown()<CR>
 
 call s:map('n', '[<Space>', '<Plug>unimpairedBlankUp')
 call s:map('n', ']<Space>', '<Plug>unimpairedBlankDown')
