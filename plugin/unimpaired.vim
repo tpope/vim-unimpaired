@@ -81,7 +81,7 @@ function! s:entries(path) abort
   let filter_suffixes = substitute(escape(&suffixes, '~.*$^'), ',', '$\\|', 'g') .'$'
   call filter(files, 'v:val !~# filter_suffixes')
 
-  return files
+  return sort(files)
 endfunction
 
 function! s:FileByOffset(num) abort
@@ -93,9 +93,9 @@ function! s:FileByOffset(num) abort
   while num
     let files = s:entries(fnamemodify(file,':h'))
     if a:num < 0
-      call reverse(sort(filter(files,'v:val <# file')))
+      call reverse(filter(files,'v:val <# file'))
     else
-      call sort(filter(files,'v:val ># file'))
+      call filter(files,'v:val ># file')
     endif
     let temp = get(files,0,'')
     if empty(temp)
