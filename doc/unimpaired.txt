@@ -88,6 +88,7 @@ On	Off	Toggle	Option
 *[ov*	*]ov*	*yov*	'virtualedit'
 *[ow*	*]ow*	*yow*	'wrap'
 *[ox*	*]ox*	*yox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
+*[oy*	*]oy*	*yoy*	'syntax'
 
 The mnemonic for y is that if you tilt it a bit it looks like a switch.
 
