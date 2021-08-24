@@ -78,6 +78,7 @@ On	Off	Toggle	Option
 *[ob*	*]ob*	*yob*	'background' (dark is off, light is on)
 *[oc*	*]oc*	*yoc*	'cursorline'
 *[od*	*]od*	*yod*	'diff' (actually |:diffthis| / |:diffoff|)
+*[oe*	*]oe*	*yoe*	'conceallevel' (|[oe| and |]oe| cycle conceallevel)
 *[oh*	*]oh*	*yoh*	'hlsearch'
 *[oi*	*]oi*	*yoi*	'ignorecase'
 *[ol*	*]ol*	*yol*	'list'
