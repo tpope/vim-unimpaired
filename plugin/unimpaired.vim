@@ -126,28 +126,24 @@ function! s:fnameescape(file) abort
 endfunction
 
 function! s:PreviousFileEntry(count) abort
-  if &filetype == 'qf'
-    let window = getwininfo(win_getid())[0]
+  let window = getwininfo(win_getid())[0]
 
-    if window.quickfix
-      execute 'colder ' . a:count
-    elseif window.loclist
-      execute 'lolder ' . a:count
-    endif
+  if window.quickfix
+    execute 'colder ' . a:count
+  elseif window.loclist
+    execute 'lolder ' . a:count
   else
     execute 'edit ' . <SID>fnameescape(fnamemodify(<SID>FileByOffset(-v:count1), ':.'))
   endif
 endfunction
 
 function! s:NextFileEntry(count) abort
-  if &filetype == 'qf'
-    let window = getwininfo(win_getid())[0]
+  let window = getwininfo(win_getid())[0]
 
-    if window.quickfix
-      execute 'cnewer ' . a:count
-    elseif window.loclist
-      execute 'cnewer ' . a:count
-    endif
+  if window.quickfix
+    execute 'cnewer ' . a:count
+  elseif window.loclist
+    execute 'cnewer ' . a:count
   else
     execute 'edit ' . <SID>fnameescape(fnamemodify(<SID>FileByOffset(v:count1), ':.'))
   endif
