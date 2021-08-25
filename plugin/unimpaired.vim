@@ -138,7 +138,11 @@ function! s:PreviousFileEntry(count) abort
 endfunction
 
 function! s:NextFileEntry(count) abort
-  let window = getwininfo(win_getid())[0]
+  if exists('*getwininfo') && exists('*win_getid')
+    let window = getwininfo(win_getid())[0]
+  else
+    let window = {}
+  endif
 
   if get(window, 'quickfix')
     return 'cnewer ' . a:count
