@@ -126,11 +126,15 @@ function! s:fnameescape(file) abort
 endfunction
 
 function! s:PreviousFileEntry(count) abort
-  let window = getwininfo(win_getid())[0]
+  if exists('*getwininfo') && exists('*win_getid')
+    let window = getwininfo(win_getid())[0]
+  else
+    let window = {}
+  endif
 
-  if window.quickfix
+  if get(window, 'quickfix')
     return 'colder ' . a:count
-  elseif window.loclist
+  elseif get(window, 'loclist')
     return 'lolder ' . a:count
   else
     return 'edit ' . <SID>fnameescape(fnamemodify(<SID>FileByOffset(-v:count1), ':.'))
