@@ -151,7 +151,7 @@ function! s:NextFileEntry(count) abort
   if get(window, 'quickfix')
     return 'cnewer ' . a:count
   elseif get(window, 'loclist')
-    return 'cnewer ' . a:count
+    return 'lnewer ' . a:count
   else
     return 'edit ' . <SID>fnameescape(fnamemodify(<SID>FileByOffset(v:count1), ':.'))
   endif
