@@ -140,9 +140,9 @@ endfunction
 function! s:NextFileEntry(count) abort
   let window = getwininfo(win_getid())[0]
 
-  if has_key(window, 'quickfix') && window.quickfix
+  if get(window, 'quickfix')
     return 'cnewer ' . a:count
-  elseif has_key(window, 'loclist') && window.loclist
+  elseif get(window, 'loclist')
     return 'cnewer ' . a:count
   else
     return 'edit ' . <SID>fnameescape(fnamemodify(<SID>FileByOffset(v:count1), ':.'))
