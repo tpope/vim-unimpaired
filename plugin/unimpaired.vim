@@ -125,8 +125,40 @@ function! s:fnameescape(file) abort
   endif
 endfunction
 
-nnoremap <silent> <Plug>unimpairedDirectoryNext     :<C-U>edit <C-R>=<SID>fnameescape(fnamemodify(<SID>FileByOffset(v:count1), ':.'))<CR><CR>
-nnoremap <silent> <Plug>unimpairedDirectoryPrevious :<C-U>edit <C-R>=<SID>fnameescape(fnamemodify(<SID>FileByOffset(-v:count1), ':.'))<CR><CR>
+function! s:GetWindow() abort
+  if exists('*getwininfo') && exists('*win_getid')
+    return get(getwininfo(win_getid()), 0, {})
+  else
+    return {}
+  endif
+endfunction
+
+function! s:PreviousFileEntry(count) abort
+  let window = s:GetWindow()
+
+  if get(window, 'quickfix')
+    return 'colder ' . a:count
+  elseif get(window, 'loclist')
+    return 'lolder ' . a:count
+  else
+    return 'edit ' . s:fnameescape(fnamemodify(s:FileByOffset(-v:count1), ':.'))
+  endif
+endfunction
+
+function! s:NextFileEntry(count) abort
+  let window = s:GetWindow()
+
+  if get(window, 'quickfix')
+    return 'cnewer ' . a:count
+  elseif get(window, 'loclist')
+    return 'lnewer ' . a:count
+  else
+    return 'edit ' . s:fnameescape(fnamemodify(s:FileByOffset(v:count1), ':.'))
+  endif
+endfunction
+
+nnoremap <silent> <Plug>unimpairedDirectoryNext     :<C-U>execute <SID>NextFileEntry(v:count1)<CR>
+nnoremap <silent> <Plug>unimpairedDirectoryPrevious :<C-U>execute <SID>PreviousFileEntry(v:count1)<CR>
 call s:map('n', ']f', '<Plug>unimpairedDirectoryNext')
 call s:map('n', '[f', '<Plug>unimpairedDirectoryPrevious')
 
