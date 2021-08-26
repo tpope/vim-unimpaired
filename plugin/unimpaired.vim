@@ -125,7 +125,7 @@ function! s:fnameescape(file) abort
   endif
 endfunction
 
-function! s:get_window() abort
+function! s:GetWindow() abort
   if exists('*getwininfo') && exists('*win_getid')
     return getwininfo(win_getid())[0]
   else
@@ -134,7 +134,7 @@ function! s:get_window() abort
 endfunction
 
 function! s:PreviousFileEntry(count) abort
-  let window = s:get_window()
+  let window = s:GetWindow()
 
   if get(window, 'quickfix')
     return 'colder ' . a:count
@@ -146,7 +146,7 @@ function! s:PreviousFileEntry(count) abort
 endfunction
 
 function! s:NextFileEntry(count) abort
-  let window = s:get_window()
+  let window = s:GetWindow()
 
   if get(window, 'quickfix')
     return 'cnewer ' . a:count
