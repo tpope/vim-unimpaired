@@ -127,7 +127,7 @@ endfunction
 
 function! s:GetWindow() abort
   if exists('*getwininfo') && exists('*win_getid')
-    return getwininfo(win_getid())[0]
+    return get(getwininfo(win_getid()), 0, {})
   else
     return {}
   endif
