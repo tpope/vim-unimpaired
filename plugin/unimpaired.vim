@@ -141,7 +141,7 @@ function! s:PreviousFileEntry(count) abort
   elseif get(window, 'loclist')
     return 'lolder ' . a:count
   else
-    return 'edit ' . <SID>fnameescape(fnamemodify(<SID>FileByOffset(-v:count1), ':.'))
+    return 'edit ' . s:fnameescape(fnamemodify(s:FileByOffset(-v:count1), ':.'))
   endif
 endfunction
 
@@ -153,7 +153,7 @@ function! s:NextFileEntry(count) abort
   elseif get(window, 'loclist')
     return 'lnewer ' . a:count
   else
-    return 'edit ' . <SID>fnameescape(fnamemodify(<SID>FileByOffset(v:count1), ':.'))
+    return 'edit ' . s:fnameescape(fnamemodify(s:FileByOffset(v:count1), ':.'))
   endif
 endfunction
 
