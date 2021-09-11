@@ -11,6 +11,7 @@ let g:loaded_unimpaired = 1
 let s:maps = []
 function! s:map(...) abort
   call add(s:maps, copy(a:000))
+  return ''
 endfunction
 
 function! s:maps() abort
@@ -276,37 +277,37 @@ call s:map('x', ']e', '<Plug>unimpairedMoveSelectionDown')
 
 " Section: Option toggling
 
-function! s:statusbump() abort
+function! s:StatuslineRefresh() abort
   let &l:readonly = &l:readonly
   return ''
 endfunction
 
-function! s:toggle(op) abort
-  call s:statusbump()
+function! s:Toggle(op) abort
+  call s:StatuslineRefresh()
   return eval('&'.a:op) ? 'no'.a:op : a:op
 endfunction
 
-function! s:cursor_options() abort
+function! s:CursorOptions() abort
   return &cursorline && &cursorcolumn ? 'nocursorline nocursorcolumn' : 'cursorline cursorcolumn'
 endfunction
 
 function! s:option_map(letter, option, mode) abort
-  call s:map('n', '[o'.a:letter, ':'.a:mode.' '.a:option.'<C-R>=<SID>statusbump()<CR><CR>')
-  call s:map('n', ']o'.a:letter, ':'.a:mode.' no'.a:option.'<C-R>=<SID>statusbump()<CR><CR>')
-  call s:map('n', 'yo'.a:letter, ':'.a:mode.' <C-R>=<SID>toggle("'.a:option.'")<CR><CR>')
+  exe 'nmap <script> <Plug>(unimpaired-enable)' .a:letter ':<C-U>'.a:mode.' '.a:option.'<C-R>=<SID>StatuslineRefresh()<CR><CR>'
+  exe 'nmap <script> <Plug>(unimpaired-disable)'.a:letter ':<C-U>'.a:mode.' no'.a:option.'<C-R>=<SID>StatuslineRefresh()<CR><CR>'
+  exe 'nmap <script> <Plug>(unimpaired-toggle)' .a:letter ':<C-U>'.a:mode.' <C-R>=<SID>Toggle("'.a:option.'")<CR><CR>'
 endfunction
 
-call s:map('n', '[ob', ':set background=light<CR>')
-call s:map('n', ']ob', ':set background=dark<CR>')
-call s:map('n', 'yob', ':set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><CR>')
+nmap <script> <Plug>(unimpaired-enable)b  :<C-U>set background=light<CR>
+nmap <script> <Plug>(unimpaired-disable)b :<C-U>set background=dark<CR>
+nmap <script> <Plug>(unimpaired-toggle)b  :<C-U>set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><CR>
 call s:option_map('c', 'cursorline', 'setlocal')
 call s:option_map('-', 'cursorline', 'setlocal')
 call s:option_map('_', 'cursorline', 'setlocal')
 call s:option_map('u', 'cursorcolumn', 'setlocal')
 call s:option_map('<Bar>', 'cursorcolumn', 'setlocal')
-call s:map('n', '[od', ':diffthis<CR>')
-call s:map('n', ']od', ':diffoff<CR>')
-call s:map('n', 'yod', ':<C-R>=&diff ? "diffoff" : "diffthis"<CR><CR>')
+nmap <script> <Plug>(unimpaired-enable)d  :<C-U>diffthis<CR>
+nmap <script> <Plug>(unimpaired-disable)d :<C-U>diffoff<CR>
+nmap <script> <Plug>(unimpaired-toggle)d  :<C-U><C-R>=&diff ? "diffoff" : "diffthis"<CR><CR>
 call s:option_map('h', 'hlsearch', 'set')
 call s:option_map('i', 'ignorecase', 'set')
 call s:option_map('l', 'list', 'setlocal')
@@ -314,17 +315,21 @@ call s:option_map('n', 'number', 'setlocal')
 call s:option_map('r', 'relativenumber', 'setlocal')
 call s:option_map('s', 'spell', 'setlocal')
 call s:option_map('w', 'wrap', 'setlocal')
-call s:map('n', '[ov', ':set virtualedit+=all<CR>')
-call s:map('n', ']ov', ':set virtualedit-=all<CR>')
-call s:map('n', 'yov', ':set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all" : "virtualedit+=all"<CR><CR>')
-call s:map('n', '[ox', ':set cursorline cursorcolumn<CR>')
-call s:map('n', ']ox', ':set nocursorline nocursorcolumn<CR>')
-call s:map('n', 'yox', ':set <C-R>=<SID>cursor_options()<CR><CR>')
-call s:map('n', '[o+', ':set cursorline cursorcolumn<CR>')
-call s:map('n', ']o+', ':set nocursorline nocursorcolumn<CR>')
-call s:map('n', 'yo+', ':set <C-R>=<SID>cursor_options()<CR><CR>')
+nmap <script> <Plug>(unimpaired-enable)v  :<C-U>set virtualedit+=all<CR>
+nmap <script> <Plug>(unimpaired-disable)v :<C-U>set virtualedit-=all<CR>
+nmap <script> <Plug>(unimpaired-toggle)v  :<C-U>set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all" : "virtualedit+=all"<CR><CR>
+nmap <script> <Plug>(unimpaired-enable)x  :<C-U>set cursorline cursorcolumn<CR>
+nmap <script> <Plug>(unimpaired-disable)x :<C-U>set nocursorline nocursorcolumn<CR>
+nmap <script> <Plug>(unimpaired-toggle)x  :<C-U>set <C-R>=<SID>CursorOptions()<CR><CR>
+nmap <script> <Plug>(unimpaired-enable)+  :<C-U>set cursorline cursorcolumn<CR>
+nmap <script> <Plug>(unimpaired-disable)+ :<C-U>set nocursorline nocursorcolumn<CR>
+nmap <script> <Plug>(unimpaired-toggle)+  :<C-U>set <C-R>=<SID>CursorOptions()<CR><CR>
 
-function! s:setup_paste() abort
+exe s:map('n', 'yo', '<Plug>(unimpaired-toggle)')
+exe s:map('n', '[o', '<Plug>(unimpaired-enable)')
+exe s:map('n', ']o', '<Plug>(unimpaired-disable)')
+
+function! s:SetupPaste() abort
   let s:paste = &paste
   let s:mouse = &mouse
   set paste
@@ -342,11 +347,12 @@ function! s:setup_paste() abort
   augroup END
 endfunction
 
-nnoremap <silent> <Plug>unimpairedPaste :call <SID>setup_paste()<CR>
+nnoremap <silent> <Plug>unimpairedPaste :call <SID>SetupPaste()<CR>
+nmap <script><silent> <Plug>(unimpaired-paste) :<C-U>call <SID>SetupPaste()<CR>
 
-call s:map('n', '[op', ':call <SID>setup_paste()<CR>O', '<silent>')
-call s:map('n', ']op', ':call <SID>setup_paste()<CR>o', '<silent>')
-call s:map('n', 'yop', ':call <SID>setup_paste()<CR>0C', '<silent>')
+nmap <script><silent> <Plug>(unimpaired-enable)p  :<C-U>call <SID>SetupPaste()<CR>O
+nmap <script><silent> <Plug>(unimpaired-disable)p :<C-U>call <SID>SetupPaste()<CR>o
+nmap <script><silent> <Plug>(unimpaired-toggle)p  :<C-U>call <SID>SetupPaste()<CR>0C
 
 " Section: Put
 
