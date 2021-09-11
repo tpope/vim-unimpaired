@@ -44,11 +44,13 @@ is "args" and for the "q" commands is "quickfix".
 
                                                 *[f*
 [f                      Go to the file preceding the current one
-                        alphabetically in the current file's directory.
+                        alphabetically in the current file's directory.  In
+                        the quickfix window, equivalent to |:colder|.
 
                                                 *]f*
 ]f                      Go to the file succeeding the current one
-                        alphabetically in the current file's directory.
+                        alphabetically in the current file's directory.  In
+                        the quickfix window, equivalent to |:cnewer|.
 
                                                 *[n*
 [n                      Go to the previous SCM conflict marker or diff/patch
