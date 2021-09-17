@@ -554,22 +554,27 @@ function! s:TransformSetup(algorithm) abort
 endfunction
 
 function! UnimpairedMapTransform(algorithm, key) abort
+  let name = tr(a:algorithm, '_', '-')
   exe 'nnoremap <expr> <Plug>unimpaired_'    .a:algorithm.' <SID>TransformSetup("'.a:algorithm.'")'
   exe 'xnoremap <expr> <Plug>unimpaired_'    .a:algorithm.' <SID>TransformSetup("'.a:algorithm.'")'
   exe 'nnoremap <expr> <Plug>unimpaired_line_'.a:algorithm.' <SID>TransformSetup("'.a:algorithm.'")."_"'
-  call s:map('n', a:key, '<Plug>unimpaired_'.a:algorithm)
-  call s:map('x', a:key, '<Plug>unimpaired_'.a:algorithm)
-  call s:map('n', a:key.a:key[strlen(a:key)-1], '<Plug>unimpaired_line_'.a:algorithm)
+  exe 'nnoremap <expr> <Plug>(unimpaired-' . name . ') <SID>TransformSetup("'.a:algorithm.'")'
+  exe 'xnoremap <expr> <Plug>(unimpaired-' . name . ') <SID>TransformSetup("'.a:algorithm.'")'
+  exe 'nnoremap <expr> <Plug>(unimpaired-' . name . '-line) <SID>TransformSetup("'.a:algorithm.'")."_"'
+  exe s:Map('n', a:key, '<Plug>(unimpaired-' . name . ')')
+  exe s:Map('x', a:key, '<Plug>(unimpaired-' . name . ')')
+  exe s:Map('n', a:key.a:key[strlen(a:key)-1], '<Plug>(unimpaired-' . name . '-line)')
+  return ''
 endfunction
 
-call UnimpairedMapTransform('string_encode','[y')
-call UnimpairedMapTransform('string_decode',']y')
-call UnimpairedMapTransform('string_encode','[C')
-call UnimpairedMapTransform('string_decode',']C')
-call UnimpairedMapTransform('url_encode','[u')
-call UnimpairedMapTransform('url_decode',']u')
-call UnimpairedMapTransform('xml_encode','[x')
-call UnimpairedMapTransform('xml_decode',']x')
+exe UnimpairedMapTransform('string_encode','[y')
+exe UnimpairedMapTransform('string_decode',']y')
+exe UnimpairedMapTransform('string_encode','[C')
+exe UnimpairedMapTransform('string_decode',']C')
+exe UnimpairedMapTransform('url_encode','[u')
+exe UnimpairedMapTransform('url_decode',']u')
+exe UnimpairedMapTransform('xml_encode','[x')
+exe UnimpairedMapTransform('xml_decode',']x')
 
 " Section: Activation
 
