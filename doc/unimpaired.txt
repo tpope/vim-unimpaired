@@ -142,14 +142,20 @@ Mnemonic: encoding always comes before decoding; "[" always comes before "]".
 ]uu
 {Visual}]u
 
-                                                *[y* *[yy* *v_[y*
+                                        *[y* *[yy* *v_[y* *[C* *[CC* *v_[C*
 [y{motion}              C String encode.  Backslash escape control
 [yy                     characters, quotation marks, and backslashes.
 {Visual}[y
+[C{motion}
+[CC
+{Visual}[C
 
-                                                *]y* *]yy* *v_]y*
+                                        *]y* *]yy* *v_]y* *]C* *]CC* *v_]C*
 ]y{motion}              C String decode.
 ]yy
 {Visual}]y
+]C{motion}
+]CC
+{Visual}]C
 
  vim:tw=78:et:ft=help:norl:

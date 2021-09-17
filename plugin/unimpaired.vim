@@ -548,6 +548,8 @@ endfunction
 
 call UnimpairedMapTransform('string_encode','[y')
 call UnimpairedMapTransform('string_decode',']y')
+call UnimpairedMapTransform('string_encode','[C')
+call UnimpairedMapTransform('string_decode',']C')
 call UnimpairedMapTransform('url_encode','[u')
 call UnimpairedMapTransform('url_decode',']u')
 call UnimpairedMapTransform('xml_encode','[x')
