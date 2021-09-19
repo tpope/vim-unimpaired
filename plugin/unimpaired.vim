@@ -47,27 +47,36 @@ endfunction
 " Section: Next and previous
 
 function! s:MapNextFamily(map,cmd) abort
+  let prefix = '<Plug>(unimpaired-' . a:cmd
   let map = '<Plug>unimpaired'.toupper(a:map)
   let cmd = '".(v:count ? v:count : "")."'.a:cmd
   let end = '"<CR>'.(a:cmd ==# 'l' || a:cmd ==# 'c' ? 'zv' : '')
+  execute 'nnoremap <silent> '.prefix.'previous) :<C-U>exe "'.cmd.'previous'.end
+  execute 'nnoremap <silent> '.prefix.'next)     :<C-U>exe "'.cmd.'next'.end
+  execute 'nnoremap <silent> '.prefix.'first)    :<C-U>exe "'.cmd.'first'.end
+  execute 'nnoremap <silent> '.prefix.'last)     :<C-U>exe "'.cmd.'last'.end
   execute 'nnoremap <silent> '.map.'Previous :<C-U>exe "'.cmd.'previous'.end
   execute 'nnoremap <silent> '.map.'Next     :<C-U>exe "'.cmd.'next'.end
   execute 'nnoremap <silent> '.map.'First    :<C-U>exe "'.cmd.'first'.end
   execute 'nnoremap <silent> '.map.'Last     :<C-U>exe "'.cmd.'last'.end
-  call s:map('n', '['.        a:map , map.'Previous')
-  call s:map('n', ']'.        a:map , map.'Next')
-  call s:map('n', '['.toupper(a:map), map.'First')
-  call s:map('n', ']'.toupper(a:map), map.'Last')
-  if exists(':'.a:cmd.'nfile')
+  exe s:Map('n', '['.        a:map , prefix.'previous)')
+  exe s:Map('n', ']'.        a:map , prefix.'next)')
+  exe s:Map('n', '['.toupper(a:map), prefix.'first)')
+  exe s:Map('n', ']'.toupper(a:map), prefix.'last)')
+  if a:cmd ==# 'c' || a:cmd ==# 'l'
+    execute 'nnoremap <silent> '.prefix.'pfile)  :<C-U>exe "'.cmd.'pfile'.end
+    execute 'nnoremap <silent> '.prefix.'nfile)  :<C-U>exe "'.cmd.'nfile'.end
     execute 'nnoremap <silent> '.map.'PFile :<C-U>exe "'.cmd.'pfile'.end
     execute 'nnoremap <silent> '.map.'NFile :<C-U>exe "'.cmd.'nfile'.end
-    call s:map('n', '[<C-'.toupper(a:map).'>', map.'PFile')
-    call s:map('n', ']<C-'.toupper(a:map).'>', map.'NFile')
-  elseif exists(':p'.a:cmd.'next')
+    exe s:Map('n', '[<C-'.toupper(a:map).'>', prefix.'pfile)')
+    exe s:Map('n', ']<C-'.toupper(a:map).'>', prefix.'nfile)')
+  elseif a:cmd ==# 't'
+    nnoremap <silent> <Plug>(unimpaired-ptprevious) :<C-U>exe v:count1 . "ptprevious"<CR>
+    nnoremap <silent> <Plug>(unimpaired-ptnext) :<C-U>exe v:count1 . "ptnext"<CR>
     execute 'nnoremap <silent> '.map.'PPrevious :<C-U>exe "p'.cmd.'previous'.end
     execute 'nnoremap <silent> '.map.'PNext :<C-U>exe "p'.cmd.'next'.end
-    call s:map('n', '[<C-'.toupper(a:map).'>', map.'PPrevious')
-    call s:map('n', ']<C-'.toupper(a:map).'>', map.'PNext')
+    exe s:Map('n', '[<C-T>', '<Plug>(unimpaired-ptprevious)')
+    exe s:Map('n', ']<C-T>', '<Plug>(unimpaired-ptnext)')
   endif
 endfunction
 
