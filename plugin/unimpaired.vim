@@ -516,7 +516,7 @@ function! s:Transform(algorithm,type) abort
   let sel_save = &selection
   let cb_save = &clipboard
   set selection=inclusive clipboard-=unnamed clipboard-=unnamedplus
-  let reg_save = @@
+  let reg_save = exists('*getreginfo') ? getreginfo('@') : getreg('@')
   if a:type ==# 'line'
     silent exe "normal! '[V']y"
     let @@ = substitute(@@, "\n$", '', '')
@@ -531,7 +531,7 @@ function! s:Transform(algorithm,type) abort
     let @@ = s:{a:algorithm}(@@)
   endif
   norm! gvp
-  let @@ = reg_save
+  call setreg('@', reg_save)
   let &selection = sel_save
   let &clipboard = cb_save
 endfunction
