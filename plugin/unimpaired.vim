@@ -38,17 +38,11 @@ function! s:maps() abort
       let tail = matchstr(head, '<[^<>]*>$\|.$') . tail
       let head = substitute(head, '<[^<>]*>$\|.$', '', '')
     endwhile
-  endif
-  if head !=# '<skip>' && empty(maparg(head.tail, mode))
-    return mode . 'map ' . flags .' ' . head.tail .' ' . rhs
-  endif
-  return ''
-endfunction
-
-function! s:maps() abort
-  for args in s:maps
-    exe call('s:Map', args)
+    if head !=# '<skip>' && empty(maparg(head.tail, mode))
+      exe mode.'map' flags head.tail rhs
+    endif
   endfor
+  return ''
 endfunction
 
 " Section: Next and previous
