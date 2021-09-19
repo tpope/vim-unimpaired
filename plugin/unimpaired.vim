@@ -38,9 +38,16 @@ function! s:maps() abort
       let tail = matchstr(head, '<[^<>]*>$\|.$') . tail
       let head = substitute(head, '<[^<>]*>$\|.$', '', '')
     endwhile
-    if head !=# '<skip>' && empty(maparg(head.tail, mode))
-      exe mode.'map' flags head.tail rhs
-    endif
+  endif
+  if head !=# '<skip>' && empty(maparg(head.tail, mode))
+    return mode . 'map ' . flags .' ' . head.tail .' ' . rhs
+  endif
+  return ''
+endfunction
+
+function! s:maps() abort
+  for args in s:maps
+    exe call('s:Map', args)
   endfor
 endfunction
 
@@ -519,6 +526,7 @@ function! s:Transform(algorithm,type) abort
   let reg_save = @@
   if a:type ==# 'line'
     silent exe "normal! '[V']y"
+    let @@ = substitute(@@, "\n$", '', '')
   elseif a:type ==# 'block'
     silent exe "normal! `[\<C-V>`]y"
   else
