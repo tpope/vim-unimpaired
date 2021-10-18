@@ -80,11 +80,11 @@ On	Off	Toggle	Option
 *[ob*	*]ob*	*yob*	'background' (dark is off, light is on)
 *[oc*	*]oc*	*yoc*	'cursorline'
 *[od*	*]od*	*yod*	'diff' (actually |:diffthis| / |:diffoff|)
+*[oe*	*]oe*	*yoe*	'spell'
 *[oh*	*]oh*	*yoh*	'hlsearch'
 *[oi*	*]oi*	*yoi*	'ignorecase'
 *[ol*	*]ol*	*yol*	'list'
 *[on*	*]on*	*yon*	'number'
-*[op*	*]op*	*yop*	'spell'
 *[or*	*]or*	*yor*	'relativenumber'
 *[ou*	*]ou*	*you*	'cursorcolumn'
 *[ov*	*]ov*	*yov*	'virtualedit'
