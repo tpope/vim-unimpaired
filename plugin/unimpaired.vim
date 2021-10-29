@@ -139,10 +139,10 @@ endfunction
 function! s:PreviousFileEntry(count) abort
   let window = s:GetWindow()
 
-  if get(window, 'quickfix')
-    return 'colder ' . a:count
-  elseif get(window, 'loclist')
+  if get(window, 'loclist')
     return 'lolder ' . a:count
+  elseif get(window, 'quickfix')
+    return 'colder ' . a:count
   else
     return 'edit ' . s:fnameescape(fnamemodify(s:FileByOffset(-v:count1), ':.'))
   endif
@@ -151,10 +151,10 @@ endfunction
 function! s:NextFileEntry(count) abort
   let window = s:GetWindow()
 
-  if get(window, 'quickfix')
-    return 'cnewer ' . a:count
-  elseif get(window, 'loclist')
+  if get(window, 'loclist')
     return 'lnewer ' . a:count
+  elseif get(window, 'quickfix')
+    return 'cnewer ' . a:count
   else
     return 'edit ' . s:fnameescape(fnamemodify(s:FileByOffset(v:count1), ':.'))
   endif
