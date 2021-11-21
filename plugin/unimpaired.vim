@@ -335,7 +335,7 @@ call s:option_map('r', 'relativenumber', 'setlocal')
 call s:option_map('s', 'spell', 'setlocal')
 nmap <script> <Plug>(unimpaired-enable)t  :setlocal colorcolumn+=+1<CR>
 nmap <script> <Plug>(unimpaired-disable)t :setlocal colorcolumn-=+1<CR>
-nmap <script> <Plug>(unimpaired-toggle)t  :setlocal <C-R>=(&colorcolumn =~# '."'".'.*+1\%(\\|,.*\)'."'".') ? "colorcolumn-=+1" : "colorcolumn+=+1"<CR><CR>
+nmap <script> <Plug>(unimpaired-toggle)t  :setlocal <C-R>=(&colorcolumn =~# '\%\(.*,\)\=+1\%\(,.*\)\=') ? "colorcolumn-=+1" : "colorcolumn+=+1"<CR><CR>
 call s:option_map('w', 'wrap', 'setlocal')
 call s:option_map('z', 'spell', 'setlocal')
 nmap <script> <Plug>(unimpaired-enable)v  :<C-U>set virtualedit+=all<CR>
