@@ -358,6 +358,16 @@ exe s:Map('n', '=s<Esc>', '<Nop>')
 exe s:Map('n', '<s<Esc>', '<Nop>')
 exe s:Map('n', '>s<Esc>', '<Nop>')
 
+function! s:RestorePaste() abort
+  if exists('s:paste')
+    let &paste = s:paste
+    let &mouse = s:mouse
+    unlet s:paste
+    unlet s:mouse
+  endif
+  autocmd! unimpaired_paste
+endfunction
+
 function! s:SetupPaste() abort
   let s:paste = &paste
   let s:mouse = &mouse
@@ -365,14 +375,12 @@ function! s:SetupPaste() abort
   set mouse=
   augroup unimpaired_paste
     autocmd!
-    autocmd InsertLeave *
-          \ if exists('s:paste') |
-          \   let &paste = s:paste |
-          \   let &mouse = s:mouse |
-          \   unlet s:paste |
-          \   unlet s:mouse |
-          \ endif |
-          \ autocmd! unimpaired_paste
+    autocmd InsertLeave * call s:RestorePaste()
+    if exists('##ModeChanged')
+      autocmd ModeChanged *:n call s:RestorePaste()
+    else
+      autocmd CursorHold,CursorMoved * call s:RestorePaste()
+    endif
   augroup END
 endfunction
 
