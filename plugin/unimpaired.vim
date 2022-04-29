@@ -34,15 +34,15 @@ endfunction
 
 " Section: Next and previous
 
-function! s:MapNextFamily(map,cmd) abort
+function! s:MapNextFamily(map, cmd, current) abort
   let prefix = '<Plug>(unimpaired-' . a:cmd
   let map = '<Plug>unimpaired'.toupper(a:map)
   let cmd = '".(v:count ? v:count : "")."'.a:cmd
   let end = '"<CR>'.(a:cmd ==# 'l' || a:cmd ==# 'c' ? 'zv' : '')
   execute 'nnoremap <silent> '.prefix.'previous) :<C-U>exe "'.cmd.'previous'.end
   execute 'nnoremap <silent> '.prefix.'next)     :<C-U>exe "'.cmd.'next'.end
-  execute 'nnoremap <silent> '.prefix.'first)    :<C-U>exe "'.cmd.'first'.end
-  execute 'nnoremap <silent> '.prefix.'last)     :<C-U>exe "'.cmd.'last'.end
+  execute 'nnoremap '.prefix.'first)    :<C-U><C-R>=v:count ? v:count . "' . a:current . '" : "' . a:cmd . 'first"<CR><CR>'
+  execute 'nnoremap '.prefix.'last)     :<C-U><C-R>=v:count ? v:count . "' . a:current . '" : "' . a:cmd . 'last"<CR><CR>'
   execute 'nnoremap <silent> '.map.'Previous :<C-U>exe "'.cmd.'previous'.end
   execute 'nnoremap <silent> '.map.'Next     :<C-U>exe "'.cmd.'next'.end
   execute 'nnoremap <silent> '.map.'First    :<C-U>exe "'.cmd.'first'.end
@@ -68,11 +68,11 @@ function! s:MapNextFamily(map,cmd) abort
   endif
 endfunction
 
-call s:MapNextFamily('a','')
-call s:MapNextFamily('b','b')
-call s:MapNextFamily('l','l')
-call s:MapNextFamily('q','c')
-call s:MapNextFamily('t','t')
+call s:MapNextFamily('a', '' , 'argument')
+call s:MapNextFamily('b', 'b', 'buffer')
+call s:MapNextFamily('l', 'l', 'll')
+call s:MapNextFamily('q', 'c', 'cc')
+call s:MapNextFamily('t', 't', 'trewind')
 
 function! s:entries(path) abort
   let path = substitute(a:path,'[\\/]$','','')
