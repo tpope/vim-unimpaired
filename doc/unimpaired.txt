@@ -86,6 +86,7 @@ On	Off	Toggle	Option
 *[on*	*]on*	*yon*	'number'
 *[or*	*]or*	*yor*	'relativenumber'
 *[os*	*]os*	*yos*	'spell'
+*[ot*	*]ot*	*yot*	'colorcolumn' ("+1" or last used value)
 *[ou*	*]ou*	*you*	'cursorcolumn'
 *[ov*	*]ov*	*yov*	'virtualedit'
 *[ow*	*]ow*	*yow*	'wrap'

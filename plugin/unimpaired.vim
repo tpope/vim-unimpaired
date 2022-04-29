@@ -346,6 +346,16 @@ nmap <script> <Plug>(unimpaired-enable)+  :<C-U>set cursorline cursorcolumn<CR>
 nmap <script> <Plug>(unimpaired-disable)+ :<C-U>set nocursorline nocursorcolumn<CR>
 nmap <script> <Plug>(unimpaired-toggle)+  :<C-U>set <C-R>=<SID>CursorOptions()<CR><CR>
 
+function! s:ColorColumn(should_clear) abort
+  if !empty(&colorcolumn)
+    let s:colorcolumn = &colorcolumn
+  endif
+  return a:should_clear ? '' : get(s:, 'colorcolumn', get(g:, 'unimpaired_colorcolumn', '+1'))
+endfunction
+nmap <script> <Plug>(unimpaired-enable)t  :<C-U>set colorcolumn=<C-R>=<SID>ColorColumn(0)<CR><CR>
+nmap <script> <Plug>(unimpaired-disable)t :<C-U>set colorcolumn=<C-R>=<SID>ColorColumn(1)<CR><CR>
+nmap <script> <Plug>(unimpaired-toggle)t  :<C-U>set colorcolumn=<C-R>=<SID>ColorColumn(!empty(&cc))<CR><CR>
+
 exe s:Map('n', 'yo', '<Plug>(unimpaired-toggle)')
 exe s:Map('n', '[o', '<Plug>(unimpaired-enable)')
 exe s:Map('n', ']o', '<Plug>(unimpaired-disable)')
