@@ -326,7 +326,6 @@ call s:option_map('<Bar>', 'cursorcolumn', 'setlocal')
 nmap <script> <Plug>(unimpaired-enable)d  :<C-U>diffthis<CR>
 nmap <script> <Plug>(unimpaired-disable)d :<C-U>diffoff<CR>
 nmap <script> <Plug>(unimpaired-toggle)d  :<C-U><C-R>=&diff ? "diffoff" : "diffthis"<CR><CR>
-call s:option_map('e', 'spell', 'setlocal')
 call s:option_map('h', 'hlsearch', 'set')
 call s:option_map('i', 'ignorecase', 'set')
 call s:option_map('l', 'list', 'setlocal')
@@ -334,7 +333,9 @@ call s:option_map('n', 'number', 'setlocal')
 call s:option_map('r', 'relativenumber', 'setlocal')
 call s:option_map('s', 'spell', 'setlocal')
 call s:option_map('w', 'wrap', 'setlocal')
-call s:option_map('z', 'spell', 'setlocal')
+if empty(maparg('<Plug>(unimpaired-toggle)z', 'n'))
+  call s:option_map('z', 'spell', 'setlocal')
+endif
 nmap <script> <Plug>(unimpaired-enable)v  :<C-U>set virtualedit+=all<CR>
 nmap <script> <Plug>(unimpaired-disable)v :<C-U>set virtualedit-=all<CR>
 nmap <script> <Plug>(unimpaired-toggle)v  :<C-U>set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all" : "virtualedit+=all"<CR><CR>

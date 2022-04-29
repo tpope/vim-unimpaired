@@ -85,11 +85,11 @@ On	Off	Toggle	Option
 *[ol*	*]ol*	*yol*	'list'
 *[on*	*]on*	*yon*	'number'
 *[or*	*]or*	*yor*	'relativenumber'
+*[os*	*]os*	*yos*	'spell'
 *[ou*	*]ou*	*you*	'cursorcolumn'
 *[ov*	*]ov*	*yov*	'virtualedit'
 *[ow*	*]ow*	*yow*	'wrap'
 *[ox*	*]ox*	*yox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
-*[oz*	*]oz*	*yoz*	'spell'
 
 The mnemonic for y is that if you tilt it a bit it looks like a switch.
 
