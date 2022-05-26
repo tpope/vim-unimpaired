@@ -1,6 +1,6 @@
 " unimpaired.vim - Pairs of handy bracket mappings
 " Maintainer:   Tim Pope <http://tpo.pe/>
-" Version:      2.0
+" Version:      2.1
 " GetLatestVimScripts: 1590 1 :AutoInstall: unimpaired.vim
 
 if exists("g:loaded_unimpaired") || &cp || v:version < 700
