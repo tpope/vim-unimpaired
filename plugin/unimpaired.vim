@@ -77,8 +77,9 @@ call s:MapNextFamily('t', 't', 'trewind')
 
 function! s:entries(path) abort
   let path = substitute(a:path,'[\\/]$','','')
-  let files = split(glob(fnameescape(path)."/.*"),"\n")
-  let files += split(glob(fnameescape(path)."/*"),"\n")
+  let path = substitute(path, '[[$*]', '[&]', 'g')
+  let files = split(glob(path."/.*"),"\n")
+  let files += split(glob(path."/*"),"\n")
   call map(files,'substitute(v:val,"[\\/]$","","")')
   call filter(files,'v:val !~# "[\\\\/]\\.\\.\\=$"')
 
