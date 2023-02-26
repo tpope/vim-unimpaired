@@ -341,6 +341,9 @@ endif
 nmap <script> <Plug>(unimpaired-enable)v  :<C-U>set virtualedit+=all<CR>
 nmap <script> <Plug>(unimpaired-disable)v :<C-U>set virtualedit-=all<CR>
 nmap <script> <Plug>(unimpaired-toggle)v  :<C-U>set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all" : "virtualedit+=all"<CR><CR>
+nmap <script> <Plug>(unimpaired-enable)W  :<C-U>set formatoptions+=t<CR>
+nmap <script> <Plug>(unimpaired-disable)W :<C-U>set formatoptions-=t<CR>
+nmap <script> <Plug>(unimpaired-toggle)W  :<C-U>set <C-R>=(&formatoptions =~# "t") ? "formatoptions-=t" : "formatoptions+=t"<CR><CR>
 nmap <script> <Plug>(unimpaired-enable)x  :<C-U>set cursorline cursorcolumn<CR>
 nmap <script> <Plug>(unimpaired-disable)x :<C-U>set nocursorline nocursorcolumn<CR>
 nmap <script> <Plug>(unimpaired-toggle)x  :<C-U>set <C-R>=<SID>CursorOptions()<CR><CR>
