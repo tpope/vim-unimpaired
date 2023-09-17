@@ -563,6 +563,14 @@ function! s:xml_decode(str) abort
   return s:xml_entity_decode(str)
 endfunction
 
+function! s:unicode_encode(str) abort
+  return substitute(a:str,'\S','\=printf("U%04X", char2nr(submatch(0)))','g')
+endfunction
+
+function! s:unicode_decode(str) abort
+  return substitute(a:str,'\vU(\x{4})','\=nr2char(str2nr(submatch(1), 16))','g')
+endfunction
+
 function! s:Transform(algorithm,type) abort
   let sel_save = &selection
   let cb_save = &clipboard
@@ -619,5 +627,7 @@ exe UnimpairedMapTransform('url_encode','[u')
 exe UnimpairedMapTransform('url_decode',']u')
 exe UnimpairedMapTransform('xml_encode','[x')
 exe UnimpairedMapTransform('xml_decode',']x')
+exe UnimpairedMapTransform('unicode_encode','[U')
+exe UnimpairedMapTransform('unicode_decode',']U')
 
 " vim:set sw=2 sts=2:

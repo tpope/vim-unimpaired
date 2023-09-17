@@ -162,4 +162,14 @@ Mnemonic: encoding always comes before decoding; "[" always comes before "]".
 ]CC
 {Visual}]C
 
+                                                *[U* *[UU* *v_[U*
+[U{motion}              Unicode encode.
+[UU                     ð => U00F0
+{Visual}[U
+
+                                                *]U* *]UU* *v_]U*
+]U{motion}              Unicode decode.
+]UU                     U00F0 => ð
+{Visual}]U
+
  vim:tw=78:et:ft=help:norl:
