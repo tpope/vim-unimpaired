@@ -311,6 +311,10 @@ function! s:CursorOptions() abort
   return &cursorline && &cursorcolumn ? 'nocursorline nocursorcolumn' : 'cursorline cursorcolumn'
 endfunction
 
+function! s:NumberOptions() abort
+  return &number && &relativenumber ? 'nonumber norelativenumber' : 'number relativenumber'
+endfunction
+
 function! s:option_map(letter, option, mode) abort
   exe 'nmap <script> <Plug>(unimpaired-enable)' .a:letter ':<C-U>'.a:mode.' '.a:option.'<C-R>=<SID>StatuslineRefresh()<CR><CR>'
   exe 'nmap <script> <Plug>(unimpaired-disable)'.a:letter ':<C-U>'.a:mode.' no'.a:option.'<C-R>=<SID>StatuslineRefresh()<CR><CR>'
@@ -347,6 +351,9 @@ nmap <script> <Plug>(unimpaired-toggle)x  :<C-U>set <C-R>=<SID>CursorOptions()<C
 nmap <script> <Plug>(unimpaired-enable)+  :<C-U>set cursorline cursorcolumn<CR>
 nmap <script> <Plug>(unimpaired-disable)+ :<C-U>set nocursorline nocursorcolumn<CR>
 nmap <script> <Plug>(unimpaired-toggle)+  :<C-U>set <C-R>=<SID>CursorOptions()<CR><CR>
+nmap <script> <Plug>(unimpaired-enable)y  :<C-U>set number relativenumber<CR>
+nmap <script> <Plug>(unimpaired-disable)y :<C-U>set nonumber norelativenumber<CR>
+nmap <script> <Plug>(unimpaired-toggle)y  :<C-U>set <C-R>=<SID>NumberOptions()<CR><CR>
 
 function! s:ColorColumn(should_clear) abort
   if !empty(&colorcolumn)
