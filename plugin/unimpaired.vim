@@ -338,6 +338,7 @@ call s:option_map('w', 'wrap', 'setlocal')
 if empty(maparg('<Plug>(unimpaired-toggle)z', 'n'))
   call s:option_map('z', 'spell', 'setlocal')
 endif
+call s:option_map('m', 'modifiable', 'setlocal')
 nmap <script> <Plug>(unimpaired-enable)v  :<C-U>set virtualedit+=all<CR>
 nmap <script> <Plug>(unimpaired-disable)v :<C-U>set virtualedit-=all<CR>
 nmap <script> <Plug>(unimpaired-toggle)v  :<C-U>set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all" : "virtualedit+=all"<CR><CR>
