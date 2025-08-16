@@ -407,13 +407,22 @@ nmap <script><silent> <Plug>(unimpaired-toggle)p  :<C-U>call <SID>SetupPaste()<C
 " Section: Put
 
 function! s:putline(how, map) abort
-  let [body, type] = [getreg(v:register), getregtype(v:register)]
+  let reg = v:register
+  let [body, type] = [getreg(reg), getregtype(reg)]
+  if reg =~ '[:%.]' " detect read-only registers
+    let [body_save, type_save] = [getreg('"'), getregtype('"')]
+    let reg = '"'
+    call setreg('"', body, type)
+  endif
   if type ==# 'V'
-    exe 'normal! "'.v:register.a:how
+    exe 'normal! "'.reg.a:how
   else
-    call setreg(v:register, body, 'l')
-    exe 'normal! "'.v:register.a:how
-    call setreg(v:register, body, type)
+    call setreg(reg, body, 'l')
+    exe 'normal! "'.reg.a:how
+    call setreg(reg, body, type)
+  endif
+  if exists('l:body_save')
+    call setreg('"', body_save, type_save)
   endif
   silent! call repeat#set("\<Plug>(unimpaired-put-".a:map.")")
 endfunction
