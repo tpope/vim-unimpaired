@@ -90,6 +90,7 @@ On	Off	Toggle	Option
 *[ou*	*]ou*	*you*	'cursorcolumn'
 *[ov*	*]ov*	*yov*	'virtualedit'
 *[ow*	*]ow*	*yow*	'wrap'
+*[oW*	*]oW*	*yoW*	'formatoptions' has "t" (hard wrap)
 *[ox*	*]ox*	*yox*	'cursorline' 'cursorcolumn' (x as in crosshairs)
 
 The mnemonic for y is that if you tilt it a bit it looks like a switch.
