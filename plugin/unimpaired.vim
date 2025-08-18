@@ -83,8 +83,11 @@ function! s:entries(path) abort
   call map(files,'substitute(v:val,"[\\/]$","","")')
   call filter(files,'v:val !~# "[\\\\/]\\.\\.\\=$"')
 
-  let filter_suffixes = substitute(escape(&suffixes, '~.*$^'), ',', '$\\|', 'g') .'$'
-  call filter(files, 'v:val !~# filter_suffixes')
+  let tmp = filter(split(escape(&suffixes, '~.*$^'), ','), '!empty(v:val)') " remove empty elements from &suffixes
+  if !empty(tmp)
+    let filter_suffixes = tmp->join('$\|') . '$'
+    call filter(files, 'v:val !~# filter_suffixes')
+  endif
 
   return sort(files)
 endfunction
